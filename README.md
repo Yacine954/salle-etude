@@ -28,6 +28,12 @@ salle-etude/
 npm install
 ```
 
+Si plus tard `npm start` se plaint qu'Electron n'est pas installé (le téléchargement de 100 Mo s'est interrompu), relance simplement :
+
+```bash
+node node_modules/electron/install.js
+```
+
 ## 2. Les commandes du quotidien
 
 | Commande | Effet |
