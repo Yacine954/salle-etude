@@ -7,6 +7,14 @@
       "salt": "dc5bf93ea56246afda7aad2a02312f6d",
       "iv": "H/ivOVmZodIzPDfQ",
       "wrap": "+hGVkZr3rddOlCsinW4HqoOE6K93KWwBdtyacFXMJf+bkK1zlp7M1g7z3tNSHwk0"
+    },
+    {
+      "nom": "Sidmi Hewa",
+      "date": "2026-09-04",
+      "hash": "852328cfaf64342488bcdb890ab13b957a90603f3794c7dc6947479c530e4a46",
+      "salt": "eefef9a0b14ad5882e02d0ff684e3de9",
+      "iv": "XInRoWazP49uwWH9",
+      "wrap": "wrp/LPAQgJ2MQVynSbZd6gDLRCfA94eUqEnO3gp9+KegZoHbm13mL8yQST3XAdMR"
     }
   ]
 }
