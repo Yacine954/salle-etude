@@ -1,0 +1,12 @@
+{
+  "codes": [
+    {
+      "nom": "Yacine (administrateur)",
+      "date": "2026-09-04",
+      "hash": "fa62d5c6c37b3d38fda9c38768e1a0bee4be1414454df81d41868416179f8b45",
+      "salt": "dc5bf93ea56246afda7aad2a02312f6d",
+      "iv": "H/ivOVmZodIzPDfQ",
+      "wrap": "+hGVkZr3rddOlCsinW4HqoOE6K93KWwBdtyacFXMJf+bkK1zlp7M1g7z3tNSHwk0"
+    }
+  ]
+}

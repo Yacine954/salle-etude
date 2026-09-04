@@ -8,6 +8,7 @@
 const fs = require("fs");
 const path = require("path");
 const { marked } = require("marked");
+const acces = require("./tools/acces.js");
 
 const ROOT = __dirname;
 const CONTENT = path.join(ROOT, "content");
@@ -274,9 +275,20 @@ function build() {
 
   var template = fs.readFileSync(path.join(SRC, "template.html"), "utf8");
   var style = inlineAssets(fs.readFileSync(path.join(SRC, "style.css"), "utf8"));
-  var app = fs.readFileSync(path.join(SRC, "app.js"), "utf8") + "\n" + fs.readFileSync(path.join(SRC, "assistant.js"), "utf8");
+  var app = fs.readFileSync(path.join(SRC, "gate.js"), "utf8") + "\n" + fs.readFileSync(path.join(SRC, "app.js"), "utf8") + "\n" + fs.readFileSync(path.join(SRC, "assistant.js"), "utf8");
   var annales = parseAnnales(modules.map(function (m) { return m.id; }));
-  var data = "var MODULES = " + JSON.stringify(modules) + ";\nvar CONFIG = " + JSON.stringify(config) + ";\nvar ANNALES = " + JSON.stringify(annales) + ";";
+  var data;
+  var codes = acces.readAcces().codes;
+  if (codes.length) {
+    var contentKey = acces.readContentKey(false);
+    if (!contentKey) throw new Error("content/cle-contenu.txt est absent alors que des codes d'accès existent. Récupère-le depuis ton autre PC, ou vide content/acces.json et recrée les codes.");
+    var sealed = acces.aesEncrypt(contentKey, Buffer.from(JSON.stringify({ modules: modules, annales: annales }), "utf8"));
+    var verrou = { iter: acces.ITER, iv: sealed.iv, data: sealed.data, codes: codes.map(function (c) { return { h: c.hash, s: c.salt, i: c.iv, w: c.wrap }; }) };
+    data = "var MODULES = [];\nvar ANNALES = [];\nvar CONFIG = " + JSON.stringify(config) + ";\nvar VERROU = " + JSON.stringify(verrou) + ";";
+    console.log("  🔒 accès réservé : " + codes.length + " code(s), contenu chiffré");
+  } else {
+    data = "var MODULES = " + JSON.stringify(modules) + ";\nvar CONFIG = " + JSON.stringify(config) + ";\nvar ANNALES = " + JSON.stringify(annales) + ";";
+  }
   data = data.replace(/<\//g, "<\\/"); // jamais de </script> accidentel dans les données
 
   var html = template

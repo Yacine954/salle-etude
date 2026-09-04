@@ -41,7 +41,14 @@ function createWindow() {
   });
 
   if (smoke) {
-    win.webContents.once("did-finish-load", async () => {
+    let reloaded = false;
+    win.webContents.on("did-finish-load", async () => {
+      if (process.env.SMOKE_CODE && !reloaded) {
+        reloaded = true;
+        await win.webContents.executeJavaScript("localStorage.setItem('salle-etude-acces-v1', " + JSON.stringify(process.env.SMOKE_CODE) + "); location.reload();");
+        return;
+      }
+      await new Promise(r => setTimeout(r, 1500));
       const title = await win.webContents.executeJavaScript("(function(){var prev=localStorage.getItem('smoke-run');localStorage.setItem('smoke-run',String(Date.now()));return document.title + ' | modules=' + document.querySelectorAll('.mcard').length + ' | previous-run=' + prev;})()");
       console.log("SMOKE OK: " + title);
       if (process.env.SMOKE_SHOT) {

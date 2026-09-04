@@ -1,4 +1,4 @@
-(function () {
+function startApp() {
   "use strict";
 
   var STORAGE_KEY = "salle-etude-progress-v2";
@@ -254,7 +254,8 @@
         '<div class="sync" data-sync="' + sync.status + '"><i></i>' + syncLabel() + '</div>' +
         '<button class="btn ghost sm" data-theme-toggle="1" style="justify-content:center">' + ({ auto: "Thème : automatique", light: "Thème : clair", dark: "Thème : sombre" })[state.theme] + '</button>' +
         '<button class="btn ghost sm" data-ambiance="1" style="justify-content:center">' + (state.ambiance === "lofi" ? "Ambiance lofi ✓" : "Ambiance lofi") + '</button>' +
-        '<button class="btn ghost sm" data-reset="1" style="justify-content:center">' + (state.resetArmed ? "Confirmer la réinitialisation" : "Réinitialiser ma progression") + '</button></div>' +
+        '<button class="btn ghost sm" data-reset="1" style="justify-content:center">' + (state.resetArmed ? "Confirmer la réinitialisation" : "Réinitialiser ma progression") + '</button>' +
+        (window.VERROU ? '<button class="btn ghost sm" data-logout="1" style="justify-content:center">Se déconnecter</button>' : '') + '</div>' +
     '</aside>';
   }
 
@@ -591,6 +592,7 @@
     if ((el = t.closest("[data-quiz-retry]"))) { var mid2 = el.getAttribute("data-quiz-retry"); state.quizSubmitted[mid2] = false; state.quizAnswers[mid2] = {}; state.scrollTop = true; render(); return; }
 
     if ((el = t.closest("[data-print]"))) { window.print(); return; }
+    if ((el = t.closest("[data-logout]"))) { window.SalleEtudeGate.logout(); return; }
     if ((el = t.closest("[data-theme-toggle]"))) { state.theme = state.theme === "auto" ? "dark" : state.theme === "dark" ? "light" : "auto"; savePrefs(); render(); return; }
     if ((el = t.closest("[data-ambiance]"))) { state.ambiance = state.ambiance === "lofi" ? "neutre" : "lofi"; savePrefs(); render(); return; }
     if ((el = t.closest("[data-reset]"))) {
@@ -642,4 +644,5 @@
 
   render();
   initSync();
-})();
+}
+if (window.VERROU) window.SalleEtudeGate.run(startApp); else startApp();

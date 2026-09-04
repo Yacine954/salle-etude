@@ -179,6 +179,43 @@ Pour qu'il fonctionne, il faut un petit service intermédiaire qui garde la clé
 
 L'assistant est **désactivé** pour l'instant (`"enabled": false` dans `content/config.json`, section `assistant`) : le bouton n'apparaît pas. Passe la valeur à `true` pour le réactiver. Sans adresse configurée, le bouton propose alors de saisir l'adresse du service : pratique pour tester avec le faux assistant local (`node tools/mock-assistant.js`, adresse `http://localhost:8787`, code `test`).
 
+## 5 ter. Accès réservé : un code par personne
+
+Le site n'est pas ouvert à tous : à l'entrée, un écran demande un **code d'accès personnel**. Le contenu (cours, annales) est chiffré dans la page ; sans code valide, il est illisible, même en lisant le code source. Les fichiers PDF et images du dossier `docs/annales/` restent en revanche accessibles à qui connaît leur adresse exacte.
+
+Les commandes, depuis le dossier du projet :
+
+```bash
+npm run acces -- ajouter "Prénom Nom"
+```
+
+affiche le code une seule fois (du type `SE-7K3P-9QWX`) : note-le et transmets-le à la personne. Puis publie :
+
+```bash
+npm run build
+```
+
+```bash
+git add -A
+```
+
+```bash
+git commit -m "Accès pour Prénom Nom"
+```
+
+```bash
+git push
+```
+
+Autres commandes : `npm run acces -- liste` (qui a un code) et `npm run acces -- retirer "Prénom Nom"` (coupe l'accès à la prochaine publication). Chaque personne saisit son code une fois ; il reste enregistré sur son appareil, et le bouton « Se déconnecter » en bas du menu l'efface.
+
+Deux précautions :
+
+- **`content/cle-contenu.txt`** est la clé qui chiffre le contenu. Elle n'est jamais publiée sur GitHub. Sauvegarde-la et copie-la sur ton autre PC (même dossier), sinon il faudra recréer tous les codes.
+- **Ton propre code** : crée-toi un code comme aux autres, il sert aussi pour l'application Windows.
+
+Pour rouvrir le site à tout le monde : vide la liste dans `content/acces.json` (`{ "codes": [] }`) et republie.
+
 ## 6. Publier pour la classe (GitHub Pages)
 
 Le dossier `docs/` est servi tel quel par GitHub Pages. Une seule personne (toi) a le droit d'écrire dans le dépôt ; les autres ne font que consulter.

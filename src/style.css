@@ -436,6 +436,19 @@ h1, h2, h3, h4 { font-family: "Bricolage Grotesque", "Public Sans", system-ui, s
 
 .foot { margin-top: 3rem; padding-top: 1.2rem; border-top: 1px solid var(--line); color: var(--ink-3); font-size: 0.8rem; display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; align-items: center; }
 
+/* ---------- Accès réservé ---------- */
+.lock { min-height: 100vh; display: grid; place-items: center; padding: 1.5rem; }
+.lock-card { width: min(440px, 100%); background: var(--bg-elev); border: 1px solid var(--line); border-radius: 18px; padding: 1.8rem 1.8rem 1.5rem; box-shadow: var(--shadow); display: flex; flex-direction: column; gap: 0.9rem; }
+.ambiance-lofi .lock-card { backdrop-filter: blur(18px) saturate(1.15); -webkit-backdrop-filter: blur(18px) saturate(1.15); }
+.lock-card .brand { padding: 0; }
+.lock-card h1 { font-size: 1.5rem; letter-spacing: -0.02em; margin-top: 0.3rem; }
+.lock-card p { margin: 0; color: var(--ink-2); font-size: 0.92rem; }
+.lock-card form { display: flex; gap: 0.5rem; margin-top: 0.2rem; }
+.lock-card input { flex: 1; font-family: "DM Mono", ui-monospace, monospace; font-size: 1.05rem; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.6rem 0.8rem; border: 1px solid var(--line-strong); border-radius: 10px; background: var(--bg); color: var(--ink); min-width: 0; }
+.lock-card input:disabled, .lock-card button:disabled { opacity: 0.6; }
+.lock-err { color: var(--bad); font-weight: 500; }
+.lock-hint { font-size: 0.8rem; color: var(--ink-3); }
+
 /* ---------- Ambiance lofi ---------- */
 body.ambiance-lofi {
   --bg-elev: var(--lofi-elev);

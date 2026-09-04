@@ -12,7 +12,8 @@
     "watch": "node build.js --watch",
     "start": "node build.js && electron .",
     "package": "node tools/package.js",
-    "icon": "electron tools/make-icon.js"
+    "icon": "electron tools/make-icon.js",
+    "acces": "node tools/acces.js"
   },
   "devDependencies": {
     "@electron/packager": "^18.3.6",

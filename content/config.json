@@ -23,5 +23,10 @@
       "Quel est le taux directeur actuel de la BCE et quel effet sur le coût de la dette ?"
     ],
     "enabled": false
+  },
+  "acces": {
+    "titre": "Accès réservé",
+    "message": "Cette salle d'étude est réservée aux personnes qui ont reçu un code d'accès personnel.",
+    "aide": "Le code est personnel : il t'a été remis directement. Il reste enregistré sur cet appareil."
   }
 }
