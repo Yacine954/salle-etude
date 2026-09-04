@@ -43,6 +43,21 @@
     });
   }
 
+  // Lien « Demander un accès » : formulaire en ligne si configuré, sinon e-mail pré-rempli.
+  function requestBlock() {
+    var href = "";
+    if (cfg.formulaire) href = cfg.formulaire;
+    else if (cfg.contact) {
+      var subject = "Demande d'accès — " + (CONFIG.titre || "Salle d'étude");
+      var body = "Bonjour,\n\nJe souhaite un code d'accès à la salle d'étude.\n\nNom : \nPrénom : \nAdresse e-mail : \nPromotion / groupe : \n\nMerci !";
+      href = "mailto:" + cfg.contact + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
+    }
+    if (!href) return "";
+    return '<div class="lock-request"><p>' + esc(cfg.demande || "Tu n'as pas encore de code ?") + '</p>' +
+      '<a class="btn ghost sm" href="' + esc(href) + '"' + (cfg.formulaire ? ' target="_blank" rel="noopener"' : '') + '>' + esc(cfg.demandeBouton || "Demander un accès") + '</a>' +
+      (cfg.info ? '<p class="lock-hint">' + esc(cfg.info) + '</p>' : '') + '</div>';
+  }
+
   function renderLock(message, busy) {
     var logo = CONFIG.logo ? '<img src="' + CONFIG.logo + '" alt="">' : esc(CONFIG.sigle || "SÉ");
     appEl.innerHTML =
@@ -54,6 +69,7 @@
         '<button class="btn acc" type="submit" ' + (busy ? 'disabled' : '') + '>' + (busy ? "Vérification…" : "Entrer") + '</button></form>' +
         (message ? '<p class="lock-err">' + esc(message) + '</p>' : '') +
         '<p class="lock-hint">' + esc(cfg.aide || "Le code est personnel : il t'a été remis directement. Il reste enregistré sur cet appareil.") + '</p>' +
+        requestBlock() +
       '</div></div>';
     var input = appEl.querySelector("[data-lock-code]");
     if (input && !busy) input.focus();

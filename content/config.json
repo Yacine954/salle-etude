@@ -27,6 +27,11 @@
   "acces": {
     "titre": "Accès réservé",
     "message": "Cette salle d'étude est réservée aux personnes qui ont reçu un code d'accès personnel.",
-    "aide": "Le code est personnel : il t'a été remis directement. Il reste enregistré sur cet appareil."
+    "aide": "Le code est personnel : il t'a été remis directement. Il reste enregistré sur cet appareil.",
+    "contact": "yacine.guettari@ciblex.fr",
+    "formulaire": "",
+    "demande": "Tu n'as pas encore de code ?",
+    "demandeBouton": "Demander un accès",
+    "info": "Envoie ta demande avec ton nom et ton prénom : tu reçois ton code personnel en retour."
   }
 }

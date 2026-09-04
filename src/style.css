@@ -448,6 +448,9 @@ h1, h2, h3, h4 { font-family: "Bricolage Grotesque", "Public Sans", system-ui, s
 .lock-card input:disabled, .lock-card button:disabled { opacity: 0.6; }
 .lock-err { color: var(--bad); font-weight: 500; }
 .lock-hint { font-size: 0.8rem; color: var(--ink-3); }
+.lock-request { border-top: 1px solid var(--line); padding-top: 0.9rem; margin-top: 0.2rem; display: flex; flex-direction: column; gap: 0.5rem; align-items: flex-start; }
+.lock-request p { margin: 0; }
+.lock-request .btn { text-decoration: none; }
 
 /* ---------- Ambiance lofi ---------- */
 body.ambiance-lofi {

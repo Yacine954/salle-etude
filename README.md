@@ -214,6 +214,8 @@ Deux précautions :
 - **`content/cle-contenu.txt`** est la clé qui chiffre le contenu. Elle n'est jamais publiée sur GitHub. Sauvegarde-la et copie-la sur ton autre PC (même dossier), sinon il faudra recréer tous les codes.
 - **Ton propre code** : crée-toi un code comme aux autres, il sert aussi pour l'application Windows.
 
+**Recevoir les demandes.** L'écran d'entrée propose un bouton « Demander un accès ». Par défaut il ouvre un e-mail pré-rempli (nom, prénom, adresse, promotion) vers l'adresse `acces.contact` de `content/config.json`. Tu peux à la place indiquer l'adresse d'un formulaire en ligne (Google Forms, Tally…) dans `acces.formulaire` : le bouton l'ouvrira. Le texte sous le bouton (`acces.info`) sert par exemple à indiquer comment participer aux frais.
+
 Pour rouvrir le site à tout le monde : vide la liste dans `content/acces.json` (`{ "codes": [] }`) et republie.
 
 ## 6. Publier pour la classe (GitHub Pages)
