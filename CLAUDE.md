@@ -40,3 +40,27 @@ Les cinq fonctionnalités du plan sont faites, sans infrastructure payante :
 Extras faits en v1.3 : bannière « Nouveautés » (`config.nouveautes`, fermeture mémorisée par version), fiche de révision imprimable par module (vue `fiche`), export / import de la progression (JSON fusionné avec `mergeProgress`).
 
 Idées gardées pour plus tard : sections « Erreurs fréquentes » et « Méthode de l'épreuve » (contenu à écrire), liens vidéo en fin de leçon, compteur de visites anonyme (demande un service).
+
+## Circuit des demandes d'accès (mis en place le 04/09/2026)
+
+- Les demandes arrivent par e-mail « Demande d'accès — La salle d'étude » sur yacineguett@gmail.com (connecteur Gmail de Claude, compte reconnecté sur cette adresse). Labels Gmail : `Label_3` = « Salle d'étude/En attente » (signalée à Yacine), `Label_2` = « Salle d'étude/Code envoyé » (traitée).
+- Une tâche planifiée Claude (« Salle d'étude — demandes d'accès », 9h et 19h Paris) lit les demandes non traitées, pose `Label_3` sur les nouvelles et notifie Yacine. Elle ne répond jamais aux demandeurs et ne crée aucun code. **Pas de relance de paiement** aux demandeurs : c'est une décision de Yacine.
+- Yacine vérifie qu'il a reçu la participation, puis dit à Claude « ok pour Prénom Nom ». Claude fait alors, PC allumé et dossier `C:\Users\Yves\Projets\salle-etude` partagé :
+  1. retrouver le thread Gmail (`label:Label_3`), relever prénom, nom, adresse, `messageId` du dernier message du demandeur ;
+  2. côté cloud : `git clone` du dépôt, `npm install marked`, puis récupérer depuis le dossier de Yacine `content/acces.json` et `content/cle-contenu.txt` (device_stage_files) ; `node tools/acces.js ajouter "Prénom Nom"` (option `--essai` ou `--jusqu-au` si demandé) ; `node build.js` ;
+  3. déposer dans le dossier de Yacine `content/acces.json`, `docs/index.html`, `docs/sw.js` (device_commit_files), puis lancer `publier.cmd` (double-clic dans l'Explorateur via le contrôle de l'ordinateur, ou demander à Yacine) ;
+  4. répondre au demandeur dans son thread avec le modèle ci-dessous (Gmail `reply`), poser `Label_2`, retirer `Label_3` ;
+  5. supprimer la copie de la clé côté cloud.
+- Modèle d'e-mail (tutoiement, validé par Yacine) :
+
+  > Salut {Prénom},
+  >
+  > Voici ton code d'accès personnel à la salle d'étude : **{CODE}**
+  > Le lien : https://yacine954.github.io/salle-etude/
+  >
+  > Tu entres le code une fois, il reste enregistré sur ton appareil. Sur téléphone, tu peux l'installer comme une appli : bandeau « Installer » (Android / Chrome) ou Partager → « Sur l'écran d'accueil » (iPhone / Safari) ; elle marche ensuite même sans connexion.
+  >
+  > Le code est personnel : merci de ne pas le partager.
+  >
+  > Bonnes révisions,
+  > Yacine
