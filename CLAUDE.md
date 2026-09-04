@@ -9,6 +9,7 @@ Application de révision (M2 Finance d'entreprise, Nanterre) maintenue par Yacin
 - Application installable (PWA) : `src/pwa.js` (enregistrement, bandeau d'installation, bandeau de mise à jour), modèle `src/sw.js`, icônes dans `content/pwa/`. Le build écrit `docs/manifest.webmanifest`, `docs/sw.js` (version = empreinte de la page) et copie les icônes. Inactif en `file://`, donc sans effet dans Electron.
 - `node build.js` assemble tout en **une page unique** `docs/index.html`, servie par GitHub Pages : https://yacine954.github.io/salle-etude/ (dépôt https://github.com/Yacine954/salle-etude, branche `main`, dossier `/docs`).
 - `npm run package` fabrique l'application Windows (Electron) dans `release/` ; sur le PC du bureau elle est installée dans `%LOCALAPPDATA%\Programs\Salle d'etude`.
+- PC de développement principal (depuis le 04/09/2026) : dossier `C:\Users\Yves\Projets\salle-etude` (Node 24, Git, npm autorisé dans PowerShell). Deux scripts double-clic à la racine : `publier.cmd` (build + commit + push) et `fabriquer-application.cmd` (build + package Electron, ouvre `release\`). Depuis Cowork, le dossier peut être partagé (« Ajouter un dossier ») et les scripts lancés par double-clic dans l'Explorateur.
 - Le README.md (en français) est le guide utilisateur complet : le tenir à jour à chaque nouvelle fonctionnalité.
 
 ## Accès réservé (important)
