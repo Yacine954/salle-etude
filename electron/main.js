@@ -1,5 +1,17 @@
 const { app, BrowserWindow, shell, Menu, nativeTheme } = require("electron");
 const path = require("path");
+const fs = require("fs");
+const { fileURLToPath } = require("url");
+
+// Ouvre un fichier local (PDF, image des annales) avec l'application par défaut de Windows.
+// Dans l'application empaquetée, ces fichiers vivent dans app.asar.unpacked, pas dans l'archive.
+function openLocalFile(url) {
+  let p;
+  try { p = fileURLToPath(url); } catch (e) { return; }
+  const unpacked = p.replace(/app\.asar([\\/])/, "app.asar.unpacked$1");
+  if (unpacked !== p && fs.existsSync(unpacked)) p = unpacked;
+  shell.openPath(p);
+}
 
 const smoke = process.argv.includes("--smoke");
 
@@ -19,11 +31,13 @@ function createWindow() {
 
   // Links to external sites open in the default browser, never inside the app.
   win.webContents.setWindowOpenHandler(({ url }) => {
-    if (/^(https?|file):/.test(url)) shell.openExternal(url);
+    if (/^https?:/.test(url)) shell.openExternal(url);
+    else if (/^file:/.test(url)) openLocalFile(url);
     return { action: "deny" };
   });
   win.webContents.on("will-navigate", (e, url) => {
     if (!url.startsWith("file:")) { e.preventDefault(); shell.openExternal(url); }
+    else if (!/index\.html/.test(url)) { e.preventDefault(); openLocalFile(url); }
   });
 
   if (smoke) {

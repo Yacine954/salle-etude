@@ -33,7 +33,7 @@ async function main() {
     platform: "win32",
     arch: "x64",
     overwrite: true,
-    asar: true,
+    asar: { unpack: "**/docs/annales/**" },
     tmpdir: false,
     icon: path.join(ROOT, "electron", "icon.ico"),
     appCopyright: pkg.author,
