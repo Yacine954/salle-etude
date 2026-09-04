@@ -15,6 +15,14 @@
       "salt": "eefef9a0b14ad5882e02d0ff684e3de9",
       "iv": "XInRoWazP49uwWH9",
       "wrap": "wrp/LPAQgJ2MQVynSbZd6gDLRCfA94eUqEnO3gp9+KegZoHbm13mL8yQST3XAdMR"
+    },
+    {
+      "nom": "Moussi Pépite",
+      "date": "2026-09-04",
+      "hash": "0de0ee965aa9828c9848c9381b4e9ae365877e58c1e979f30adb30c0b045f92e",
+      "salt": "b1c38767b830ecb17976124d715698a5",
+      "iv": "kKhjWY76T9wWUy44",
+      "wrap": "bNlWtXifMOSOmvn/+FJHMcCZdsFvIFd+P1vL45whvhX7aveKrNvMU91+A1pqBANT"
     }
   ]
 }
