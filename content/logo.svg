@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
+  <!-- Fond : carré arrondi couleur encre -->
+  <rect x="0" y="0" width="256" height="256" rx="58" fill="#15191D"/>
+  <!-- Bandeau de la toque -->
+  <path d="M72 128 v34 a8 8 0 0 0 4.6 7.2 L128 194 l51.4 -24.8 a8 8 0 0 0 4.6 -7.2 v-34 Z" fill="#8A9096"/>
+  <!-- Plateau de la toque -->
+  <path d="M128 60 L222 110 L128 160 L34 110 Z" fill="#F1F1EE"/>
+  <!-- Bouton central -->
+  <circle cx="128" cy="110" r="7" fill="#2FA3B2"/>
+  <!-- Gland (tassel) -->
+  <path d="M128 110 L222 110 v52" fill="none" stroke="#2FA3B2" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="222" cy="172" r="12" fill="#2FA3B2"/>
+</svg>
