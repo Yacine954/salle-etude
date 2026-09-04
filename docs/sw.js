@@ -3,7 +3,7 @@
    ce qui déclenche la mise à jour chez les visiteurs. */
 "use strict";
 
-var VERSION = "ec5a19461535";
+var VERSION = "ac26869ef4da";
 var CACHE = "salle-etude-" + VERSION;
 var POLICES = "salle-etude-polices";
 var FICHIERS = ["index.html","manifest.webmanifest","icone-192.png","icone-512.png","icone-maskable-512.png","icone-apple-180.png","annales/2025-partiel-risques-exemple.pdf"];

@@ -253,15 +253,15 @@ On Error GoTo Gestion … Exit Sub … Gestion: MsgBox Err.Description : Resume 
 
 ## Quelle est la différence entre Sub et Function ?
 - Sub est plus rapide
-- [x] Function renvoie une valeur et peut s'utiliser dans une cellule
 - Sub ne peut pas contenir de boucle
 - Il n'y a aucune différence
+- [x] Function renvoie une valeur et peut s'utiliser dans une cellule
 > Une Function renvoie un résultat (=MaFonction(A1)), une Sub exécute des actions.
 
 ## Que fait ws.Cells(ws.Rows.Count, 1).End(xlUp).Row ?
 - Compte le nombre de feuilles
-- [x] Renvoie le numéro de la dernière ligne remplie de la colonne A
 - Supprime la dernière ligne
+- [x] Renvoie le numéro de la dernière ligne remplie de la colonne A
 - Trie la colonne A
 > On part du bas de la colonne et on remonte (xlUp) jusqu'à la première cellule non vide.
 
@@ -273,22 +273,22 @@ On Error GoTo Gestion … Exit Sub … Gestion: MsgBox Err.Description : Resume 
 > Sans elle, une faute de frappe crée silencieusement une nouvelle variable vide.
 
 ## Pour classer une valeur dans l'une de quatre tranches, la structure la plus lisible est :
-- Une boucle Do While
 - [x] Select Case
+- Une boucle Do While
 - On Error GoTo
 - With … End With
 > Select Case gère des plages de valeurs (Case 1 To 30) de façon claire.
 
 ## Le code de la procédure Workbook_Open se place dans :
 - Un module standard
-- [x] ThisWorkbook
 - Le module de la feuille Synthèse
 - Un UserForm
+- [x] ThisWorkbook
 > Les événements du classeur vivent dans ThisWorkbook ; ceux d'une feuille dans son module.
 
 ## Quel outil est le plus adapté pour fusionner chaque mois 12 exports CSV de l'ERP ?
-- RECHERCHEV
 - [x] Power Query
+- RECHERCHEV
 - Une mise en forme conditionnelle
 - MsgBox
 > Power Query rejoue l'import et la transformation en un clic, sans code.
@@ -302,8 +302,8 @@ On Error GoTo Gestion … Exit Sub … Gestion: MsgBox Err.Description : Resume 
 
 ## Pourquoi coller en valeurs (xlPasteValues) dans la Synthèse ?
 - Pour garder les formules vivantes
-- [x] Pour figer le résultat et éviter les liens cassés
 - Pour changer la police
+- [x] Pour figer le résultat et éviter les liens cassés
 - Pour supprimer les doublons
 > La Synthèse doit rester lisible même si la source change ou est absente.
 

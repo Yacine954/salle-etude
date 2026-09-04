@@ -180,43 +180,43 @@ M-6 sujet validé · M-5 littérature · M-4 données · M-3 analyse · M-2 réd
 
 ## Lequel de ces énoncés est une problématique et non un thème ?
 - Le recouvrement client dans les PME
-- [x] Dans quelle mesure un scoring de relance réduit-il le DSO d'une PME de services ?
 - Les normes IFRS
 - La trésorerie
+- [x] Dans quelle mesure un scoring de relance réduit-il le DSO d'une PME de services ?
 > Une problématique est une question précise, discutable, à laquelle on peut répondre de façon nuancée.
 
 ## La revue de littérature doit se conclure par :
 - Un résumé chronologique des auteurs
-- [x] Un cadre d'analyse mobilisé ensuite sur le terrain
 - La bibliographie
 - Les recommandations
+- [x] Un cadre d'analyse mobilisé ensuite sur le terrain
 > Elle sert à construire les concepts avec lesquels on lira les données.
 
 ## Une balance âgée extraite de l'ERP est une donnée :
-- Primaire
 - [x] Secondaire
+- Primaire
 - Qualitative
 - Inexploitable
 > Elle existe indépendamment de l'étude ; un entretien mené pour le mémoire serait une donnée primaire.
 
 ## Dans le texte, une citation APA de deux auteurs s'écrit :
 - (Nom et Nom 2020)
-- [x] (Nom & Nom, 2020)
 - Nom, Nom, 2020
+- [x] (Nom & Nom, 2020)
 - [1]
 > Format APA : (Nom & Nom, année) ; à partir de trois auteurs : (Nom et al., année).
 
 ## Reformuler un paragraphe d'un article sans citer la source est :
-- Autorisé si les mots changent
 - [x] Du plagiat
+- Autorisé si les mots changent
 - Une paraphrase acceptable
 - Une citation indirecte valide
 > L'idée appartient à l'auteur : toute reprise, même reformulée, doit être citée.
 
 ## Expliciter les limites de son étude dans la discussion :
 - Fait baisser la note
-- [x] Est attendu et témoigne de rigueur
 - Est inutile
+- [x] Est attendu et témoigne de rigueur
 - Remplace la conclusion
 > Le jury valorise le recul critique ; taire les limites est perçu comme une faiblesse.
 

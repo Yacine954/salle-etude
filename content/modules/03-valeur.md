@@ -224,29 +224,29 @@ Cash immobilisé = ΔDSO × CA TTC ÷ 365
 
 ## Sous IFRS 16, un contrat de location chez le preneur :
 - Reste hors bilan
-- [x] Crée un actif « droit d'utilisation » et une dette de loyers
 - Est comptabilisé en charge unique à la signature
 - N'a aucun effet sur l'EBITDA
+- [x] Crée un actif « droit d'utilisation » et une dette de loyers
 > L'actif et la dette apparaissent au bilan ; le loyer est remplacé par amortissement + intérêts, ce qui augmente l'EBITDA.
 
 ## FR = 200, BFR = 260. La trésorerie nette est de :
-- +60
 - [x] −60
+- +60
 - +460
 - 0
 > TN = FR − BFR = 200 − 260 = −60 : l'entreprise finance une partie de son BFR par du découvert.
 
 ## Le ROCE est de 8 % et le coût de la dette après impôt de 5 %. S'endetter davantage :
 - Réduit le ROE
-- [x] Augmente le ROE (levier positif)
 - N'a aucun effet sur le ROE
 - Rend le ROE négatif
+- [x] Augmente le ROE (levier positif)
 > ROCE > i : chaque euro emprunté rapporte plus qu'il ne coûte, le ROE augmente.
 
 ## Dans un DCF, la valeur terminale se calcule par :
 - EBITDA × multiple sectoriel uniquement
-- [x] FCF(n+1) ÷ (WACC − g)
 - Somme des dividendes passés
+- [x] FCF(n+1) ÷ (WACC − g)
 - Capitaux propres × PER
 > Formule de Gordon-Shapiro, rente perpétuelle croissante au taux g.
 
@@ -272,8 +272,8 @@ Cash immobilisé = ΔDSO × CA TTC ÷ 365
 > CA journalier = 36,5 M ÷ 365 = 100 k€ ; 15 jours × 100 k€ = 1,5 M€.
 
 ## Le goodwill est :
-- Amorti linéairement sur 5 ans en IFRS
 - [x] Soumis à un test de dépréciation annuel (IAS 36)
+- Amorti linéairement sur 5 ans en IFRS
 - Toujours nul dans les comptes consolidés
 - Un passif
 > En IFRS, le goodwill n'est pas amorti mais testé chaque année (et en cas d'indice de perte de valeur).

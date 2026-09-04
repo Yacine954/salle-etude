@@ -196,23 +196,23 @@ Criticité = Probabilité × Impact
 
 ## Une entreprise européenne qui encaissera 1 M$ dans 3 mois veut se couvrir sans renoncer à un éventuel gain si le dollar monte. Elle utilise :
 - Une vente à terme (forward)
-- [x] Un put sur dollar
 - Un swap de taux
+- [x] Un put sur dollar
 - Un future sur taux
 > Le put protège contre la baisse du dollar tout en gardant le potentiel de hausse ; le forward fige le cours.
 
 ## Un swap de taux classique échange :
-- Deux devises différentes
 - [x] Un taux fixe contre un taux variable sur un même notionnel
+- Deux devises différentes
 - Des actions contre des obligations
 - Une créance contre une dette
 > Les flux d'intérêts sont échangés, jamais le notionnel.
 
 ## La VaR à 1 jour est de 10 000 €. La VaR à 16 jours vaut environ :
 - 160 000 €
-- [x] 40 000 €
 - 10 000 €
 - 2 500 €
+- [x] 40 000 €
 > VaR(T) ≈ VaR(1) × √T = 10 000 × 4 = 40 000 €.
 
 ## Quelle est la principale limite de la VaR paramétrique ?
@@ -223,8 +223,8 @@ Criticité = Probabilité × Impact
 > D'où les stress tests et l'expected shortfall.
 
 ## Parmi les composantes COSO, laquelle correspond à la supervision continue du dispositif ?
-- L'environnement de contrôle
 - [x] Le pilotage
+- L'environnement de contrôle
 - L'évaluation des risques
 - L'information et la communication
 > Le pilotage (monitoring) vérifie dans la durée que les contrôles fonctionnent.
@@ -232,14 +232,14 @@ Criticité = Probabilité × Impact
 ## Dans le modèle des trois lignes de maîtrise, l'audit interne est :
 - La première ligne
 - La deuxième ligne
-- [x] La troisième ligne
 - Hors du modèle
+- [x] La troisième ligne
 > Il évalue de façon indépendante les deux premières lignes et rapporte au comité d'audit.
 
 ## Sous IFRS 9, l'approche simplifiée pour les créances commerciales utilise :
 - Une provision forfaitaire de 5 %
-- [x] Une matrice de taux de perte par tranche d'ancienneté
 - Aucune provision avant le défaut avéré
+- [x] Une matrice de taux de perte par tranche d'ancienneté
 - La valeur de marché des créances
 > Chaque tranche de la balance âgée reçoit un taux de perte attendu ; provision = Σ encours × taux.
 

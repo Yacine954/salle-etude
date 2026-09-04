@@ -32,10 +32,10 @@ Les cinq fonctionnalités du plan sont faites, sans infrastructure payante :
 
 1. **PWA** — v1.2 : manifeste, service worker, installation sur téléphone, hors ligne, mise à jour automatique.
 2. **Révision espacée** — v1.3 : boîtes de Leitner (`LEITNER_DAYS`, `NEW_PER_DAY` dans `src/app.js`), stockées dans `progress[module].leitner["definitions:3"] = [boîte, à revoir le, dernière révision, créée le]` ; vue `revision`, carte « Révision espacée » sur l'accueil, boutons « Je savais / Je ne savais pas » sur les cartes révélées d'un module. Boîte ≥ 4 ⇒ carte cochée « maîtrisée ».
-3. **Examen blanc** — v1.3 : vue `examen` (setup → run → done), tirage au hasard, **ordre des réponses mélangé** (les quiz des modules ont la bonne réponse en B dans 72 cas sur 80 : à rééquilibrer quand on retouche les quiz), chronomètre, note /20 au demi-point, historique dans `localStorage` (`salle-etude-examens-v1`).
+3. **Examen blanc** — v1.3 : vue `examen` (setup → run → done), tirage au hasard, **ordre des réponses mélangé** ; les quiz des modules ont été rééquilibrés (`npm run quiz`, script `tools/equilibre-quiz.js`, reproductible et idempotent : à relancer après ajout de questions), chronomètre, note /20 au demi-point, historique dans `localStorage` (`salle-etude-examens-v1`).
 4. **Codes à durée limitée** — v1.3 : `tools/acces.js` (`--jusqu-au`, `--essai`, `prolonger … --illimite`), champ `expire` dans `acces.json` ; au build, un code expiré perd sa clé enveloppée (`w`) et garde `e` pour le message « code expiré » (`src/gate.js`).
 5. **Compte à rebours** — v1.3 : `config.examens` (titre, date, heure, lieu, modules), carte « Prochains examens » sur l'accueil.
 
 Extras faits en v1.3 : bannière « Nouveautés » (`config.nouveautes`, fermeture mémorisée par version), fiche de révision imprimable par module (vue `fiche`), export / import de la progression (JSON fusionné avec `mergeProgress`).
 
-Idées gardées pour plus tard : sections « Erreurs fréquentes » et « Méthode de l'épreuve » (contenu à écrire), liens vidéo en fin de leçon, compteur de visites anonyme (demande un service), rééquilibrer la position des bonnes réponses dans les quiz.
+Idées gardées pour plus tard : sections « Erreurs fréquentes » et « Méthode de l'épreuve » (contenu à écrire), liens vidéo en fin de leçon, compteur de visites anonyme (demande un service).

@@ -208,16 +208,16 @@ Sharpe = (Rp − r_f) ÷ σp
 
 ## Dans une régression, un coefficient a t = 0,8. On en conclut que :
 - Il est significatif à 5 %
-- [x] Il n'est pas significativement différent de zéro
 - Le modèle est faux
 - Le R² est élevé
+- [x] Il n'est pas significativement différent de zéro
 > |t| < 1,96 : on ne peut pas rejeter l'hypothèse β = 0 au seuil de 5 %.
 
 ## L'hétéroscédasticité :
 - Biaise les coefficients MCO
-- [x] Biaise les écarts-types des coefficients
 - Rend le R² négatif
 - N'a aucun effet
+- [x] Biaise les écarts-types des coefficients
 > Les coefficients restent sans biais, mais les tests de significativité sont faussés ; remède : écarts-types robustes.
 
 ## Le test de Dickey-Fuller sert à :
@@ -228,29 +228,29 @@ Sharpe = (Rp − r_f) ÷ σp
 > Il teste la présence d'une racine unitaire ; sans stationnarité, risque de régression fallacieuse.
 
 ## Deux actifs de même écart-type 20 % et de corrélation 0. Un portefeuille 50/50 a un écart-type de :
-- 20 %
 - [x] 14,1 %
+- 20 %
 - 10 %
 - 0 %
 > σp² = 0,25 × 0,04 + 0,25 × 0,04 + 0 = 0,02 ; σp = 14,1 %. La diversification réduit le risque.
 
 ## r_f = 3 %, prime de marché = 5 %, β = 1,4. Le rendement exigé par le MEDAF est :
 - 8 %
-- [x] 10 %
 - 7 %
+- [x] 10 %
 - 12 %
 > 3 % + 1,4 × 5 % = 10 %.
 
 ## Selon la forme semi-forte de l'efficience :
 - L'analyse technique bat le marché
-- [x] L'information publique est déjà dans les prix
 - Les initiés ne gagnent jamais
+- [x] L'information publique est déjà dans les prix
 - Les prix sont aléatoires sans lien avec l'information
 > L'analyse fondamentale sur information publique ne permet pas de battre durablement le marché.
 
 ## On observe que les factures les plus relancées sont payées le plus tard. Conclure que la relance retarde le paiement est une erreur de :
-- Multicolinéarité
 - [x] Endogénéité (causalité inverse)
+- Multicolinéarité
 - Saisonnalité
 - Stationnarité
 > On relance davantage les mauvais payeurs : la causalité va du retard vers la relance.

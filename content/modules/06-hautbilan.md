@@ -203,8 +203,8 @@ Cash = ΔDSO × CA TTC ÷ 365
 # Quiz
 
 ## Selon Modigliani-Miller avec impôt, la dette :
-- Détruit toujours de la valeur
 - [x] Crée de la valeur via l'économie d'impôt sur les intérêts
+- Détruit toujours de la valeur
 - N'a aucun effet
 - Réduit le résultat d'exploitation
 > V(endettée) = V(non endettée) + t × D.
@@ -225,8 +225,8 @@ Cash = ΔDSO × CA TTC ÷ 365
 
 ## Dans un LBO, la dette de la holding est remboursée par :
 - Les salariés
-- [x] Les dividendes remontés de la cible
 - L'État
+- [x] Les dividendes remontés de la cible
 - Les fournisseurs
 > La capacité de la cible à distribuer du cash est le cœur de l'analyse d'un LBO.
 
@@ -239,21 +239,21 @@ Cash = ΔDSO × CA TTC ÷ 365
 
 ## Un earn-out est :
 - Une garantie de passif
-- [x] Un complément de prix conditionné aux résultats futurs
 - Une prime de contrôle
 - Une clause de non-concurrence
+- [x] Un complément de prix conditionné aux résultats futurs
 > Il réconcilie vendeur et acheteur sur une valeur incertaine.
 
 ## Dans une titrisation, la tranche qui absorbe les premières pertes est :
 - La tranche senior
 - La tranche mezzanine
-- [x] La tranche equity
 - La tranche garantie
+- [x] La tranche equity
 > Elle est la moins bien notée et la mieux rémunérée ; la senior est remboursée en premier.
 
 ## L'affacturage « sans recours » signifie que :
-- Le factor n'avance pas de fonds
 - [x] Le factor supporte le risque d'impayé
+- Le factor n'avance pas de fonds
 - L'entreprise garde le risque d'impayé
 - Le client n'est pas informé
 > Avec recours, l'entreprise rembourse le factor si le client ne paie pas ; sans recours, le factor assume la perte.

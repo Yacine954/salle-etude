@@ -201,16 +201,16 @@ Prévision = Σ (Créance × Probabilité de règlement par tranche)
 # Quiz
 
 ## Dans un budget de trésorerie, une vente HT de 10 000 € facturée en janvier à 60 jours (TVA 20 %) apparaît :
+- [x] 12 000 € en mars
 - 10 000 € en janvier
 - 12 000 € en janvier
-- [x] 12 000 € en mars
 - 10 000 € en mars
 > On raisonne en TTC (12 000 €) et à la date d'encaissement (janvier + 60 jours = mars).
 
 ## Le BFR se calcule comme :
-- [x] Stocks + Créances clients − Dettes fournisseurs
 - Actif total − Passif total
 - Créances clients − Dettes clients
+- [x] Stocks + Créances clients − Dettes fournisseurs
 - Chiffre d'affaires − Charges
 > Formule classique du besoin en fonds de roulement d'exploitation.
 
@@ -223,9 +223,9 @@ Prévision = Σ (Créance × Probabilité de règlement par tranche)
 
 ## Découvert de 200 000 € pendant 45 jours à 6 %. Les agios s'élèvent à :
 - 12 000 €
-- [x] 1 500 €
 - 1 479 €
 - 9 000 €
+- [x] 1 500 €
 > 200 000 × 6 % × 45 ÷ 360 = 1 500 €.
 
 ## Le cash pooling notionnel :
@@ -237,23 +237,23 @@ Prévision = Σ (Créance × Probabilité de règlement par tranche)
 
 ## Pour placer un excédent à très court terme, le critère prioritaire est :
 - Le rendement avant tout
-- [x] La sécurité et la liquidité avant le rendement
 - La durée la plus longue possible
+- [x] La sécurité et la liquidité avant le rendement
 - Le montant minimum
 > Le placement doit être disponible pour le prochain pic de décaissements.
 
 ## La meilleure protection contre la fraude au changement de RIB fournisseur est :
-- Payer plus vite
 - [x] Vérifier le changement par un canal indépendant (appel à un contact connu) et double validation
+- Payer plus vite
 - Ne plus payer par virement
 - Faire confiance à l'email
 > Le contrôle interne des paiements repose sur la vérification indépendante et la séparation initiation/validation.
 
 ## Dans une prévision d'encaissement construite à partir d'une balance âgée, chaque créance est pondérée par :
 - Son montant uniquement
-- [x] Une probabilité de règlement qui décroît avec l'ancienneté
 - La devise de facturation
 - Le nombre de relances, indépendamment du montant
+- [x] Une probabilité de règlement qui décroît avec l'ancienneté
 > Prévision = Σ créance × probabilité par tranche, à partir des taux historiques.
 
 # Exercices

@@ -151,36 +151,36 @@ DSO · Encours échu · Part > 90 j · Taux de recouvrement du mois · Nombre de
 
 ## Dans la théorie de l'agence, le « principal » est :
 - Le dirigeant
-- [x] L'actionnaire
 - Le commissaire aux comptes
+- [x] L'actionnaire
 - Le salarié
 > L'actionnaire (principal) délègue la gestion au dirigeant (agent).
 
 ## Dans une structure dualiste, l'organe qui dirige est :
 - Le conseil de surveillance
-- [x] Le directoire
 - Le comité d'audit
 - L'assemblée générale
+- [x] Le directoire
 > Le directoire dirige, le conseil de surveillance contrôle.
 
 ## Le principe « comply or explain » signifie :
-- Appliquer toutes les lois sans exception
 - [x] Appliquer les recommandations du code ou justifier les écarts
+- Appliquer toutes les lois sans exception
 - Expliquer les comptes aux salariés
 - Se conformer aux normes IFRS
 > Les codes de gouvernance ne sont pas contraignants, mais tout écart doit être expliqué.
 
 ## La double matérialité consiste à analyser :
 - Deux exercices comptables
-- [x] L'impact de l'entreprise sur le monde et l'impact des enjeux ESG sur l'entreprise
 - Les comptes sociaux et consolidés
 - Les risques financiers et opérationnels
+- [x] L'impact de l'entreprise sur le monde et l'impact des enjeux ESG sur l'entreprise
 > C'est le principe central de la CSRD.
 
 ## La taxonomie européenne sert à :
-- [x] Classer les activités économiques durables
 - Fixer le taux d'impôt sur les sociétés
 - Noter les dirigeants
+- [x] Classer les activités économiques durables
 - Publier les comptes semestriels
 > Elle définit quelles activités contribuent aux objectifs environnementaux.
 
@@ -199,8 +199,8 @@ DSO · Encours échu · Part > 90 j · Taux de recouvrement du mois · Nombre de
 > Il relève de l'information permanente : à publier dès que l'écart est avéré.
 
 ## Dans un reporting de performance, l'élément le plus souvent oublié et pourtant décisif est :
-- Le logo
 - [x] Les écarts expliqués et les actions
+- Le logo
 - Le nombre de pages
 - La couleur des graphiques
 > Sans écart expliqué ni action, le reporting n'aide pas à décider.

@@ -162,44 +162,44 @@ LTV = ARPU × marge brute ÷ taux de churn ; cible LTV/CAC > 3
 # Quiz
 
 ## Une startup lève 1 M€ sur une valorisation pre-money de 4 M€. Quelle part du capital obtient l'investisseur ?
-- 25 %
 - [x] 20 %
+- 25 %
 - 33 %
 - 80 %
 > Post-money = 4 + 1 = 5 M€ ; part = 1 ÷ 5 = 20 %.
 
 ## Qu'est-ce qu'un BSA-AIR ?
 - Une action de préférence avec dividende garanti
-- [x] Un instrument qui finance immédiatement en reportant la valorisation au tour suivant
 - Un prêt bancaire garanti par Bpifrance
+- [x] Un instrument qui finance immédiatement en reportant la valorisation au tour suivant
 - Une option d'achat sur les actions des fondateurs
 > Le BSA-AIR reporte la fixation de la valorisation au tour suivant, avec décote et plafond négociés.
 
 ## La préférence de liquidation 1x signifie que l'investisseur :
 - Reçoit le double de sa mise en cas de sortie
-- [x] Récupère sa mise en priorité avant tout partage
 - Est remboursé uniquement en cas de faillite
 - Renonce à tout dividende
+- [x] Récupère sa mise en priorité avant tout partage
 > En cas de sortie, l'investisseur touche d'abord 1x son investissement, puis le solde est partagé selon les règles du pacte.
 
 ## Le « carried interest » d'un fonds de VC correspond à :
-- Les frais de gestion annuels
 - [x] La part de plus-value reversée à l'équipe de gestion
+- Les frais de gestion annuels
 - Les intérêts payés aux LP
 - Le taux d'actualisation utilisé
 > Le carried (souvent 20 %) rémunère les GP sur la performance, au-delà du hurdle rate.
 
 ## Une startup a 300 k€ en banque et un burn rate net de 50 k€/mois. Son runway est de :
 - 3 mois
-- [x] 6 mois
 - 12 mois
 - 15 mois
+- [x] 6 mois
 > 300 ÷ 50 = 6 mois. Il est temps de préparer le tour suivant.
 
 ## Le vesting avec « cliff » d'un an signifie que :
 - Les actions sont vendues au bout d'un an
-- [x] Aucune action n'est acquise avant 12 mois, puis acquisition progressive
 - Le fondateur reçoit toutes ses actions à la signature
+- [x] Aucune action n'est acquise avant 12 mois, puis acquisition progressive
 - Les actions sont bloquées 4 ans sans exception
 > Le cliff empêche un départ précoce de repartir avec des actions ; après 12 mois, le vesting devient progressif.
 

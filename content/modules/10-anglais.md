@@ -206,15 +206,15 @@ Role → concrete result → current project → next step
 > Receivable = à recevoir = créances ; payable = dettes fournisseurs.
 
 ## Une facture « outstanding » est :
-- Forcément en retard
 - [x] Non encore réglée, échue ou non
+- Forcément en retard
 - Passée en perte
 - Contestée
 > Overdue signifie en retard ; outstanding signifie simplement non réglée.
 
 ## « To write off a receivable » signifie :
-- Relancer le client
 - [x] Passer la créance en perte
+- Relancer le client
 - Provisionner la créance
 - Émettre un avoir
 > Write-off = perte définitive ; allowance = provision.
@@ -229,28 +229,28 @@ Role → concrete result → current project → next step
 ## « Working capital » se traduit par :
 - Capital social
 - Fonds de roulement au sens français
-- [x] Besoin en fonds de roulement
 - Trésorerie
+- [x] Besoin en fonds de roulement
 > En anglais, working capital = actif circulant − passif circulant = BFR.
 
 ## « 1.5 billion » correspond à :
 - 1,5 million
-- [x] 1,5 milliard
 - 15 milliards
 - 1 500
+- [x] 1,5 milliard
 > Billion = milliard en anglais moderne.
 
 ## Dans une relance, « by 31 July » signifie :
 - Le 31 juillet exactement
-- [x] Au plus tard le 31 juillet
 - À partir du 31 juillet
+- [x] Au plus tard le 31 juillet
 - Environ le 31 juillet
 > By = date limite ; on = à cette date précise.
 
 ## Quelle formulation convient à une première relance ?
 - Pay now or we sue you.
-- [x] According to our records, invoice no. 118 remains outstanding. Could you confirm when we can expect payment?
 - You never pay on time.
+- [x] According to our records, invoice no. 118 remains outstanding. Could you confirm when we can expect payment?
 - URGENT!!! PAYMENT!!!
 > Factuelle, polie, avec une demande d'action claire.
 
