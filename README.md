@@ -57,6 +57,13 @@ Après la seconde commande (répondre `O`), ferme et rouvre le terminal. Sur un 
 
 Pour voir le résultat pendant que tu travailles : lance `npm run watch`, ouvre `docs/index.html` dans ton navigateur et recharge la page après chaque modification.
 
+**Sans terminal.** Deux fichiers à double-cliquer dans le dossier du projet font le travail à ta place :
+
+- `publier.cmd` — reconstruit la page, enregistre les changements et les envoie sur GitHub (le site est à jour une à deux minutes plus tard). S'il n'y a rien de nouveau, il le dit et s'arrête.
+- `fabriquer-application.cmd` — fabrique l'application Windows dans `release\` et ouvre le dossier à la fin (quelques minutes).
+
+En cas de problème, la fenêtre reste ouverte avec le message d'erreur : copie-le à Claude.
+
 ## 3. Ajouter ou modifier un module
 
 Chaque module est un fichier `content/modules/NN-identifiant.md`. Le numéro `NN` fixe l'ordre d'affichage. Pour créer un module, copie un fichier existant, renomme-le et change son en-tête :
