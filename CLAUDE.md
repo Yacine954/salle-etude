@@ -45,12 +45,14 @@ Idées gardées pour plus tard : sections « Erreurs fréquentes » et « Métho
 
 - Les demandes arrivent par e-mail « Demande d'accès — La salle d'étude » sur yacineguett@gmail.com (connecteur Gmail de Claude, compte reconnecté sur cette adresse). Labels Gmail : `Label_3` = « Salle d'étude/En attente » (signalée à Yacine), `Label_2` = « Salle d'étude/Code envoyé » (traitée).
 - Une tâche planifiée Claude (« Salle d'étude — demandes d'accès », 9h et 19h Paris) lit les demandes non traitées, pose `Label_3` sur les nouvelles et notifie Yacine. Elle ne répond jamais aux demandeurs et ne crée aucun code. **Pas de relance de paiement** aux demandeurs : c'est une décision de Yacine.
-- Yacine vérifie qu'il a reçu la participation, puis dit à Claude « ok pour Prénom Nom ». Claude fait alors, PC allumé et dossier `C:\Users\Yves\Projets\salle-etude` partagé :
+- Yacine vérifie qu'il a reçu la participation, puis dit à Claude « ok pour Prénom Nom » (depuis n'importe quel appareil). Claude fait alors, **entièrement dans le cloud, PC éteint ou non** :
   1. retrouver le thread Gmail (`label:Label_3`), relever prénom, nom, adresse, `messageId` du dernier message du demandeur ;
-  2. côté cloud : `git clone` du dépôt, `npm install marked`, puis récupérer depuis le dossier de Yacine `content/acces.json` et `content/cle-contenu.txt` (device_stage_files) ; `node tools/acces.js ajouter "Prénom Nom"` (option `--essai` ou `--jusqu-au` si demandé) ; `node build.js` ;
-  3. déposer dans le dossier de Yacine `content/acces.json`, `docs/index.html`, `docs/sw.js` (device_commit_files), puis lancer `publier.cmd` (double-clic dans l'Explorateur via le contrôle de l'ordinateur, ou demander à Yacine) ;
-  4. répondre au demandeur dans son thread avec le modèle ci-dessous (Gmail `reply`), poser `Label_2`, retirer `Label_3` ;
-  5. supprimer la copie de la clé côté cloud.
+  2. `git clone https://github.com/Yacine954/salle-etude.git` (le dépôt doit être dans les sources GitHub autorisées de la session pour pouvoir pousser), `npm install marked` ;
+  3. la clé : fichier `cle-contenu.txt` dans le Google Drive de Yacine, dossier « Salle d'étude (privé) » (id fichier `1I0xZz6dv7jdkP_8rZHt-ZPZ21Q--NDCM`), lu via le connecteur Google Drive et écrit dans `content/cle-contenu.txt` (jamais commité — `.gitignore`) ;
+  4. `node tools/acces.js ajouter "Prénom Nom"` (option `--essai` ou `--jusqu-au` si demandé) → code + lien direct ; `node build.js` ; `git add -A`, `git commit -m "Accès pour Prénom Nom"`, `git push` ;
+  5. répondre au demandeur dans son thread avec le modèle ci-dessous (Gmail `reply`), poser `Label_2`, retirer `Label_3` ;
+  6. supprimer la copie de la clé côté cloud.
+  Si le push cloud est refusé (403), repli : déposer `content/acces.json`, `docs/index.html`, `docs/sw.js` dans le dossier du PC (device_commit_files) et lancer `publier.cmd` (double-clic dans l'Explorateur via le contrôle de l'ordinateur). `publier.cmd` fait un `git pull --rebase` avant de construire, pour intégrer les publications faites depuis le cloud.
 - Modèle d'e-mail (tutoiement, validé par Yacine) :
 
   > Salut {Prénom},

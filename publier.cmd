@@ -6,6 +6,10 @@ setlocal
 cd /d "%~dp0"
 title Salle d'etude - publication
 
+echo === 0/3 Recuperation des publications faites ailleurs (Claude, autre PC) ===
+git pull --rebase --autostash
+if errorlevel 1 goto :erreur
+
 echo === 1/3 Construction de la page ===
 call npm run build
 if errorlevel 1 goto :erreur
