@@ -346,9 +346,17 @@ function build() {
     var contentKey = acces.readContentKey(false);
     if (!contentKey) throw new Error("content/cle-contenu.txt est absent alors que des codes d'accès existent. Récupère-le depuis ton autre PC, ou vide content/acces.json et recrée les codes.");
     var sealed = acces.aesEncrypt(contentKey, Buffer.from(JSON.stringify({ modules: modules, annales: annales }), "utf8"));
-    var verrou = { iter: acces.ITER, iv: sealed.iv, data: sealed.data, codes: codes.map(function (c) { return { h: c.hash, s: c.salt, i: c.iv, w: c.wrap }; }) };
+    // Un code expiré garde son empreinte (pour afficher « code expiré ») mais perd sa clé enveloppée :
+    // il ne peut plus rien déchiffrer, quoi qu'il arrive côté navigateur.
+    var expired = 0;
+    var verrou = { iter: acces.ITER, iv: sealed.iv, data: sealed.data, codes: codes.map(function (c) {
+      var entry = { h: c.hash, s: c.salt, i: c.iv, w: c.wrap };
+      if (c.expire) entry.e = c.expire;
+      if (acces.isExpired(c)) { delete entry.w; expired++; }
+      return entry;
+    }) };
     data = "var MODULES = [];\nvar ANNALES = [];\nvar CONFIG = " + JSON.stringify(config) + ";\nvar VERROU = " + JSON.stringify(verrou) + ";";
-    console.log("  🔒 accès réservé : " + codes.length + " code(s), contenu chiffré");
+    console.log("  🔒 accès réservé : " + (codes.length - expired) + " code(s) actif(s)" + (expired ? ", " + expired + " expiré(s) non publié(s)" : "") + ", contenu chiffré");
   } else {
     data = "var MODULES = " + JSON.stringify(modules) + ";\nvar CONFIG = " + JSON.stringify(config) + ";\nvar ANNALES = " + JSON.stringify(annales) + ";";
   }

@@ -4,6 +4,21 @@ function startApp() {
   var STORAGE_KEY = "salle-etude-progress-v2";
   var LEGACY_KEY = "salle-etude-progress-v1";
   var PREF_KEY = "salle-etude-prefs-v1";
+  var EXAM_KEY = "salle-etude-examens-v1";
+  var NEWS_KEY = "salle-etude-nouveautes-v1";
+
+  /* ---------- Dates (format AAAA-MM-JJ, en heure locale) ---------- */
+  function isoDate(d) { return d.getFullYear() + "-" + pad(d.getMonth() + 1) + "-" + pad(d.getDate()); }
+  function todayISO() { return isoDate(new Date()); }
+  function addDays(iso, n) { var p = iso.split("-"); var d = new Date(+p[0], +p[1] - 1, +p[2] + n); return isoDate(d); }
+  function daysBetween(a, b) { var pa = a.split("-"), pb = b.split("-"); return Math.round((new Date(+pb[0], +pb[1] - 1, +pb[2]) - new Date(+pa[0], +pa[1] - 1, +pa[2])) / 86400000); }
+  function frDate(iso, long) {
+    var p = iso.split("-"); var d = new Date(+p[0], +p[1] - 1, +p[2]);
+    if (!long) return p[2] + "/" + p[1] + "/" + p[0];
+    var jours = ["dimanche", "lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi"];
+    var mois = ["janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "octobre", "novembre", "décembre"];
+    return jours[d.getDay()] + " " + d.getDate() + " " + mois[d.getMonth()] + (d.getFullYear() !== new Date().getFullYear() ? " " + d.getFullYear() : "");
+  }
 
   var PRIO_LABEL = CONFIG.priorites || { 1: "Priorité 1", 2: "Priorité 2", 3: "Priorité 3" };
   /* Groupes (semestres) dans l'ordre d'apparition des modules */
@@ -17,7 +32,9 @@ function startApp() {
     book: '<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h7a3 3 0 0 1 3 3v13a2 2 0 0 0-2-2H4z"/><path d="M20 4h-7a3 3 0 0 0-3 3v13a2 2 0 0 1 2-2h8z"/></svg>',
     search: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>',
     check: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg>',
-    menu: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>'
+    menu: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>',
+    cards: '<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="14" height="13" rx="2"/><path d="M7 7V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-2"/></svg>',
+    timer: '<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2.5M9 2h6M12 2v3"/></svg>'
   };
 
   function getModule(id) {
@@ -35,8 +52,27 @@ function startApp() {
       exercisesDone: m.exercises.map(function () { return false; }),
       quizBest: null,
       termsKnown: {},
-      formulasKnown: {}
+      formulasKnown: {},
+      leitner: {}   // "definitions:3" → [boîte, à revoir le, dernière révision, créée le]
     };
+  }
+  function cleanLeitner(src) {
+    var out = {};
+    if (!src || typeof src !== "object") return out;
+    Object.keys(src).forEach(function (k) {
+      var e = src[k];
+      if (!/^(definitions|formules):\d+$/.test(k) || !Array.isArray(e) || typeof e[0] !== "number") return;
+      out[k] = [Math.max(1, Math.min(LEITNER_DAYS.length - 1, e[0])), String(e[1] || todayISO()), String(e[2] || todayISO()), String(e[3] || e[2] || todayISO())];
+    });
+    return out;
+  }
+  function mergeLeitner(a, b) {
+    var out = {};
+    Object.keys(a).concat(Object.keys(b)).forEach(function (k) {
+      var ea = a[k], eb = b[k];
+      out[k] = !ea ? eb : !eb ? ea : (eb[2] > ea[2] || (eb[2] === ea[2] && eb[0] > ea[0])) ? eb : ea;
+    });
+    return out;
   }
   function defaultProgress() {
     var p = {};
@@ -75,6 +111,7 @@ function startApp() {
       dst.quizBest = (src.quizBest && typeof src.quizBest.score === "number") ? { score: src.quizBest.score, total: src.quizBest.total || m.quiz.length } : null;
       dst.termsKnown = src.termsKnown || {};
       dst.formulasKnown = src.formulasKnown || {};
+      dst.leitner = cleanLeitner(src.leitner);
     });
     return base;
   }
@@ -90,6 +127,7 @@ function startApp() {
       po.termsKnown = {}; po.formulasKnown = {};
       Object.keys(pa.termsKnown).concat(Object.keys(pb.termsKnown)).forEach(function (k) { if (pa.termsKnown[k] || pb.termsKnown[k]) po.termsKnown[k] = true; });
       Object.keys(pa.formulasKnown).concat(Object.keys(pb.formulasKnown)).forEach(function (k) { if (pa.formulasKnown[k] || pb.formulasKnown[k]) po.formulasKnown[k] = true; });
+      po.leitner = mergeLeitner(pa.leitner || {}, pb.leitner || {});
     });
     return out;
   }
@@ -104,6 +142,65 @@ function startApp() {
   function saveProgress() { saveLocal(); pushRemote(); }
   function loadPrefs() { try { var raw = localStorage.getItem(PREF_KEY); return raw ? JSON.parse(raw) : {}; } catch (e) { return {}; } }
   function savePrefs() { try { localStorage.setItem(PREF_KEY, JSON.stringify({ cardMode: state.cardMode, lastModule: state.lastModule, ambiance: state.ambiance, theme: state.theme })); } catch (e) {} }
+
+  /* ---------- Révision espacée : boîtes de Leitner ----------
+     Chaque carte (définition ou formule) est dans une boîte de 1 à 6. « Je savais » la fait monter
+     d'une boîte, « Je ne savais pas » la ramène en boîte 1. L'écart entre deux révisions double à
+     chaque boîte : 1, 2, 4, 8, 16 puis 32 jours. Une carte jamais révisée est « nouvelle » :
+     on en propose au plus NEW_PER_DAY par jour pour ne pas noyer la file. */
+  var LEITNER_DAYS = [0, 1, 2, 4, 8, 16, 32];
+  var NEW_PER_DAY = 10;
+
+  function cardKey(kind, i) { return kind + ":" + i; }
+  function cardItem(m, kind, i) { return kind === "definitions" ? m.glossary[i] : m.formulas[i]; }
+  function leitnerOf(mid, key) { return state.progress[mid].leitner[key] || null; }
+
+  function rateCard(mid, key, ok) {
+    var pr = state.progress[mid];
+    var today = todayISO();
+    var e = pr.leitner[key];
+    var box = ok ? Math.min(LEITNER_DAYS.length - 1, (e ? e[0] : 0) + 1) : 1;
+    pr.leitner[key] = [box, addDays(today, LEITNER_DAYS[box]), today, e ? e[3] : today];
+    // À partir de la boîte 4, la carte est considérée maîtrisée (compte dans l'avancement).
+    if (ok && box >= 4) { var parts = key.split(":"); (parts[0] === "definitions" ? pr.termsKnown : pr.formulasKnown)[parts[1]] = true; }
+    saveProgress();
+  }
+
+  function allCards() {
+    var out = [];
+    MODULES.forEach(function (m) {
+      m.glossary.forEach(function (it, i) { out.push({ m: m, kind: "definitions", i: i, key: cardKey("definitions", i), it: it, e: leitnerOf(m.id, cardKey("definitions", i)) }); });
+      m.formulas.forEach(function (it, i) { out.push({ m: m, kind: "formules", i: i, key: cardKey("formules", i), it: it, e: leitnerOf(m.id, cardKey("formules", i)) }); });
+    });
+    return out;
+  }
+  function reviewPlan() {
+    var today = todayISO();
+    var cards = allCards();
+    var due = cards.filter(function (c) { return c.e && c.e[1] <= today; }).sort(function (a, b) { return a.e[1] < b.e[1] ? -1 : a.e[1] > b.e[1] ? 1 : 0; });
+    var newToday = cards.filter(function (c) { return c.e && c.e[3] === today; }).length;
+    var fresh = cards.filter(function (c) { return !c.e; }).sort(function (a, b) { return (a.m.priority - b.m.priority) || (moduleIndex(a.m) - moduleIndex(b.m)); });
+    var news = fresh.slice(0, Math.max(0, NEW_PER_DAY - newToday));
+    var next = null;
+    cards.forEach(function (c) { if (c.e && c.e[1] > today && (!next || c.e[1] < next)) next = c.e[1]; });
+    return { due: due, news: news, fresh: fresh.length, next: next, seen: cards.length - fresh.length, total: cards.length };
+  }
+  function shuffle(arr) { for (var i = arr.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = arr[i]; arr[i] = arr[j]; arr[j] = t; } return arr; }
+
+  function startReview(random) {
+    var plan = reviewPlan();
+    var queue = random ? shuffle(allCards()).slice(0, 10) : plan.due.concat(plan.news);
+    state.rev = { queue: queue.map(function (c) { return { mid: c.m.id, kind: c.kind, i: c.i }; }), idx: 0, revealed: false, ok: 0, ko: 0 };
+    state.view = "revision"; state.navOpen = false; state.scrollTop = true;
+    render();
+  }
+
+  /* ---------- Examens blancs : historique ---------- */
+  function loadExams() { try { var raw = localStorage.getItem(EXAM_KEY); var a = raw ? JSON.parse(raw) : []; return Array.isArray(a) ? a : []; } catch (e) { return []; } }
+  function saveExams(list) { try { localStorage.setItem(EXAM_KEY, JSON.stringify(list.slice(-50))); } catch (e) {} }
+  function noteSur20(score, total) { return total ? Math.round((score / total) * 40) / 2 : 0; }
+  function frNote(n) { return String(n).replace(".", ","); }
+  function fmtClock(secs) { secs = Math.max(0, Math.round(secs)); return Math.floor(secs / 60) + ":" + pad(secs % 60); }
 
   /* ---------- Sync with the artifact store: progress follows the user across devices ---------- */
   var sync = { ref: null, status: "local", timer: null, last: "" };
@@ -195,7 +292,11 @@ function startApp() {
     search: "",
     lastModule: prefs.lastModule || null,
     navOpen: false,
-    scrollTop: false
+    scrollTop: false,
+    rev: null,                 // session de révision espacée en cours
+    exam: null,                // examen blanc en cours (setup / run / done)
+    exams: loadExams(),        // historique des examens blancs
+    importMsg: ""
   };
 
   function pct(n, d) { return d === 0 ? 0 : Math.round((n / d) * 100); }
@@ -240,6 +341,9 @@ function startApp() {
       }).join("");
     };
     var g = globalPct();
+    var plan = reviewPlan();
+    var nDue = plan.due.length + plan.news.length;
+    var expire = window.SalleEtudeAccesInfo && SalleEtudeAccesInfo.expire;
     return '<aside class="sidebar' + (state.navOpen ? ' open' : '') + '" id="sidebar">' +
       '<div class="brand"><div class="mark">' + brandMark() + '</div><div><div class="t">' + esc(CONFIG.titre) + '</div><div class="s">' + esc(CONFIG.sousTitre || "") + '</div></div></div>' +
       '<div class="side-search">' + ICONS.search + '<input type="search" placeholder="Chercher un terme, une formule…" value="' + esc(state.search) + '" data-search="1" aria-label="Rechercher"></div>' +
@@ -249,14 +353,22 @@ function startApp() {
         '<button class="nav-item' + (state.view === "glossaire" ? ' active' : '') + '" data-go="glossaire">' + ICONS.book + 'Glossaire complet</button>' +
         '<button class="nav-item' + (state.view === "annales" ? ' active' : '') + '" data-go="annales">' + ICONS.scroll + 'Annales' + (ANNALES.length ? '<span class="count">' + ANNALES.length + '</span>' : '') + '</button>' +
       '</div>' +
+      '<div class="side-group"><div class="side-label">S\'entraîner</div>' +
+        '<button class="nav-item' + (state.view === "revision" ? ' active' : '') + '" data-go="revision">' + ICONS.cards + 'Révision du jour' + (nDue ? '<span class="count' + (plan.due.length ? ' due' : '') + '">' + nDue + '</span>' : '') + '</button>' +
+        '<button class="nav-item' + (state.view === "examen" ? ' active' : '') + '" data-go="examen">' + ICONS.timer + 'Examen blanc</button>' +
+      '</div>' +
       codes().map(function (c) { return '<div class="side-group"><div class="side-label">' + esc(groupLabel(c)) + '</div>' + modItems(c) + '</div>'; }).join("") +
       '<div class="side-foot"><div>Avancement global · <b class="mono">' + g + ' %</b></div><div class="bar"><span style="width:' + g + '%"></span></div>' +
         '<div class="sync" data-sync="' + sync.status + '"><i></i>' + syncLabel() + '</div>' +
         (window.SalleEtudePWA && SalleEtudePWA.installable() ? '<button class="btn ghost sm" data-pwa-install="1" style="justify-content:center">Installer l\'application</button>' : '') +
         '<button class="btn ghost sm" data-theme-toggle="1" style="justify-content:center">' + ({ auto: "Thème : automatique", light: "Thème : clair", dark: "Thème : sombre" })[state.theme] + '</button>' +
         '<button class="btn ghost sm" data-ambiance="1" style="justify-content:center">' + (state.ambiance === "lofi" ? "Ambiance lofi ✓" : "Ambiance lofi") + '</button>' +
+        '<button class="btn ghost sm" data-export="1" style="justify-content:center">Exporter ma progression</button>' +
+        '<label class="btn ghost sm" style="justify-content:center">Importer une sauvegarde<input type="file" accept=".json,application/json" data-import="1" hidden></label>' +
+        (state.importMsg ? '<div class="side-msg">' + esc(state.importMsg) + '</div>' : '') +
         '<button class="btn ghost sm" data-reset="1" style="justify-content:center">' + (state.resetArmed ? "Confirmer la réinitialisation" : "Réinitialiser ma progression") + '</button>' +
-        (window.VERROU ? '<button class="btn ghost sm" data-logout="1" style="justify-content:center">Se déconnecter</button>' : '') + '</div>' +
+        (window.VERROU ? '<button class="btn ghost sm" data-logout="1" style="justify-content:center">Se déconnecter</button>' : '') +
+        (expire ? '<div class="side-expire">Accès valable jusqu\'au ' + frDate(expire) + '</div>' : '') + '</div>' +
     '</aside>';
   }
 
@@ -278,6 +390,55 @@ function startApp() {
     '</button>';
   }
 
+  /* Bannière « Nouveautés » : config.nouveautes = { version, titre, texte } ; se ferme jusqu'à la version suivante. */
+  function renderNews() {
+    var n = CONFIG.nouveautes;
+    if (!n || !n.version || !n.texte) return "";
+    var seen = "";
+    try { seen = localStorage.getItem(NEWS_KEY) || ""; } catch (e) {}
+    if (seen === String(n.version)) return "";
+    return '<div class="news"><div><div class="k">Nouveautés' + (n.version ? ' · version ' + esc(n.version) : '') + '</div>' + (n.titre ? '<div class="t">' + esc(n.titre) + '</div>' : '') + '<p>' + esc(n.texte) + '</p></div><button class="pwa-close" data-news-close="1" aria-label="Fermer">×</button></div>';
+  }
+
+  /* Carte « À revoir aujourd'hui » de l'accueil. */
+  function renderReviewCard() {
+    var plan = reviewPlan();
+    var nDue = plan.due.length, nNew = plan.news.length;
+    var body, cta;
+    if (nDue || nNew) {
+      var parts = [];
+      if (nDue) parts.push(nDue + ' carte' + (nDue > 1 ? 's' : '') + ' à revoir');
+      if (nNew) parts.push(nNew + ' nouvelle' + (nNew > 1 ? 's' : ''));
+      body = parts.join(" · ");
+      cta = '<button class="btn acc sm" data-review-start="1">Commencer' + (nDue + nNew <= 15 ? ' · ' + Math.max(2, Math.round((nDue + nNew) / 2)) + ' min' : '') + '</button>';
+    } else {
+      body = plan.seen ? 'Rien à revoir aujourd\'hui. ' + (plan.next ? 'Prochaine révision le ' + frDate(plan.next) + '.' : '') : 'Commence par quelques cartes : elles reviendront au bon moment.';
+      cta = '<button class="btn ghost sm" data-review-start="random">Réviser 10 cartes au hasard</button>';
+    }
+    return '<div class="widget rev"><div class="k">Révision espacée</div><div class="v">' + (nDue + nNew || '✓') + '</div><div class="d">' + body + '</div>' +
+      '<div class="d2">' + plan.seen + '/' + plan.total + ' cartes déjà vues</div><div class="a">' + cta + '</div></div>';
+  }
+
+  /* Compte à rebours : config.examens = [{ titre, date: "AAAA-MM-JJ", modules: [ids] }]. */
+  function upcomingExams() {
+    var today = todayISO();
+    return (CONFIG.examens || []).filter(function (x) { return x && /^\d{4}-\d{2}-\d{2}$/.test(String(x.date)) && x.date >= today; })
+      .sort(function (a, b) { return a.date < b.date ? -1 : a.date > b.date ? 1 : 0; });
+  }
+  function renderExamsCard() {
+    var list = upcomingExams().slice(0, 4);
+    if (!list.length) return "";
+    var today = todayISO();
+    var rows = list.map(function (x, idx) {
+      var j = daysBetween(today, x.date);
+      var mods = (x.modules || []).map(getModule).filter(Boolean);
+      var chips = mods.map(function (m) { return '<button class="chip go hued" style="--h:' + hue(m) + '" data-open-module="' + m.id + '">' + pad(moduleIndex(m)) + ' · ' + esc(m.title) + '</button>'; }).join("");
+      return '<div class="exam-row' + (idx === 0 ? ' first' : '') + (j <= 7 ? ' soon' : '') + '"><div class="j">' + (j === 0 ? 'Aujourd\'hui' : 'J-' + j) + '</div>' +
+        '<div><div class="t">' + esc(x.titre || "Examen") + '</div><div class="dt">' + frDate(x.date, true) + (x.heure ? ' · ' + esc(x.heure) : '') + (x.lieu ? ' · ' + esc(x.lieu) : '') + '</div>' + (chips ? '<div class="chips">' + chips + '</div>' : '') + '</div></div>';
+    }).join("");
+    return '<div class="widget exams"><div class="k">Prochains examens</div>' + rows + '</div>';
+  }
+
   function renderHome() {
     var g = globalPct();
     var strip = MODULES.map(function (m) {
@@ -287,8 +448,11 @@ function startApp() {
     var resume = last ? '<button class="resume hued" style="--h:' + hue(last) + '" data-open-module="' + last.id + '"><div><div class="l">Reprendre</div><div class="n">' + pad(moduleIndex(last)) + '</div></div><div><div class="t">' + last.title + '</div><div class="go">' + moduleStats(last).overall + ' % complété · continuer là où tu t\'es arrêté</div></div><div class="go">→</div></button>' : "";
     var grid = function (code) { return '<div class="grid2">' + MODULES.filter(function (m) { return m.code === code; }).map(renderModuleCard).join("") + '</div>'; };
 
-    return '<div class="home-hero"><div><h1>' + CONFIG.accueilTitre + '</h1><p>' + CONFIG.accueilTexte + ' <span data-sync-copy>' + syncCopy() + '</span></p></div>' +
+    var examsCard = renderExamsCard();
+    return renderNews() +
+      '<div class="home-hero"><div><h1>' + CONFIG.accueilTitre + '</h1><p>' + CONFIG.accueilTexte + ' <span data-sync-copy>' + syncCopy() + '</span></p></div>' +
       '<div class="big-pct"><div class="v">' + g + '<span style="font-size:0.5em">%</span></div><div class="l">Avancement global</div></div></div>' +
+      '<div class="widgets' + (examsCard ? '' : ' single') + '">' + renderReviewCard() + examsCard + '</div>' +
       '<div class="strip">' + strip + '</div>' + resume +
       codes().map(function (c) { var n = MODULES.filter(function (m) { return m.code === c; }).length; return '<div class="sem-head"><h2>' + esc(groupLabel(c)) + '</h2><span>' + n + ' module' + (n > 1 ? 's' : '') + '</span></div>' + grid(c); }).join("") +
       '<div class="foot"><span>' + (CONFIG.pied || "") + '</span></div>';
@@ -331,8 +495,8 @@ function startApp() {
     var knownCount = countKeys(known);
 
     var bar = '<div class="toolbar"><span class="hint">' + (isDef
-        ? "Chaque terme avec sa définition. En mode cartes, réponds de tête, révèle, puis coche « Je maîtrise »."
-        : "Les formules et repères à connaître par cœur. En mode cartes, seul le nom apparaît : retrouve la formule, puis révèle.") + '</span>' +
+        ? "Chaque terme avec sa définition. En mode cartes, réponds de tête, révèle, puis dis si tu savais : la carte reviendra au bon moment dans ta révision du jour."
+        : "Les formules et repères à connaître par cœur. En mode cartes, seul le nom apparaît : retrouve la formule, révèle, puis dis si tu savais.") + '</span>' +
       '<div class="right"><button class="pill' + (cardMode ? ' on' : '') + '" data-cardmode="' + kind + '">' + (cardMode ? 'Mode cartes ✓' : 'Mode cartes') + '</button>' +
       (cardMode ? '<button class="pill" data-flip-all="' + kind + '">Tout révéler</button>' : '') +
       '<span class="mono" style="font-size:0.76rem;color:var(--ink-3)">' + knownCount + '/' + items.length + ' maîtrisées</span></div></div>';
@@ -349,11 +513,19 @@ function startApp() {
       } else {
         face = '<div class="f">' + esc(it.f) + '</div>' + (it.note ? '<div class="note">' + it.note + '</div>' : '');
       }
+      var le = leitnerOf(m.id, key);
+      var boxTag = le ? '<span class="box-tag" title="Boîte ' + le[0] + ' sur ' + (LEITNER_DAYS.length - 1) + '">' + boxDots(le[0]) + (le[1] <= todayISO() ? 'à revoir' : 'le ' + frDate(le[1])) + '</span>' : '';
+      var rate = (cardMode && flipped) ? '<div class="rate"><button class="btn ghost sm" data-rate="' + key + ':0">Je ne savais pas</button><button class="btn acc sm" data-rate="' + key + ':1">Je savais</button></div>' : '';
       return '<div class="fc' + (isKnown ? ' known' : '') + '"><div class="top"><div class="term' + (isDef ? '' : ' mono') + '">' + (isDef ? it.term : it.name) + '</div>' +
-        toggleBtn(isKnown, 'data-known="' + key + '"', 'Maîtrisée', 'Je maîtrise') + '</div>' + face + '</div>';
+        toggleBtn(isKnown, 'data-known="' + key + '"', 'Maîtrisée', 'Je maîtrise') + '</div>' + face + rate + boxTag + '</div>';
     }).join("");
 
     return bar + '<div class="cards">' + list + '</div>';
+  }
+  function boxDots(box) {
+    var s = '<i class="dots">';
+    for (var b = 1; b < LEITNER_DAYS.length; b++) s += '<b' + (b <= box ? ' class="on"' : '') + '></b>';
+    return s + '</i>';
   }
 
   function renderEvaluation(m) {
@@ -427,10 +599,170 @@ function startApp() {
       default: body = renderCours(m);
     }
     var st = moduleStats(m);
-    return '<button class="back" data-go="home">← Tous les modules</button>' +
+    return '<div class="back-row"><button class="back" data-go="home">← Tous les modules</button><button class="btn ghost sm" data-fiche="' + m.id + '">Fiche de révision imprimable</button></div>' +
       '<div class="banner"><div><div class="chips"><span class="chip">' + m.code + '</span><span class="chip' + (m.priority === 1 ? ' p1' : ' acc') + '">' + PRIO_LABEL[m.priority] + '</span></div>' +
         '<h1>' + m.title + '</h1><p>' + m.tagline + '</p></div>' + bigRing(st.overall) + '<div class="wm">' + pad(moduleIndex(m)) + '</div></div>' +
       renderSeg(m) + '<div>' + body + '</div>';
+  }
+
+  /* ---------- Fiche de révision imprimable (un module) ---------- */
+
+  function renderFiche(m) {
+    var retenir = [];
+    m.lessons.forEach(function (l) {
+      var re = /<div class="retenir">[\s\S]*?<\/div>/g, hit;
+      while ((hit = re.exec(l.html))) retenir.push({ lesson: l.title, html: hit[0] });
+    });
+    var formules = m.formulas.map(function (f) { return '<div class="fc"><div class="top"><div class="term mono">' + f.name + '</div></div><div class="f">' + esc(f.f) + '</div>' + (f.note ? '<div class="note">' + f.note + '</div>' : '') + '</div>'; }).join("");
+    var defs = m.glossary.map(function (g) { return '<div class="fc"><div class="top"><div class="term">' + g.term + '</div></div><div class="def">' + g.def + '</div></div>'; }).join("");
+    return '<div class="back-row no-print"><button class="back" data-open-module="' + m.id + '">← Retour au module</button><button class="btn acc sm" data-print="1">Imprimer</button></div>' +
+      '<div class="fiche hued" style="--h:' + hue(m) + '">' +
+        '<div class="fiche-head"><span class="n">' + pad(moduleIndex(m)) + '</span><div><h1>' + m.title + '</h1><p>' + m.tagline + ' · Fiche de révision, ' + m.formulas.length + ' formules, ' + m.glossary.length + ' définitions' + (retenir.length ? ', ' + retenir.length + ' points à retenir' : '') + '.</p></div></div>' +
+        (retenir.length ? '<h2>À retenir</h2><div class="fiche-retenir">' + retenir.map(function (r) { return '<div class="fiche-r"><div class="src">' + r.lesson + '</div>' + r.html + '</div>'; }).join("") + '</div>' : '') +
+        (m.formulas.length ? '<h2>Formules</h2><div class="cards">' + formules + '</div>' : '') +
+        (m.glossary.length ? '<h2>Définitions</h2><div class="cards">' + defs + '</div>' : '') +
+      '</div>';
+  }
+
+  /* ---------- Révision du jour (session de cartes) ---------- */
+
+  function renderRevision() {
+    var rev = state.rev;
+    var plan = reviewPlan();
+    var intro = '<div class="ptitle"><h1>Révision du jour</h1><p>Les cartes que tu as déjà vues reviennent à intervalles croissants (1, 2, 4, 8, 16 puis 32 jours) : celles que tu rates reviennent dès demain, celles que tu sais s\'espacent. Chaque jour, au plus ' + NEW_PER_DAY + ' nouvelles cartes s\'ajoutent, en commençant par les modules prioritaires.</p></div>';
+
+    if (!rev) {
+      var nDue = plan.due.length, nNew = plan.news.length;
+      var boxes = [0, 0, 0, 0, 0, 0, 0];
+      allCards().forEach(function (c) { if (c.e) boxes[c.e[0]]++; });
+      var boxesHtml = '<div class="boxes">' + [1, 2, 3, 4, 5, 6].map(function (b) { return '<div class="bx"><div class="v">' + boxes[b] + '</div><div class="l">Boîte ' + b + '<br><span>tous les ' + LEITNER_DAYS[b] + ' j</span></div></div>'; }).join("") + '<div class="bx new"><div class="v">' + plan.fresh + '</div><div class="l">Jamais vues</div></div></div>';
+      var start = (nDue || nNew)
+        ? '<div class="qresult"><div class="v">' + (nDue + nNew) + '</div><div class="m">' + (nDue ? nDue + ' carte' + (nDue > 1 ? 's' : '') + ' à revoir' : '') + (nDue && nNew ? ' et ' : '') + (nNew ? nNew + ' nouvelle' + (nNew > 1 ? 's' : '') : '') + '.<br><button class="btn acc" data-review-start="1" style="margin-top:0.6rem">Commencer la session</button></div></div>'
+        : '<div class="qresult"><div class="v">✓</div><div class="m">Rien à revoir aujourd\'hui. ' + (plan.next ? 'Prochaine révision le ' + frDate(plan.next) + '.' : 'Ouvre un module en mode cartes pour commencer.') + '<br><button class="btn ghost" data-review-start="random" style="margin-top:0.6rem">Réviser 10 cartes au hasard</button></div></div>';
+      return intro + start + boxesHtml;
+    }
+
+    if (rev.idx >= rev.queue.length) {
+      var total = rev.ok + rev.ko;
+      return intro + '<div class="qresult"><div class="v">' + rev.ok + '/' + total + '</div><div class="m">Session terminée : ' + rev.ok + ' carte' + (rev.ok > 1 ? 's' : '') + ' sue' + (rev.ok > 1 ? 's' : '') + ', ' + rev.ko + ' à retravailler' + (rev.ko ? ' (elles reviennent dès demain)' : '') + '.<br>' +
+        '<button class="btn ghost" data-go="home" style="margin-top:0.6rem">Retour à l\'accueil</button> ' + (reviewPlan().due.length ? '<button class="btn acc" data-review-start="1" style="margin-top:0.6rem">Continuer</button>' : '') + '</div></div>';
+    }
+
+    var c = rev.queue[rev.idx];
+    var m = getModule(c.mid);
+    var it = cardItem(m, c.kind, c.i);
+    var isDef = c.kind === "definitions";
+    var le = leitnerOf(m.id, cardKey(c.kind, c.i));
+    var front = isDef ? it.term : it.name;
+    var back = isDef ? '<div class="def">' + it.def + '</div>' : '<div class="f">' + esc(it.f) + '</div>' + (it.note ? '<div class="note">' + it.note + '</div>' : '');
+    return '<div class="rev-top"><button class="back" data-review-stop="1">← Arrêter</button><span class="mono">' + (rev.idx + 1) + ' / ' + rev.queue.length + '</span></div>' +
+      '<div class="bar rev-bar"><span style="width:' + Math.round((rev.idx / rev.queue.length) * 100) + '%"></span></div>' +
+      '<div class="rev-card hued" style="--h:' + hue(m) + '">' +
+        '<div class="chips"><button class="chip go" data-open-module-tab="' + m.id + ':' + c.kind + '">' + pad(moduleIndex(m)) + ' · ' + esc(m.title) + '</button><span class="chip">' + (isDef ? 'Définition' : 'Formule') + '</span>' + (le ? '<span class="chip">Boîte ' + le[0] + '</span>' : '<span class="chip acc">Nouvelle</span>') + '</div>' +
+        '<div class="front' + (isDef ? '' : ' mono') + '">' + front + '</div>' +
+        (rev.revealed
+          ? '<div class="answer">' + back + '</div><div class="rate big"><button class="btn ghost" data-rev-rate="0">Je ne savais pas</button><button class="btn acc" data-rev-rate="1">Je savais</button></div>'
+          : '<div class="reveal"><button class="btn acc" data-rev-reveal="1">Révéler ' + (isDef ? 'la définition' : 'la formule') + '</button><p class="lock-hint">Réponds de tête avant de révéler.</p></div>') +
+      '</div>';
+  }
+
+  /* ---------- Examen blanc ---------- */
+
+  function examPool(ids) {
+    var pool = [];
+    MODULES.forEach(function (m) { if (ids.indexOf(m.id) === -1) return; m.quiz.forEach(function (q, qi) { pool.push({ mid: m.id, qi: qi }); }); });
+    return pool;
+  }
+  function examStart(ids, n, minutes) {
+    var pool = shuffle(examPool(ids)).slice(0, n);
+    if (!pool.length) return;
+    // L'ordre des réponses est mélangé à chaque examen : dans les modules, la bonne réponse est
+    // très souvent en position B, ce qui se devinerait sans rien savoir.
+    pool.forEach(function (q) { q.perm = shuffle(getModule(q.mid).quiz[q.qi].options.map(function (_, k) { return k; })); });
+    state.exam = { phase: "run", modules: ids, n: pool.length, minutes: minutes, questions: pool, answers: {}, start: Date.now(), end: null, limit: minutes ? Date.now() + minutes * 60000 : null };
+    examTick();
+    state.scrollTop = true;
+    render();
+  }
+  var examTimer = null;
+  function examTick() {
+    clearInterval(examTimer);
+    examTimer = setInterval(function () {
+      var ex = state.exam;
+      if (!ex || ex.phase !== "run") { clearInterval(examTimer); return; }
+      var el = document.querySelector("[data-exam-clock]");
+      var left = ex.limit ? (ex.limit - Date.now()) / 1000 : (Date.now() - ex.start) / 1000;
+      if (el) { el.textContent = fmtClock(left); el.classList.toggle("late", !!ex.limit && left < 60); }
+      if (ex.limit && left <= 0) examSubmit(true);
+    }, 500);
+  }
+  function examSubmit(auto) {
+    var ex = state.exam;
+    if (!ex || ex.phase !== "run") return;
+    clearInterval(examTimer);
+    var score = 0;
+    ex.questions.forEach(function (q, i) { if (ex.answers[i] === getModule(q.mid).quiz[q.qi].correct) score++; });
+    ex.end = Date.now();
+    ex.phase = "done";
+    ex.score = score;
+    ex.auto = !!auto;
+    state.exams.push({ d: new Date().toISOString(), n: ex.n, s: score, note: noteSur20(score, ex.n), mods: ex.modules.length, secs: Math.round((ex.end - ex.start) / 1000) });
+    saveExams(state.exams);
+    state.scrollTop = true;
+    render();
+  }
+
+  function renderExamen() {
+    var ex = state.exam;
+    var letters = ["A", "B", "C", "D"];
+
+    if (!ex || ex.phase === "setup") {
+      var sel = (ex && ex.modules) || MODULES.map(function (m) { return m.id; });
+      var n = (ex && ex.n) || 20, minutes = ex && ex.minutes !== undefined ? ex.minutes : 20;
+      var available = examPool(sel).length;
+      var mods = MODULES.map(function (m) {
+        return '<label class="pick hued' + (sel.indexOf(m.id) !== -1 ? ' on' : '') + '" style="--h:' + hue(m) + '"><input type="checkbox" data-exam-mod="' + m.id + '"' + (sel.indexOf(m.id) !== -1 ? ' checked' : '') + '><span class="n">' + pad(moduleIndex(m)) + '</span><span>' + m.title + '</span><span class="c mono">' + m.quiz.length + ' q.</span></label>';
+      }).join("");
+      var opt = function (attr, values, cur, label) { return values.map(function (v) { return '<button class="pill' + (v[0] === cur ? ' on' : '') + '" data-' + attr + '="' + v[0] + '">' + v[1] + '</button>'; }).join(""); };
+      var hist = state.exams.slice().reverse().slice(0, 8);
+      var best = state.exams.reduce(function (b, e) { return e.note > b ? e.note : b; }, 0);
+      var histHtml = hist.length ? '<h2 class="h2">Tes derniers examens' + (state.exams.length ? ' <span class="mono" style="font-size:0.78rem;color:var(--ink-3)">· meilleure note ' + frNote(best) + '/20</span>' : '') + '</h2><table class="hist"><thead><tr><th>Date</th><th>Modules</th><th>Score</th><th>Note</th><th>Durée</th></tr></thead><tbody>' +
+        hist.map(function (e) { return '<tr><td>' + frDate(e.d.slice(0, 10)) + '</td><td>' + e.mods + '</td><td class="mono">' + e.s + '/' + e.n + '</td><td class="mono"><b>' + frNote(e.note) + '</b>/20</td><td class="mono">' + fmtClock(e.secs) + '</td></tr>'; }).join("") + '</tbody></table>' : '';
+      return '<div class="ptitle"><h1>Examen blanc</h1><p>Des questions tirées au hasard dans les modules choisis, un chronomètre, une note sur 20 et la correction détaillée. Choisis tes modules, puis lance-toi comme le jour J : sans le cours à côté.</p></div>' +
+        '<div class="exam-setup"><h2 class="h2">Modules <span class="mono" style="font-size:0.78rem;color:var(--ink-3)">· ' + available + ' questions disponibles</span> <button class="pill sm" data-exam-all="1">Tout</button> <button class="pill sm" data-exam-all="0">Aucun</button> <button class="pill sm" data-exam-all="p1">Priorité 1</button></h2><div class="picks">' + mods + '</div>' +
+        '<div class="exam-opts"><div><div class="k">Questions</div>' + opt("exam-n", [[10, "10"], [20, "20"], [30, "30"], [40, "40"]], n) + '</div><div><div class="k">Durée</div>' + opt("exam-min", [[10, "10 min"], [20, "20 min"], [30, "30 min"], [45, "45 min"], [0, "Sans limite"]], minutes) + '</div></div>' +
+        '<button class="btn acc" data-exam-start="1"' + (available ? '' : ' disabled') + '>Commencer l\'examen · ' + Math.min(n, available) + ' questions</button></div>' + histHtml;
+    }
+
+    var qs = ex.questions.map(function (q, i) {
+      var m = getModule(q.mid), qq = m.quiz[q.qi];
+      var selA = ex.answers[i];
+      var done = ex.phase === "done";
+      var opts = (q.perm || qq.options.map(function (_, k) { return k; })).map(function (oi, pos) {
+        var o = qq.options[oi];
+        var cls = "opt";
+        if (done) { if (oi === qq.correct) cls += " correct"; else if (oi === selA) cls += " incorrect"; }
+        else if (selA === oi) cls += " sel";
+        return '<label class="' + cls + '"><input type="radio" name="ex-' + i + '" value="' + oi + '"' + (selA === oi ? ' checked' : '') + (done ? ' disabled' : '') + ' data-exam-answer="' + i + ':' + oi + '"><span class="letter">' + letters[pos] + '</span><span>' + o + '</span></label>';
+      }).join("");
+      var explain = done ? '<div class="qx' + (selA === qq.correct ? '' : ' ko') + '"><span class="tag">' + (selA === qq.correct ? 'Correct' : selA === undefined ? 'Sans réponse' : 'Incorrect') + '</span>' + qq.explain + '</div>' : '';
+      return '<div class="qq"><div class="qt"><span class="qn">' + pad(i + 1) + '</span><span>' + qq.q + '</span></div><div class="qmod"><span class="chip go hued" style="--h:' + hue(m) + '" data-open-module-tab="' + m.id + ':evaluation">' + pad(moduleIndex(m)) + ' · ' + esc(m.title) + '</span></div><div class="opts">' + opts + '</div>' + explain + '</div>';
+    }).join("");
+
+    if (ex.phase === "run") {
+      var answered = Object.keys(ex.answers).length;
+      return '<div class="exam-bar"><div><div class="k">Examen blanc</div><div class="t">' + ex.n + ' questions · ' + ex.modules.length + ' module' + (ex.modules.length > 1 ? 's' : '') + '</div></div>' +
+        '<div class="clock mono" data-exam-clock>' + fmtClock(ex.limit ? (ex.limit - Date.now()) / 1000 : (Date.now() - ex.start) / 1000) + '</div>' +
+        '<button class="btn acc sm" data-exam-submit="1">Rendre la copie</button></div>' +
+        '<p class="lock-hint" style="margin:0 0 1rem">' + (ex.limit ? 'Le chronomètre rend la copie automatiquement à la fin du temps. ' : '') + 'Réponses données : <span data-exam-count>' + answered + '</span>/' + ex.n + '.</p>' + qs +
+        '<button class="btn acc" data-exam-submit="1">Rendre la copie</button>';
+    }
+
+    var note = noteSur20(ex.score, ex.n);
+    var verdict = note >= 16 ? "Excellent. Tu es prêt sur ces modules." : note >= 12 ? "Bien. Relis les explications des questions manquées, puis refais un examen dans quelques jours." : note >= 8 ? "Juste. Reprends les leçons des modules où tu as perdu des points avant de recommencer." : "Reprends le cours de ces modules avant de refaire un examen blanc.";
+    return '<div class="ptitle"><h1>Correction</h1></div>' +
+      '<div class="qresult"><div class="v">' + frNote(note) + '<span style="font-size:0.5em">/20</span></div><div class="m">' + ex.score + ' bonne' + (ex.score > 1 ? 's' : '') + ' réponse' + (ex.score > 1 ? 's' : '') + ' sur ' + ex.n + ' en ' + fmtClock((ex.end - ex.start) / 1000) + (ex.auto ? ' — temps écoulé, copie rendue automatiquement' : '') + '. ' + verdict + '<br>' +
+        '<button class="btn ghost" data-exam-again="1" style="margin-top:0.6rem">Nouvel examen</button> <button class="btn ghost" data-go="home" style="margin-top:0.6rem">Accueil</button></div></div>' + qs;
   }
 
   /* ---------- Global pages ---------- */
@@ -541,7 +873,12 @@ function startApp() {
     if (state.view === "module") {
       var m = getModule(state.moduleId);
       if (m) { main = renderModule(m); h = hue(m); } else main = renderHome();
+    } else if (state.view === "fiche") {
+      var mf = getModule(state.moduleId);
+      if (mf) { main = renderFiche(mf); h = hue(mf); } else main = renderHome();
     } else if (state.view === "formulaire" || state.view === "glossaire") main = renderGlobal(state.view);
+    else if (state.view === "revision") main = renderRevision();
+    else if (state.view === "examen") main = renderExamen();
     else if (state.view === "annales") main = renderAnnales();
     else if (state.view === "search") main = renderSearch();
     else main = renderHome();
@@ -574,7 +911,7 @@ function startApp() {
     if ((el = t.closest("[data-open-module-tab]"))) { var p = el.getAttribute("data-open-module-tab").split(":"); openModule(p[0], p[1]); return; }
     if ((el = t.closest("[data-open-module]"))) { openModule(el.getAttribute("data-open-module")); return; }
     if ((el = t.closest("[data-nav-toggle]"))) { state.navOpen = !state.navOpen; render(); return; }
-    if ((el = t.closest("[data-go]"))) { state.view = el.getAttribute("data-go"); state.search = ""; state.resetArmed = false; state.navOpen = false; state.scrollTop = true; render(); return; }
+    if ((el = t.closest("[data-go]"))) { state.view = el.getAttribute("data-go"); state.search = ""; state.resetArmed = false; state.navOpen = false; state.scrollTop = true; if (state.view !== "revision") state.rev = null; render(); return; }
     if ((el = t.closest("[data-tab]"))) { state.tab = el.getAttribute("data-tab"); render(); return; }
 
     if ((el = t.closest("[data-lesson-toggle]"))) { var li = parseInt(el.getAttribute("data-lesson-toggle"), 10); var pr = state.progress[state.moduleId]; pr.lessonsRead[li] = !pr.lessonsRead[li]; saveProgress(); render(); return; }
@@ -592,6 +929,40 @@ function startApp() {
     if ((el = t.closest("[data-quiz-submit]"))) { var mid = el.getAttribute("data-quiz-submit"); var mq = getModule(mid); var answers = state.quizAnswers[mid] || {}; var score = 0; mq.quiz.forEach(function (q, i) { if (answers[i] === q.correct) score++; }); state.quizSubmitted[mid] = true; var pr3 = state.progress[mid]; if (!pr3.quizBest || score > pr3.quizBest.score) { pr3.quizBest = { score: score, total: mq.quiz.length }; saveProgress(); } state.scrollTop = true; render(); return; }
     if ((el = t.closest("[data-quiz-retry]"))) { var mid2 = el.getAttribute("data-quiz-retry"); state.quizSubmitted[mid2] = false; state.quizAnswers[mid2] = {}; state.scrollTop = true; render(); return; }
 
+    if ((el = t.closest("[data-rate]"))) { var rp = el.getAttribute("data-rate").split(":"); rateCard(state.moduleId, rp[0] + ":" + rp[1], rp[2] === "1"); render(); return; }
+
+    /* Révision du jour */
+    if ((el = t.closest("[data-review-start]"))) { startReview(el.getAttribute("data-review-start") === "random"); return; }
+    if ((el = t.closest("[data-review-stop]"))) { state.rev = null; render(); return; }
+    if ((el = t.closest("[data-rev-reveal]"))) { if (state.rev) { state.rev.revealed = true; render(); } return; }
+    if ((el = t.closest("[data-rev-rate]"))) {
+      var rv = state.rev; if (!rv) return;
+      var rc = rv.queue[rv.idx];
+      var ok = el.getAttribute("data-rev-rate") === "1";
+      rateCard(rc.mid, cardKey(rc.kind, rc.i), ok);
+      if (ok) rv.ok++; else rv.ko++;
+      rv.idx++; rv.revealed = false; state.scrollTop = true; render(); return;
+    }
+
+    /* Examen blanc */
+    if ((el = t.closest("[data-exam-mod]"))) { return; } // géré dans « change »
+    if ((el = t.closest("[data-exam-all]"))) {
+      var mode = el.getAttribute("data-exam-all");
+      state.exam = state.exam && state.exam.phase === "setup" ? state.exam : { phase: "setup", modules: MODULES.map(function (m) { return m.id; }), n: 20, minutes: 20 };
+      state.exam.modules = MODULES.filter(function (m) { return mode === "1" || (mode === "p1" && m.priority === 1); }).map(function (m) { return m.id; });
+      render(); return;
+    }
+    if ((el = t.closest("[data-exam-n]"))) { examSetup().n = parseInt(el.getAttribute("data-exam-n"), 10); render(); return; }
+    if ((el = t.closest("[data-exam-min]"))) { examSetup().minutes = parseInt(el.getAttribute("data-exam-min"), 10); render(); return; }
+    if ((el = t.closest("[data-exam-start]"))) { var es = examSetup(); examStart(es.modules, es.n, es.minutes); return; }
+    if ((el = t.closest("[data-exam-submit]"))) { examSubmit(false); return; }
+    if ((el = t.closest("[data-exam-again]"))) { var prev = state.exam; state.exam = { phase: "setup", modules: prev.modules, n: prev.n, minutes: prev.minutes }; state.scrollTop = true; render(); return; }
+
+    /* Fiche, nouveautés, sauvegarde */
+    if ((el = t.closest("[data-fiche]"))) { state.view = "fiche"; state.moduleId = el.getAttribute("data-fiche"); state.navOpen = false; state.scrollTop = true; render(); return; }
+    if ((el = t.closest("[data-news-close]"))) { try { localStorage.setItem(NEWS_KEY, String(CONFIG.nouveautes.version)); } catch (err) {} render(); return; }
+    if ((el = t.closest("[data-export]"))) { exportProgress(); return; }
+
     if ((el = t.closest("[data-print]"))) { window.print(); return; }
     if ((el = t.closest("[data-logout]"))) { window.SalleEtudeGate.logout(); return; }
     if ((el = t.closest("[data-pwa-install]"))) { SalleEtudePWA.install().then(function () { render(); }); return; }
@@ -604,7 +975,66 @@ function startApp() {
     }
   });
 
+  function examSetup() {
+    if (!state.exam || state.exam.phase !== "setup") state.exam = { phase: "setup", modules: MODULES.map(function (m) { return m.id; }), n: 20, minutes: 20 };
+    return state.exam;
+  }
+
+  /* ---------- Sauvegarde : export / import d'un fichier JSON ---------- */
+  function exportProgress() {
+    var body = { app: "salle-etude", v: 1, date: new Date().toISOString(), progress: state.progress, examens: state.exams, prefs: loadPrefs() };
+    var blob = new Blob([JSON.stringify(body, null, 1)], { type: "application/json" });
+    var a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "salle-etude-progression-" + todayISO() + ".json";
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    setTimeout(function () { URL.revokeObjectURL(a.href); }, 2000);
+  }
+  function importProgress(file) {
+    var reader = new FileReader();
+    reader.onload = function () {
+      try {
+        var data = JSON.parse(reader.result);
+        if (!data || data.app !== "salle-etude" || !data.progress) throw new Error("Ce fichier n'est pas une sauvegarde de la salle d'étude.");
+        state.progress = mergeProgress(state.progress, normalizeProgress(data.progress));
+        if (Array.isArray(data.examens)) {
+          var seen = {}; state.exams.forEach(function (x) { seen[x.d] = true; });
+          data.examens.forEach(function (x) { if (x && x.d && !seen[x.d]) state.exams.push(x); });
+          state.exams.sort(function (a, b) { return a.d < b.d ? -1 : 1; });
+          saveExams(state.exams);
+        }
+        saveProgress();
+        state.importMsg = "Sauvegarde importée : ta progression a été fusionnée (rien n'est perdu).";
+      } catch (err) { state.importMsg = "Import impossible : " + err.message; }
+      render();
+      setTimeout(function () { state.importMsg = ""; render(); }, 6000);
+    };
+    reader.readAsText(file);
+  }
+
   app.addEventListener("change", function (e) {
+    var imp = e.target.closest("[data-import]");
+    if (imp && imp.files && imp.files[0]) { importProgress(imp.files[0]); return; }
+
+    var mod = e.target.closest("[data-exam-mod]");
+    if (mod) {
+      var es = examSetup(), id = mod.getAttribute("data-exam-mod");
+      es.modules = es.modules.filter(function (x) { return x !== id; });
+      if (mod.checked) es.modules.push(id);
+      render(); return;
+    }
+
+    var ans = e.target.closest("[data-exam-answer]");
+    if (ans && state.exam && state.exam.phase === "run") {
+      var pa = ans.getAttribute("data-exam-answer").split(":");
+      state.exam.answers[parseInt(pa[0], 10)] = parseInt(pa[1], 10);
+      var lab = ans.closest("label");
+      if (lab && lab.parentNode) { var sb = lab.parentNode.querySelectorAll(".opt"); for (var j = 0; j < sb.length; j++) sb[j].classList.remove("sel"); lab.classList.add("sel"); }
+      var cnt = document.querySelector("[data-exam-count]");
+      if (cnt) cnt.textContent = Object.keys(state.exam.answers).length;
+      return;
+    }
+
     var radio = e.target.closest("[data-quiz-answer]");
     if (radio) {
       var parts = radio.getAttribute("data-quiz-answer").split(":");

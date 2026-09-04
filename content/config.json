@@ -14,6 +14,12 @@
     "3": "Priorité 3"
   },
   "ambiance": "lofi",
+  "nouveautes": {
+    "version": "1.3",
+    "titre": "Révision espacée, examens blancs et application sur téléphone",
+    "texte": "Les cartes que tu révèles reviennent au bon moment dans « Révision du jour ». Entraîne-toi en conditions réelles avec « Examen blanc » (chronomètre, note sur 20, correction). Et installe la salle d'étude sur ton téléphone : elle fonctionne même sans connexion."
+  },
+  "examens": [],
   "assistant": {
     "url": "",
     "nom": "Assistant",

@@ -615,3 +615,113 @@ body.ambiance-lofi::after {
 .pwa-close:hover { background: var(--bg-sunk); color: var(--ink); }
 @media (max-width: 560px) { .pwa-bar { bottom: 0.7rem; } .pwa-bar p { flex-basis: 100%; } }
 @media print { .pwa-bar { display: none !important; } }
+
+/* ---------- Version 1.3 : révision espacée, examen blanc, compte à rebours, fiche, nouveautés ---------- */
+
+/* Accueil : bandeau nouveautés et cartes « widgets » */
+.news { display: flex; align-items: flex-start; gap: 0.8rem; background: var(--acc-soft); border: 1px solid var(--acc); border-radius: 14px; padding: 0.9rem 1.1rem; margin-bottom: 1.4rem; }
+.news .k { font-family: "DM Mono", monospace; font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--acc); }
+.news .t { font-weight: 700; margin-top: 0.2rem; }
+.news p { margin: 0.25rem 0 0; font-size: 0.9rem; color: var(--ink-2); line-height: 1.5; }
+.news > div { flex: 1; }
+.widgets { display: grid; grid-template-columns: minmax(240px, 1fr) minmax(0, 1.6fr); gap: 0.9rem; margin-bottom: 1.4rem; }
+.widgets.single { grid-template-columns: minmax(240px, 420px); }
+.widget { background: var(--bg-elev); border: 1px solid var(--line); border-radius: 14px; padding: 1rem 1.15rem; box-shadow: var(--shadow); }
+.widget .k { font-family: "DM Mono", monospace; font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-3); }
+.widget.rev { display: grid; grid-template-columns: auto 1fr; grid-template-rows: auto auto auto auto; column-gap: 1rem; align-items: center; }
+.widget.rev .k { grid-column: 1 / -1; }
+.widget.rev .v { grid-row: 2 / 5; font-family: "Bricolage Grotesque", sans-serif; font-weight: 800; font-size: 2.6rem; line-height: 1; letter-spacing: -0.05em; color: var(--acc); }
+.widget.rev .d { font-size: 0.9rem; color: var(--ink); margin-top: 0.4rem; }
+.widget.rev .d2 { font-size: 0.76rem; color: var(--ink-3); }
+.widget.rev .a { margin-top: 0.5rem; }
+.exam-row { display: grid; grid-template-columns: auto 1fr; gap: 0.9rem; align-items: start; padding: 0.7rem 0; border-top: 1px solid var(--line); }
+.exam-row:first-of-type { border-top: none; }
+.exam-row .j { font-family: "Bricolage Grotesque", sans-serif; font-weight: 800; font-size: 1.35rem; letter-spacing: -0.04em; color: var(--ink-3); min-width: 4.2rem; line-height: 1.1; }
+.exam-row.first .j { color: var(--acc); font-size: 1.7rem; }
+.exam-row.soon .j { color: var(--bad); }
+.exam-row .t { font-weight: 600; }
+.exam-row .dt { font-size: 0.82rem; color: var(--ink-2); }
+.exam-row .dt::first-letter { text-transform: uppercase; }
+.exam-row .chip, .rev-card .chip.go, .qmod .chip { text-transform: none; letter-spacing: 0; font-family: inherit; font-size: 0.74rem; }
+.exam-row .chips { display: flex; flex-wrap: wrap; gap: 0.3rem; margin-top: 0.35rem; }
+@media (max-width: 760px) { .widgets, .widgets.single { grid-template-columns: 1fr; } }
+
+/* Barre latérale */
+.nav-item .count.due { background: var(--acc); color: #fff; }
+.side-msg { font-size: 0.74rem; color: var(--good); line-height: 1.35; }
+.side-expire { font-size: 0.72rem; color: var(--ink-3); text-align: center; }
+.side-foot label.btn { cursor: pointer; }
+
+/* Cartes d'un module : boîte de Leitner et boutons de notation */
+.fc .rate { display: flex; gap: 0.45rem; margin-top: 0.7rem; flex-wrap: wrap; }
+.fc .rate .btn { flex: 1; justify-content: center; }
+.box-tag { display: inline-flex; align-items: center; gap: 0.45rem; margin-top: 0.6rem; font-family: "DM Mono", monospace; font-size: 0.68rem; color: var(--ink-3); }
+.dots { display: inline-flex; gap: 2px; }
+.dots b { width: 6px; height: 6px; border-radius: 50%; background: var(--line-strong); }
+.dots b.on { background: var(--acc); }
+.back-row { display: flex; align-items: center; justify-content: space-between; gap: 0.8rem; flex-wrap: wrap; margin-bottom: 1rem; }
+.back-row .back { margin-bottom: 0; }
+
+/* Révision du jour */
+.rev-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.6rem; color: var(--ink-3); font-size: 0.85rem; }
+.rev-top .back { margin: 0; }
+.rev-bar { height: 6px; border-radius: 99px; background: var(--bg-sunk); overflow: hidden; margin-bottom: 1.4rem; }
+.rev-bar > span { display: block; height: 100%; background: var(--acc); transition: width 0.25s; }
+.rev-card { background: var(--bg-elev); border: 1px solid var(--line); border-top: 4px solid var(--acc); border-radius: 16px; padding: 1.4rem 1.5rem; box-shadow: var(--shadow); max-width: 720px; }
+.rev-card .chips { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-bottom: 1.1rem; }
+.rev-card .front { font-family: "Bricolage Grotesque", sans-serif; font-weight: 700; font-size: clamp(1.3rem, 2.6vw, 1.8rem); letter-spacing: -0.02em; line-height: 1.25; margin-bottom: 1.2rem; }
+.rev-card .front.mono { font-family: "DM Mono", monospace; font-weight: 500; font-size: 1.15rem; color: var(--acc); }
+.rev-card .reveal { display: flex; flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+.rev-card .answer { border-top: 1px dashed var(--line-strong); padding-top: 1rem; font-size: 1rem; line-height: 1.55; }
+.rev-card .answer .f { font-family: "DM Mono", monospace; font-size: 0.9rem; background: var(--bg-sunk); border-left: 3px solid var(--acc); border-radius: 0 8px 8px 0; padding: 0.7rem 0.9rem; white-space: pre-wrap; overflow-x: auto; }
+.rev-card .answer .note { color: var(--ink-2); font-size: 0.88rem; margin-top: 0.5rem; }
+.rate.big { display: flex; gap: 0.6rem; margin-top: 1.2rem; flex-wrap: wrap; }
+.rate.big .btn { flex: 1; justify-content: center; }
+.boxes { display: grid; grid-template-columns: repeat(auto-fit, minmax(96px, 1fr)); gap: 0.6rem; margin-top: 1.4rem; }
+.bx { background: var(--bg-elev); border: 1px solid var(--line); border-radius: 12px; padding: 0.7rem 0.8rem; }
+.bx .v { font-family: "Bricolage Grotesque", sans-serif; font-weight: 800; font-size: 1.5rem; letter-spacing: -0.04em; color: var(--acc); line-height: 1; }
+.bx .l { font-size: 0.74rem; color: var(--ink-2); margin-top: 0.3rem; line-height: 1.3; }
+.bx .l span { color: var(--ink-3); font-family: "DM Mono", monospace; font-size: 0.66rem; }
+.bx.new .v { color: var(--ink-3); }
+
+/* Examen blanc */
+.h2 { font-size: 1.05rem; margin: 1.3rem 0 0.6rem; display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; }
+.pill.sm { padding: 0.2rem 0.6rem; font-size: 0.72rem; }
+.exam-setup { background: var(--bg-elev); border: 1px solid var(--line); border-radius: 14px; padding: 0.4rem 1.2rem 1.2rem; }
+.picks { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 0.45rem; }
+.pick { display: flex; align-items: center; gap: 0.6rem; border: 1px solid var(--line); border-radius: 10px; padding: 0.5rem 0.7rem; cursor: pointer; font-size: 0.88rem; background: var(--bg); }
+.pick.on { border-color: var(--acc); background: var(--acc-soft); }
+.pick input { accent-color: var(--acc); }
+.pick .n { font-family: "Bricolage Grotesque", sans-serif; font-weight: 800; color: var(--acc); }
+.pick .c { margin-left: auto; font-size: 0.7rem; color: var(--ink-3); white-space: nowrap; }
+.exam-opts { display: flex; gap: 2rem; flex-wrap: wrap; margin: 1.1rem 0; }
+.exam-opts .k { font-family: "DM Mono", monospace; font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 0.4rem; }
+.exam-opts .pill { margin-right: 0.3rem; }
+.exam-bar { position: sticky; top: 0; z-index: 15; display: grid; grid-template-columns: 1fr auto auto; gap: 1rem; align-items: center; background: var(--bg-elev); border: 1px solid var(--line); border-radius: 14px; padding: 0.8rem 1.1rem; margin-bottom: 1rem; box-shadow: var(--shadow); }
+.exam-bar .k { font-family: "DM Mono", monospace; font-size: 0.66rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-3); }
+.exam-bar .t { font-weight: 600; font-size: 0.92rem; }
+.exam-bar .clock { font-size: 1.5rem; font-weight: 500; letter-spacing: -0.02em; }
+.exam-bar .clock.late { color: var(--bad); animation: chat-pulse 0.7s ease-in-out infinite alternate; }
+.qmod { margin: -0.4rem 0 0.7rem; }
+.qmod .chip { cursor: pointer; }
+.hist { width: 100%; border-collapse: collapse; font-size: 0.86rem; background: var(--bg-elev); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+.hist th, .hist td { text-align: left; padding: 0.5rem 0.8rem; border-top: 1px solid var(--line); }
+.hist th { font-family: "DM Mono", monospace; font-size: 0.66rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-3); border-top: none; }
+@media (max-width: 640px) { .exam-bar { grid-template-columns: 1fr auto; } .exam-bar .btn { grid-column: 1 / -1; justify-content: center; } }
+
+/* Fiche de révision imprimable */
+.fiche { max-width: 900px; }
+.fiche-head { display: flex; gap: 1rem; align-items: flex-start; border-bottom: 3px solid var(--acc); padding-bottom: 0.9rem; margin-bottom: 1.2rem; }
+.fiche-head .n { font-family: "Bricolage Grotesque", sans-serif; font-weight: 800; font-size: 2.4rem; letter-spacing: -0.05em; color: var(--acc); line-height: 1; }
+.fiche-head h1 { font-size: 1.7rem; letter-spacing: -0.03em; }
+.fiche-head p { color: var(--ink-2); margin: 0.3rem 0 0; font-size: 0.9rem; }
+.fiche h2 { font-size: 1.1rem; margin: 1.5rem 0 0.7rem; padding-left: 0.6rem; border-left: 4px solid var(--acc); }
+.fiche-retenir { display: grid; gap: 0.6rem; }
+.fiche-r .src { font-family: "DM Mono", monospace; font-size: 0.66rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 0.2rem; }
+@media print {
+  .no-print, .back-row, .widgets, .news, .strip, .resume, .rev-top { display: none !important; }
+  .fiche { max-width: none; }
+  .fiche h2 { break-after: avoid; }
+  .fiche-r, .bx { break-inside: avoid; }
+  .exam-bar { position: static; box-shadow: none; }
+}

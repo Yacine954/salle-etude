@@ -26,14 +26,16 @@ Application de révision (M2 Finance d'entreprise, Nanterre) maintenue par Yacin
 - Après une fonctionnalité : commit, push, et si elle touche l'application, repackager.
 - L'assistant IA (`assistant-worker/`, `src/assistant.js`) est mis de côté pour raison de coût : ne pas le réactiver sans demande.
 
-## Prochaine séance (plan validé par Yacine)
+## État du plan (validé par Yacine)
 
-Cinq fonctionnalités à réaliser, dans cet ordre, sans infrastructure payante :
+Les cinq fonctionnalités du plan sont faites, sans infrastructure payante :
 
-1. ~~**PWA**~~ — **fait (v1.2)** : manifeste, service worker, installation sur téléphone, hors ligne, mise à jour automatique. Fonctionne avec l'écran d'accès (le déchiffrement se fait dans le navigateur, sur le contenu mis en cache).
-2. **Révision espacée des cartes** (définitions et formules) : boîtes de Leitner, file « à revoir aujourd'hui » sur l'accueil.
-3. **Mode examen blanc** : questions tirées au hasard dans les modules choisis, chronomètre, note sur 20, correction, historique des scores.
-4. **Codes à durée limitée** : date d'expiration facultative par code (`npm run acces -- ajouter "Nom" --jusqu-au 2027-01-31`), essai de sept jours.
-5. **Compte à rebours des examens** : dates dans `config.json`, rappel sur l'accueil avec modules prioritaires.
+1. **PWA** — v1.2 : manifeste, service worker, installation sur téléphone, hors ligne, mise à jour automatique.
+2. **Révision espacée** — v1.3 : boîtes de Leitner (`LEITNER_DAYS`, `NEW_PER_DAY` dans `src/app.js`), stockées dans `progress[module].leitner["definitions:3"] = [boîte, à revoir le, dernière révision, créée le]` ; vue `revision`, carte « Révision espacée » sur l'accueil, boutons « Je savais / Je ne savais pas » sur les cartes révélées d'un module. Boîte ≥ 4 ⇒ carte cochée « maîtrisée ».
+3. **Examen blanc** — v1.3 : vue `examen` (setup → run → done), tirage au hasard, **ordre des réponses mélangé** (les quiz des modules ont la bonne réponse en B dans 72 cas sur 80 : à rééquilibrer quand on retouche les quiz), chronomètre, note /20 au demi-point, historique dans `localStorage` (`salle-etude-examens-v1`).
+4. **Codes à durée limitée** — v1.3 : `tools/acces.js` (`--jusqu-au`, `--essai`, `prolonger … --illimite`), champ `expire` dans `acces.json` ; au build, un code expiré perd sa clé enveloppée (`w`) et garde `e` pour le message « code expiré » (`src/gate.js`).
+5. **Compte à rebours** — v1.3 : `config.examens` (titre, date, heure, lieu, modules), carte « Prochains examens » sur l'accueil.
 
-Idées gardées pour plus tard : bannière « Nouveautés », fiche de révision imprimable par module, sections « Erreurs fréquentes » et « Méthode de l'épreuve », liens vidéo en fin de leçon, compteur de visites anonyme, export/import de la progression.
+Extras faits en v1.3 : bannière « Nouveautés » (`config.nouveautes`, fermeture mémorisée par version), fiche de révision imprimable par module (vue `fiche`), export / import de la progression (JSON fusionné avec `mergeProgress`).
+
+Idées gardées pour plus tard : sections « Erreurs fréquentes » et « Méthode de l'épreuve » (contenu à écrire), liens vidéo en fin de leçon, compteur de visites anonyme (demande un service), rééquilibrer la position des bonnes réponses dans les quiz.

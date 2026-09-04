@@ -7,7 +7,7 @@ Tout le projet tient dans ce dossier. Le contenu est écrit en fichiers texte (M
 ```
 salle-etude/
 ├── content/
-│   ├── config.json          titre, sous-titre, texte d'accueil, noms des semestres
+│   ├── config.json          titre, textes d'accueil, semestres, dates d'examens, bannière nouveautés
 │   ├── modules/             un fichier .md par module (l'ordre des fichiers = l'ordre des modules)
 │   └── pwa/                 les icônes de l'application installée sur téléphone
 ├── src/
@@ -161,6 +161,31 @@ Puis `npm run build` : les fichiers sont copiés dans `docs/annales/` et publié
 
 Un exemple (`2025-partiel-risques-exemple.md` et son PDF) est fourni : supprime-le quand tu as tes vrais sujets. Évite les PDF de plus d'une vingtaine de Mo : le dépôt GitHub deviendrait lourd à cloner.
 
+## 4 ter. S'entraîner : révision espacée, examen blanc, compte à rebours, fiches
+
+Depuis la version 1.3, le menu a une rubrique **S'entraîner** et l'accueil affiche deux cartes : la révision du jour et les prochains examens. Rien de tout cela ne demande de serveur : tout est calculé et enregistré sur l'appareil de l'élève (et compris dans l'export de progression, voir plus bas).
+
+**Révision espacée (boîtes de Leitner).** Chaque définition et chaque formule est une carte. Quand l'élève révèle une carte en mode cartes (dans un module ou dans la révision du jour), il répond « Je savais » ou « Je ne savais pas ». Une carte sue monte d'une boîte et revient plus tard (1, 2, 4, 8, 16 puis 32 jours) ; une carte ratée redescend en boîte 1 et revient dès le lendemain. Chaque jour, au plus dix cartes jamais vues s'ajoutent, en commençant par les modules de priorité 1. À partir de la boîte 4, la carte est automatiquement cochée « maîtrisée » dans l'avancement. Le nombre de cartes du jour est affiché dans le menu ; la page « Révision du jour » montre aussi le remplissage des boîtes. Pour changer le rythme : `LEITNER_DAYS` et `NEW_PER_DAY` en haut de la section « Révision espacée » de `src/app.js`.
+
+**Examen blanc.** L'élève choisit ses modules (boutons « Tout », « Aucun », « Priorité 1 »), le nombre de questions (10 à 40) et la durée (10 à 45 minutes, ou sans limite). Les questions sont tirées au hasard dans les quiz des modules choisis et **l'ordre des réponses est mélangé** (dans les fichiers de modules, la bonne réponse est presque toujours en position B : à corriger petit à petit quand tu retouches un quiz, mais l'examen blanc n'est pas dupe). Le chronomètre rend la copie tout seul à la fin du temps. La correction donne une note sur 20 (au demi-point), le détail question par question avec l'explication et le module d'origine, et l'historique des huit derniers examens reste visible sur la page de réglage.
+
+**Compte à rebours des examens.** Renseigne tes dates dans `content/config.json`, clé `examens` :
+
+```json
+"examens": [
+  { "titre": "Partiel risques financiers", "date": "2027-01-12", "heure": "9h", "lieu": "Amphi B", "modules": ["risques"] },
+  { "titre": "Partiel IFRS", "date": "2027-01-15", "modules": ["valeur", "gouvernance"] }
+]
+```
+
+Seuls `titre` et `date` (format AAAA-MM-JJ) sont obligatoires ; `modules` reprend les identifiants (`id`) des fichiers de modules et les affiche en boutons cliquables. L'accueil montre les quatre prochains examens avec le nombre de jours restants (en rouge à moins de sept jours) ; les dates passées disparaissent d'elles-mêmes. Reconstruis et publie après modification.
+
+**Fiche de révision imprimable.** Dans un module, le bouton « Fiche de révision imprimable » (en haut à droite) rassemble les encadrés « À retenir » du cours, toutes les formules et toutes les définitions sur une page épurée, puis « Imprimer » (ou « Enregistrer en PDF » dans la boîte d'impression du navigateur).
+
+**Bannière « Nouveautés ».** Pour annoncer une évolution, remplis `nouveautes` dans `content/config.json` (`version`, `titre`, `texte`). La bannière s'affiche sur l'accueil jusqu'à ce que l'élève la ferme ; elle réapparaît quand tu changes `version`. Supprime la clé ou vide `texte` pour ne rien afficher.
+
+**Sauvegarder / transférer sa progression.** En bas du menu, « Exporter ma progression » télécharge un fichier `salle-etude-progression-AAAA-MM-JJ.json` (leçons lues, cartes, boîtes de révision, meilleurs scores, examens blancs). « Importer une sauvegarde » le relit sur un autre appareil et **fusionne** : rien de ce qui a été fait sur l'un ou l'autre n'est perdu. C'est le moyen de changer de téléphone ou de passer du PC au mobile.
+
 ## 5. Changer le design
 
 Tout est dans `src/style.css`. Les couleurs, la teinte d'accent et les ombres sont des variables en tête de fichier (`--bg`, `--ink`, `--acc-s`…), en deux jeux : thème clair puis thème sombre. Les polices sont chargées dans `src/template.html` (Google Fonts) : change les familles là, puis les noms dans `style.css`.
@@ -220,6 +245,22 @@ git push
 ```
 
 Autres commandes : `npm run acces -- liste` (qui a un code) et `npm run acces -- retirer "Prénom Nom"` (coupe l'accès à la prochaine publication). Chaque personne saisit son code une fois ; il reste enregistré sur son appareil, et le bouton « Se déconnecter » en bas du menu l'efface.
+
+**Codes à durée limitée.** Tu peux donner une date de fin à un code (la date est incluse) ou un essai de sept jours :
+
+```bash
+npm run acces -- ajouter "Prénom Nom" --jusqu-au 2027-01-31
+npm run acces -- ajouter "Prénom Nom" --essai
+```
+
+Passé la date, la personne voit « Ton code a expiré le … » avec ton adresse pour le prolonger, et sa mention « Accès valable jusqu'au … » apparaît en bas de son menu avant. Pour prolonger ou lever la limite :
+
+```bash
+npm run acces -- prolonger "Prénom Nom" --jusqu-au 2027-06-30
+npm run acces -- prolonger "Prénom Nom" --illimite
+```
+
+`npm run acces -- liste` signale les codes qui expirent bientôt (⏳) ou sont expirés (✘). Deux choses à savoir : la date est vérifiée sur l'appareil du visiteur, mais c'est surtout la **publication** qui compte — à chaque `npm run build`, la clé d'un code expiré n'est plus mise dans la page, donc il ne peut plus rien déchiffrer. Pense à republier de temps en temps (n'importe quelle publication suffit) pour que les expirations prennent effet côté serveur.
 
 Deux précautions :
 

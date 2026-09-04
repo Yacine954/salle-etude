@@ -12,6 +12,18 @@
   function hexToBytes(h) { var arr = new Uint8Array(h.length / 2); for (var i = 0; i < arr.length; i++) arr[i] = parseInt(h.substr(i * 2, 2), 16); return arr; }
   function toHex(buf) { return Array.prototype.map.call(new Uint8Array(buf), function (b) { return ("0" + b.toString(16)).slice(-2); }).join(""); }
   function esc(s) { return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;"); }
+  function todayISO() { var d = new Date(); return d.getFullYear() + "-" + ("0" + (d.getMonth() + 1)).slice(-2) + "-" + ("0" + d.getDate()).slice(-2); }
+  function frDate(iso) { var p = iso.split("-"); return p[2] + "/" + p[1] + "/" + p[0]; }
+
+  // Code à durée limitée : la date de fin est incluse ; sans clé enveloppée (w), le build l'a déjà retiré.
+  function expiredMessage(entry) {
+    if (!entry.w || (entry.e && entry.e < todayISO())) {
+      var quand = entry.e ? " le " + frDate(entry.e) : "";
+      return "Ton code a expiré" + quand + "." + (cfg.contact ? " Écris à " + cfg.contact + " pour le prolonger." : "");
+    }
+    return "";
+  }
+  window.SalleEtudeAccesInfo = { expire: null };
 
   function unlock(code) {
     code = normalize(code);
@@ -23,6 +35,9 @@
       var hex = toHex(h);
       entry = VERROU.codes.filter(function (c) { return c.h === hex; })[0];
       if (!entry) throw new Error("Code inconnu ou désactivé.");
+      var expired = expiredMessage(entry);
+      if (expired) throw new Error(expired);
+      window.SalleEtudeAccesInfo.expire = entry.e || null;
       return crypto.subtle.importKey("raw", enc.encode(code), "PBKDF2", false, ["deriveKey"]);
     }).then(function (base) {
       return crypto.subtle.deriveKey({ name: "PBKDF2", salt: hexToBytes(entry.s), iterations: VERROU.iter, hash: "SHA-256" }, base, { name: "AES-GCM", length: 256 }, false, ["decrypt"]);
@@ -39,7 +54,7 @@
       try { localStorage.setItem(KEY, code); } catch (e) {}
       return true;
     }, function (e) {
-      throw new Error(e && e.message && /Code/.test(e.message) ? e.message : "Code inconnu ou désactivé.");
+      throw new Error(e && e.message && /[Cc]ode/.test(e.message) ? e.message : "Code inconnu ou désactivé.");
     });
   }
 
