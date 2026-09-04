@@ -19,7 +19,7 @@ function createWindow() {
 
   // Links to external sites open in the default browser, never inside the app.
   win.webContents.setWindowOpenHandler(({ url }) => {
-    if (/^https?:/.test(url)) shell.openExternal(url);
+    if (/^(https?|file):/.test(url)) shell.openExternal(url);
     return { action: "deny" };
   });
   win.webContents.on("will-navigate", (e, url) => {

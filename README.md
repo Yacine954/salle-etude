@@ -118,6 +118,37 @@ Règles utiles :
 
 Ouvre le fichier du module, écris sous `# Notes`, relance `npm run build`. L'onglet **Notes** du module affiche le résultat, et la recherche fouille aussi dedans.
 
+## 4 bis. Les annales (sujets d'examen)
+
+La page **Annales** du menu rassemble les sujets d'examen, partiels et devoirs, classés par module, avec un corrigé dépliable. Chaque module concerné gagne aussi un onglet « Annales ».
+
+Tout se passe dans le dossier `content/annales/` :
+
+- **Le plus simple** : dépose un PDF ou une image (`.png`, `.jpg`, `.webp`) dans le dossier. Il devient un sujet à part entière ; le nom du fichier sert de titre. Nomme-le avec l'année et l'identifiant du module pour qu'il soit rangé automatiquement, par exemple `2025-partiel-risques.pdf` ou `2024-examen-tresorerie-page1.jpg`.
+- **Plus complet** : un fichier `.md` décrit le sujet, joint des fichiers et contient le texte du sujet et son corrigé :
+
+````markdown
+---
+titre: Partiel de gestion des risques
+module: risques              identifiant du module (voir l'en-tête de son fichier)
+annee: 2025
+session: Janvier
+type: Partiel                Partiel, Examen, Rattrapage, Devoir, TD…
+duree: 2 h
+fichiers: 2025-partiel-risques.pdf, 2025-partiel-risques-annexe.png
+---
+
+# Sujet
+Le texte du sujet en Markdown (facultatif si le PDF suffit).
+
+# Corrigé
+Le corrigé, affiché seulement quand l'étudiant clique sur « Voir le corrigé ».
+````
+
+Puis `npm run build` : les fichiers sont copiés dans `docs/annales/` et publiés avec le site. Les PDF s'ouvrent dans un nouvel onglet, les images s'affichent en vignettes cliquables, et la recherche fouille les titres et les textes.
+
+Un exemple (`2025-partiel-risques-exemple.md` et son PDF) est fourni : supprime-le quand tu as tes vrais sujets. Évite les PDF de plus d'une vingtaine de Mo : le dépôt GitHub deviendrait lourd à cloner.
+
 ## 5. Changer le design
 
 Tout est dans `src/style.css`. Les couleurs, la teinte d'accent et les ombres sont des variables en tête de fichier (`--bg`, `--ink`, `--acc-s`…), en deux jeux : thème clair puis thème sombre. Les polices sont chargées dans `src/template.html` (Google Fonts) : change les familles là, puis les noms dans `style.css`.

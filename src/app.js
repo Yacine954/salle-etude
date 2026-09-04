@@ -13,6 +13,7 @@
   var ICONS = {
     home: '<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11.5 12 4l9 7.5"/><path d="M5 10v10h14V10"/></svg>',
     sigma: '<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 5H6l7 7-7 7h12"/></svg>',
+    scroll: '<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h11a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H7"/><path d="M5 3a2 2 0 0 0-2 2v2h4V5a2 2 0 0 0-2-2z"/><path d="M7 21a2 2 0 0 1-2-2V7"/><path d="M11 8h6M11 12h6M11 16h4"/></svg>',
     book: '<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h7a3 3 0 0 1 3 3v13a2 2 0 0 0-2-2H4z"/><path d="M20 4h-7a3 3 0 0 0-3 3v13a2 2 0 0 1 2-2h8z"/></svg>',
     search: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>',
     check: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg>',
@@ -189,6 +190,7 @@
     quizSubmitted: {},
     quizAnswers: {},
     revealed: {},
+    corrigeOpen: {},
     resetArmed: false,
     search: "",
     lastModule: prefs.lastModule || null,
@@ -245,6 +247,7 @@
         '<button class="nav-item' + (state.view === "home" ? ' active' : '') + '" data-go="home">' + ICONS.home + 'Accueil</button>' +
         '<button class="nav-item' + (state.view === "formulaire" ? ' active' : '') + '" data-go="formulaire">' + ICONS.sigma + 'Formulaire complet</button>' +
         '<button class="nav-item' + (state.view === "glossaire" ? ' active' : '') + '" data-go="glossaire">' + ICONS.book + 'Glossaire complet</button>' +
+        '<button class="nav-item' + (state.view === "annales" ? ' active' : '') + '" data-go="annales">' + ICONS.scroll + 'Annales' + (ANNALES.length ? '<span class="count">' + ANNALES.length + '</span>' : '') + '</button>' +
       '</div>' +
       codes().map(function (c) { return '<div class="side-group"><div class="side-label">' + esc(groupLabel(c)) + '</div>' + modItems(c) + '</div>'; }).join("") +
       '<div class="side-foot"><div>Avancement global · <b class="mono">' + g + ' %</b></div><div class="bar"><span style="width:' + g + '%"></span></div>' +
@@ -301,6 +304,8 @@
       ["exercices", "Exercices", st.ex + "/" + m.exercises.length],
       ["notes", "Notes", m.notes ? "✎" : "—"]
     ];
+    var nAnn = annalesOf(m.id).length;
+    if (nAnn) tabs.push(["annales", "Annales", String(nAnn)]);
     return '<div class="seg" role="tablist">' + tabs.map(function (t) {
       return '<button role="tab" class="' + (state.tab === t[0] ? 'active' : '') + '" data-tab="' + t[0] + '">' + t[1] + '<span class="c">' + t[2] + '</span></button>';
     }).join("") + '</div>';
@@ -416,6 +421,7 @@
       case "formules": body = renderCards(m, "formules"); break;
       case "evaluation": body = renderEvaluation(m); break;
       case "exercices": body = renderExercices(m); break;
+      case "annales": body = renderAnnalesList(annalesOf(m.id), false); break;
       default: body = renderCours(m);
     }
     var st = moduleStats(m);
@@ -426,6 +432,65 @@
   }
 
   /* ---------- Global pages ---------- */
+
+  /* ---------- Annales ---------- */
+
+  function annalesOf(moduleId) { return ANNALES.filter(function (a) { return a.module === moduleId; }); }
+
+  function renderAnnale(a, showModule) {
+    var m = a.module ? getModule(a.module) : null;
+    var chips = [];
+    if (a.annee) chips.push('<span class="chip acc">' + esc(a.annee) + '</span>');
+    if (a.session) chips.push('<span class="chip">' + esc(a.session) + '</span>');
+    if (a.type) chips.push('<span class="chip">' + esc(a.type) + '</span>');
+    if (a.duree) chips.push('<span class="chip">' + esc(a.duree) + '</span>');
+    if (showModule && m) chips.push('<button class="chip go" data-open-module="' + m.id + '">' + pad(moduleIndex(m)) + ' · ' + esc(m.title) + '</button>');
+    var pdfs = a.files.filter(function (f) { return f.kind !== "image"; });
+    var imgs = a.files.filter(function (f) { return f.kind === "image"; });
+    var files = pdfs.map(function (f) {
+      return '<a class="btn ghost sm" href="' + f.url + '" target="_blank" rel="noopener">' + (f.kind === "pdf" ? "Ouvrir le PDF" : "Télécharger") + ' <span class="mono" style="opacity:.7">' + esc(f.name) + ' · ' + f.size + '</span></a>';
+    }).join("");
+    var gallery = imgs.length ? '<div class="an-gallery">' + imgs.map(function (f) {
+      return '<a href="' + f.url + '" target="_blank" rel="noopener" title="' + esc(f.name) + '"><img src="' + f.url + '" alt="' + esc(f.name) + '" loading="lazy"></a>';
+    }).join("") + '</div>' : '';
+    var open = !!state.corrigeOpen[a.id];
+    var corrige = a.corrige
+      ? (open ? '<div class="sol"><span class="label">Corrigé</span><div class="lesson-body">' + a.corrige + '</div></div><button class="btn ghost sm" data-corrige-hide="' + a.id + '">Masquer le corrigé</button>'
+              : '<button class="btn ghost sm" data-corrige-show="' + a.id + '">Voir le corrigé</button>')
+      : '';
+    return '<article class="an hued" id="an-' + a.id + '" style="--h:' + (m ? hue(m) : 185) + '">' +
+      '<div class="an-head"><h3>' + esc(a.title) + '</h3><div class="chips">' + chips.join("") + '</div></div>' +
+      (files ? '<div class="an-files">' + files + '</div>' : '') + gallery +
+      (a.sujet ? '<div class="lesson-body an-sujet">' + a.sujet + '</div>' : '') +
+      (corrige ? '<div class="an-corrige">' + corrige + '</div>' : '') +
+    '</article>';
+  }
+
+  function renderAnnalesList(list, groupByModule) {
+    if (!list.length) return '<div class="notes-empty"><p>Aucun sujet pour l\'instant.</p><p>Dépose un PDF, une image ou un fichier <code>.md</code> dans <code>content/annales/</code>, puis relance <code>npm run build</code>. Le guide du projet décrit le format.</p></div>';
+    if (!groupByModule) return list.map(function (a) { return renderAnnale(a, false); }).join("");
+    var groups = [], byKey = {};
+    list.forEach(function (a) {
+      var key = a.module && getModule(a.module) ? a.module : "_autres";
+      if (!byKey[key]) { byKey[key] = []; groups.push(key); }
+      byKey[key].push(a);
+    });
+    groups.sort(function (x, y) { var mx = getModule(x), my = getModule(y); return (mx ? moduleIndex(mx) : 999) - (my ? moduleIndex(my) : 999); });
+    return groups.map(function (key) {
+      var m = getModule(key);
+      var head = m ? '<div class="ghead hued" style="--h:' + hue(m) + '"><span class="n">' + pad(moduleIndex(m)) + '</span><h2>' + esc(m.title) + '</h2></div>' : '<div class="ghead"><h2>Autres sujets</h2></div>';
+      return head + byKey[key].map(function (a) { return renderAnnale(a, false); }).join("");
+    }).join("");
+  }
+
+  function renderAnnales() {
+    var years = {};
+    ANNALES.forEach(function (a) { if (a.annee) years[a.annee] = true; });
+    var yl = Object.keys(years).sort().reverse();
+    return '<div class="ptitle"><h1>Annales</h1><p>' + (ANNALES.length ? ANNALES.length + ' sujet' + (ANNALES.length > 1 ? 's' : '') + (yl.length ? ' · ' + yl.join(", ") : '') + ', classés par module. Les corrigés se déplient sujet par sujet.' : 'Les sujets d\'examen, partiels et devoirs, avec leurs corrigés.') + '</p>' +
+      (ANNALES.length ? '<div style="margin-top:0.9rem"><button class="btn ghost sm" data-print="1">Imprimer</button></div>' : '') + '</div>' +
+      renderAnnalesList(ANNALES, true);
+  }
 
   function renderGlobal(kind) {
     var isDef = kind === "glossaire";
@@ -452,9 +517,13 @@
       m.lessons.forEach(function (l) { var txt = l.html.replace(/<[^>]+>/g, " "); if (norm(l.title + " " + txt).indexOf(q) !== -1) hits.push({ k: "Leçon", t: l.title, d: "Dans le cours du module " + pad(moduleIndex(m)), m: m, tab: "cours" }); });
       if (m.notes && norm(m.notes.replace(/<[^>]+>/g, " ")).indexOf(q) !== -1) hits.push({ k: "Notes", t: "Notes du module " + pad(moduleIndex(m)), d: m.title, m: m, tab: "notes" });
     });
+    ANNALES.forEach(function (a) {
+      var txt = a.title + " " + a.annee + " " + a.session + " " + a.type + " " + (a.sujet + " " + a.corrige).replace(/<[^>]+>/g, " ") + " " + a.files.map(function (f) { return f.name; }).join(" ");
+      if (norm(txt).indexOf(q) !== -1) { var m = a.module ? getModule(a.module) : null; hits.push({ k: "Annale", t: a.title, d: [a.annee, a.session, a.type].filter(Boolean).join(" · ") || "Sujet d'examen", m: m, tab: "annales", annale: a.id }); }
+    });
     var list = hits.slice(0, 60).map(function (h) {
-      return '<div class="hit hued" style="--h:' + hue(h.m) + '"><div><div class="k">' + h.k + ' · module ' + pad(moduleIndex(h.m)) + '</div><div class="t">' + h.t + '</div></div>' +
-        '<button class="go" data-open-module-tab="' + h.m.id + ':' + h.tab + '">Ouvrir →</button>' +
+      return '<div class="hit hued" style="--h:' + (h.m ? hue(h.m) : 185) + '"><div><div class="k">' + h.k + (h.m ? ' · module ' + pad(moduleIndex(h.m)) : '') + '</div><div class="t">' + h.t + '</div></div>' +
+        (h.m ? '<button class="go" data-open-module-tab="' + h.m.id + ':' + h.tab + '">Ouvrir →</button>' : '<button class="go" data-go="annales">Ouvrir →</button>') +
         (h.f ? '<div class="f">' + esc(h.f) + '</div>' : '') + (h.d ? '<div class="d">' + h.d + '</div>' : '') + '</div>';
     }).join("");
     return '<div class="ptitle"><h1>Recherche</h1><p>' + hits.length + ' résultat' + (hits.length > 1 ? 's' : '') + ' pour « ' + esc(state.search) + ' »' + (hits.length > 60 ? ' (60 affichés)' : '') + '.</p></div>' +
@@ -471,6 +540,7 @@
       var m = getModule(state.moduleId);
       if (m) { main = renderModule(m); h = hue(m); } else main = renderHome();
     } else if (state.view === "formulaire" || state.view === "glossaire") main = renderGlobal(state.view);
+    else if (state.view === "annales") main = renderAnnales();
     else if (state.view === "search") main = renderSearch();
     else main = renderHome();
 
@@ -508,6 +578,8 @@
     if ((el = t.closest("[data-lesson-toggle]"))) { var li = parseInt(el.getAttribute("data-lesson-toggle"), 10); var pr = state.progress[state.moduleId]; pr.lessonsRead[li] = !pr.lessonsRead[li]; saveProgress(); render(); return; }
     if ((el = t.closest("[data-ex-toggle]"))) { var ei = parseInt(el.getAttribute("data-ex-toggle"), 10); var pr2 = state.progress[state.moduleId]; pr2.exercisesDone[ei] = !pr2.exercisesDone[ei]; saveProgress(); render(); return; }
     if ((el = t.closest("[data-ex-reveal]"))) { state.revealed[state.moduleId] = state.revealed[state.moduleId] || {}; state.revealed[state.moduleId][parseInt(el.getAttribute("data-ex-reveal"), 10)] = true; render(); return; }
+    if ((el = t.closest("[data-corrige-show]"))) { state.corrigeOpen[el.getAttribute("data-corrige-show")] = true; render(); return; }
+    if ((el = t.closest("[data-corrige-hide]"))) { state.corrigeOpen[el.getAttribute("data-corrige-hide")] = false; render(); return; }
     if ((el = t.closest("[data-ex-hide]"))) { state.revealed[state.moduleId] = state.revealed[state.moduleId] || {}; state.revealed[state.moduleId][parseInt(el.getAttribute("data-ex-hide"), 10)] = false; render(); return; }
 
     if ((el = t.closest("[data-cardmode]"))) { var kind = el.getAttribute("data-cardmode"); state.cardMode[kind] = !state.cardMode[kind]; state.flipped[state.moduleId] = {}; savePrefs(); render(); return; }

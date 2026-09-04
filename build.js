@@ -187,6 +187,78 @@ function inlineAssets(css) {
   });
 }
 
+/* ---------- annales (sujets d'examen) ---------- */
+
+var FILE_KINDS = { pdf: "pdf", png: "image", jpg: "image", jpeg: "image", webp: "image", gif: "image", docx: "doc", doc: "doc", xlsx: "doc", xls: "doc", pptx: "doc", txt: "doc" };
+
+function slug(s) { return norm(s).replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, ""); }
+function humanSize(bytes) { return bytes < 1024 * 1024 ? Math.max(1, Math.round(bytes / 1024)) + " Ko" : (bytes / 1048576).toFixed(1).replace(".0", "") + " Mo"; }
+
+// Lit content/annales/ : les .md décrivent un sujet (et ses fichiers joints) ; les PDF/images non
+// mentionnés par un .md deviennent chacun un sujet à part entière. Les fichiers sont copiés dans docs/annales/.
+function parseAnnales(moduleIds) {
+  var dir = path.join(CONTENT, "annales");
+  var outDir = path.join(ROOT, "docs", "annales");
+  fs.rmSync(outDir, { recursive: true, force: true });
+  if (!fs.existsSync(dir)) return [];
+  fs.mkdirSync(outDir, { recursive: true });
+
+  var all = fs.readdirSync(dir).filter(function (f) { return !f.startsWith("."); });
+  var mds = all.filter(function (f) { return /\.md$/i.test(f); }).sort();
+  var attachments = all.filter(function (f) { return FILE_KINDS[f.split(".").pop().toLowerCase()]; });
+  var used = {};
+  var entries = [];
+
+  function fileEntry(name) {
+    var src = path.join(dir, name);
+    if (!fs.existsSync(src)) { console.warn("  ⚠ annales : fichier joint introuvable : " + name); return null; }
+    fs.copyFileSync(src, path.join(outDir, name));
+    used[name] = true;
+    var ext = name.split(".").pop().toLowerCase();
+    return { name: name, url: "annales/" + encodeURIComponent(name), kind: FILE_KINDS[ext] || "doc", size: humanSize(fs.statSync(src).size) };
+  }
+  function guessFromName(name) {
+    var base = name.replace(/\.[^.]+$/, "");
+    var year = (base.match(/(20\d{2})/) || [])[1] || "";
+    var mod = moduleIds.filter(function (id) { return norm(base).indexOf(id) !== -1; })[0] || "";
+    var title = base.replace(/[-_]+/g, " ").replace(/\s+/g, " ").trim();
+    return { title: title.charAt(0).toUpperCase() + title.slice(1), annee: year, module: mod };
+  }
+
+  mds.forEach(function (f) {
+    var text = fs.readFileSync(path.join(dir, f), "utf8").replace(/\r\n/g, "\n");
+    var fm = parseFrontmatter(text.split("\n"));
+    var meta = fm.meta;
+    var sections = splitSections(fm.rest);
+    var guess = guessFromName(f);
+    var files = String(meta.fichiers || "").split(",").map(function (s) { return s.trim(); }).filter(Boolean).map(fileEntry).filter(Boolean);
+    var free = function (key) { var sec = sections[key]; if (!sec) return ""; var body = (sec._free || []).concat(sec.map(function (it) { return "## " + it.title + "\n" + it.body.join("\n"); })).join("\n").trim(); return body ? mdToHtml(body) : ""; };
+    var sujet = free("sujet") || (function () { var lines = fm.rest.filter(function (l) { return !/^# /.test(l); }); var noSection = Object.keys(sections).length === 0; return noSection && lines.join("\n").trim() ? mdToHtml(lines.join("\n")) : ""; })();
+    if (meta.module && moduleIds.indexOf(meta.module) === -1) console.warn("  ⚠ " + f + " : module inconnu « " + meta.module + " »");
+    entries.push({
+      id: slug(f.replace(/\.md$/i, "")),
+      title: meta.titre || guess.title,
+      module: meta.module || guess.module || "",
+      annee: String(meta.annee || guess.annee || ""),
+      session: meta.session || "",
+      type: meta.type || "",
+      duree: meta.duree || "",
+      sujet: sujet,
+      corrige: free("corrige"),
+      files: files
+    });
+  });
+
+  attachments.filter(function (f) { return !used[f]; }).sort().forEach(function (f) {
+    var g = guessFromName(f);
+    var fe = fileEntry(f);
+    if (fe) entries.push({ id: slug(f), title: g.title, module: g.module, annee: g.annee, session: "", type: "", duree: "", sujet: "", corrige: "", files: [fe] });
+  });
+
+  entries.sort(function (a, b) { return (b.annee || "").localeCompare(a.annee || "") || a.title.localeCompare(b.title, "fr"); });
+  return entries;
+}
+
 /* ---------- assemblage ---------- */
 
 function build() {
@@ -203,7 +275,8 @@ function build() {
   var template = fs.readFileSync(path.join(SRC, "template.html"), "utf8");
   var style = inlineAssets(fs.readFileSync(path.join(SRC, "style.css"), "utf8"));
   var app = fs.readFileSync(path.join(SRC, "app.js"), "utf8") + "\n" + fs.readFileSync(path.join(SRC, "assistant.js"), "utf8");
-  var data = "var MODULES = " + JSON.stringify(modules) + ";\nvar CONFIG = " + JSON.stringify(config) + ";";
+  var annales = parseAnnales(modules.map(function (m) { return m.id; }));
+  var data = "var MODULES = " + JSON.stringify(modules) + ";\nvar CONFIG = " + JSON.stringify(config) + ";\nvar ANNALES = " + JSON.stringify(annales) + ";";
   data = data.replace(/<\//g, "<\\/"); // jamais de </script> accidentel dans les données
 
   var html = template
@@ -217,7 +290,7 @@ function build() {
   fs.writeFileSync(OUT, html);
   var nojekyll = path.join(path.dirname(OUT), ".nojekyll");
   if (!fs.existsSync(nojekyll)) fs.writeFileSync(nojekyll, "");
-  console.log("✔ " + path.relative(ROOT, OUT) + " — " + modules.length + " modules, " + Math.round(html.length / 1024) + " Ko, " + (Date.now() - t0) + " ms");
+  console.log("✔ " + path.relative(ROOT, OUT) + " — " + modules.length + " modules, " + annales.length + " annale(s), " + Math.round(html.length / 1024) + " Ko, " + (Date.now() - t0) + " ms");
   return modules;
 }
 

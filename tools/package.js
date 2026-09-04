@@ -23,6 +23,8 @@ async function main() {
   fs.cpSync(path.join(ROOT, "electron"), path.join(STAGE, "electron"), { recursive: true });
   fs.mkdirSync(path.join(STAGE, "docs"));
   fs.copyFileSync(path.join(ROOT, "docs", "index.html"), path.join(STAGE, "docs", "index.html"));
+  var annales = path.join(ROOT, "docs", "annales");
+  if (fs.existsSync(annales)) fs.cpSync(annales, path.join(STAGE, "docs", "annales"), { recursive: true });
 
   var paths = await packager({
     dir: STAGE,
