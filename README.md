@@ -124,6 +124,14 @@ Tout est dans `src/style.css`. Les couleurs, la teinte d'accent et les ombres so
 
 Les textes de l'accueil, le titre de l'application et les noms des semestres sont dans `content/config.json`.
 
+### Le logo
+
+- **Sans image** : la pastille de la barre latérale affiche un sigle, réglable avec `"sigle": "SÉ"` dans `content/config.json`.
+- **Avec image** : dépose `content/logo.svg` ou `content/logo.png` (carré, fond transparent de préférence). Au prochain `npm run build`, l'image remplace le sigle dans la barre latérale et devient l'icône de l'onglet du navigateur.
+- **Icône de l'application Windows** : avec un `content/logo.png` de 256×256 pixels, lance `npm run icon` puis `npm run package`. L'icône de la fenêtre, de la barre des tâches et du raccourci est mise à jour.
+
+Pour convertir ou redimensionner une image en PNG 256×256, Paint ou n'importe quel outil en ligne suffit.
+
 ## 6. Publier pour la classe (GitHub Pages)
 
 Le dossier `docs/` est servi tel quel par GitHub Pages. Une seule personne (toi) a le droit d'écrire dans le dépôt ; les autres ne font que consulter.

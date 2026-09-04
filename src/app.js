@@ -26,6 +26,7 @@
   function moduleIndex(m) { return MODULES.indexOf(m) + 1; }
   function pad(n) { return (n < 10 ? "0" : "") + n; }
   function hue(m) { return m.hue || 185; }
+  function brandMark() { return CONFIG.logo ? '<img src="' + CONFIG.logo + '" alt="">' : esc(CONFIG.sigle || "SÉ"); }
 
   function emptyModuleProgress(m) {
     return {
@@ -236,7 +237,7 @@
     };
     var g = globalPct();
     return '<aside class="sidebar' + (state.navOpen ? ' open' : '') + '" id="sidebar">' +
-      '<div class="brand"><div class="mark">' + esc(CONFIG.sigle || "SÉ") + '</div><div><div class="t">' + esc(CONFIG.titre) + '</div><div class="s">' + esc(CONFIG.sousTitre || "") + '</div></div></div>' +
+      '<div class="brand"><div class="mark">' + brandMark() + '</div><div><div class="t">' + esc(CONFIG.titre) + '</div><div class="s">' + esc(CONFIG.sousTitre || "") + '</div></div></div>' +
       '<div class="side-search">' + ICONS.search + '<input type="search" placeholder="Chercher un terme, une formule…" value="' + esc(state.search) + '" data-search="1" aria-label="Rechercher"></div>' +
       '<div class="side-group">' +
         '<button class="nav-item' + (state.view === "home" ? ' active' : '') + '" data-go="home">' + ICONS.home + 'Accueil</button>' +
@@ -251,7 +252,7 @@
   }
 
   function renderTopbar() {
-    return '<div class="topbar"><div class="brand"><div class="mark">' + esc(CONFIG.sigle || "SÉ") + '</div><div><div class="t">' + esc(CONFIG.titre) + '</div></div></div>' +
+    return '<div class="topbar"><div class="brand"><div class="mark">' + brandMark() + '</div><div><div class="t">' + esc(CONFIG.titre) + '</div></div></div>' +
       '<button class="menu-btn" data-nav-toggle="1" aria-label="Menu">' + ICONS.menu + '</button></div>';
   }
 

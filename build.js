@@ -166,11 +166,23 @@ function parseModule(file) {
   return mod;
 }
 
+// Logo : content/logo.svg ou content/logo.png (le premier trouvé), intégré dans la page.
+function readLogo() {
+  var candidates = [["logo.svg", "image/svg+xml"], ["logo.png", "image/png"]];
+  for (var i = 0; i < candidates.length; i++) {
+    var p = path.join(CONTENT, candidates[i][0]);
+    if (fs.existsSync(p)) return "data:" + candidates[i][1] + ";base64," + fs.readFileSync(p).toString("base64");
+  }
+  return null;
+}
+
 /* ---------- assemblage ---------- */
 
 function build() {
   var t0 = Date.now();
   var config = JSON.parse(fs.readFileSync(path.join(CONTENT, "config.json"), "utf8"));
+  var logo = readLogo();
+  if (logo) config.logo = logo;
   var files = fs.readdirSync(path.join(CONTENT, "modules")).filter(function (f) { return /\.md$/i.test(f); }).sort();
   var modules = files.map(function (f) { return parseModule(path.join(CONTENT, "modules", f)); });
 
@@ -185,6 +197,7 @@ function build() {
 
   var html = template
     .replace("{{TITLE}}", config.titre)
+    .replace("{{FAVICON}}", logo ? '<link rel="icon" href="' + logo + '">' : "")
     .replace("{{STYLE}}", function () { return style; })
     .replace("{{DATA}}", function () { return data; })
     .replace("{{APP}}", function () { return app; });

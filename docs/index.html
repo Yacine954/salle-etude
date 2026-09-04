@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>La salle d'étude</title>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Public+Sans:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -125,6 +126,7 @@ h1, h2, h3, h4 { font-family: "Bricolage Grotesque", "Public Sans", system-ui, s
 }
 .brand .t { font-family: "Bricolage Grotesque", sans-serif; font-weight: 700; font-size: 1rem; line-height: 1.1; }
 .brand .s { font-size: 0.74rem; color: var(--ink-3); margin-top: 0.15rem; }
+.brand .mark img { width: 100%; height: 100%; object-fit: cover; border-radius: inherit; display: block; }
 
 .side-search { position: relative; }
 .side-search input {
@@ -472,6 +474,7 @@ var CONFIG = {"titre":"La salle d'étude","sousTitre":"M2 Finance d'entreprise �
   function moduleIndex(m) { return MODULES.indexOf(m) + 1; }
   function pad(n) { return (n < 10 ? "0" : "") + n; }
   function hue(m) { return m.hue || 185; }
+  function brandMark() { return CONFIG.logo ? '<img src="' + CONFIG.logo + '" alt="">' : esc(CONFIG.sigle || "SÉ"); }
 
   function emptyModuleProgress(m) {
     return {
@@ -682,7 +685,7 @@ var CONFIG = {"titre":"La salle d'étude","sousTitre":"M2 Finance d'entreprise �
     };
     var g = globalPct();
     return '<aside class="sidebar' + (state.navOpen ? ' open' : '') + '" id="sidebar">' +
-      '<div class="brand"><div class="mark">' + esc(CONFIG.sigle || "SÉ") + '</div><div><div class="t">' + esc(CONFIG.titre) + '</div><div class="s">' + esc(CONFIG.sousTitre || "") + '</div></div></div>' +
+      '<div class="brand"><div class="mark">' + brandMark() + '</div><div><div class="t">' + esc(CONFIG.titre) + '</div><div class="s">' + esc(CONFIG.sousTitre || "") + '</div></div></div>' +
       '<div class="side-search">' + ICONS.search + '<input type="search" placeholder="Chercher un terme, une formule…" value="' + esc(state.search) + '" data-search="1" aria-label="Rechercher"></div>' +
       '<div class="side-group">' +
         '<button class="nav-item' + (state.view === "home" ? ' active' : '') + '" data-go="home">' + ICONS.home + 'Accueil</button>' +
@@ -697,7 +700,7 @@ var CONFIG = {"titre":"La salle d'étude","sousTitre":"M2 Finance d'entreprise �
   }
 
   function renderTopbar() {
-    return '<div class="topbar"><div class="brand"><div class="mark">' + esc(CONFIG.sigle || "SÉ") + '</div><div><div class="t">' + esc(CONFIG.titre) + '</div></div></div>' +
+    return '<div class="topbar"><div class="brand"><div class="mark">' + brandMark() + '</div><div><div class="t">' + esc(CONFIG.titre) + '</div></div></div>' +
       '<button class="menu-btn" data-nav-toggle="1" aria-label="Menu">' + ICONS.menu + '</button></div>';
   }
 
