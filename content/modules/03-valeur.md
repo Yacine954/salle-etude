@@ -11,77 +11,78 @@ couleur: 212
 
 ## Le référentiel IFRS : principes et normes clés
 
-<p>Les IFRS (International Financial Reporting Standards) s'appliquent aux comptes consolidés des sociétés cotées européennes. Deux principes structurants : la <strong>prééminence de la substance sur la forme</strong> (on comptabilise la réalité économique) et un recours étendu à la <strong>juste valeur</strong> (fair value) à côté du coût historique.</p>
+<p>Les IFRS (International Financial Reporting Standards) sont le référentiel comptable qui s'applique aux comptes consolidés des sociétés cotées européennes. Pour bien les lire, il faut d'abord comprendre les deux principes qui les structurent. Le premier est la <strong>prééminence de la substance sur la forme</strong> : autrement dit, on comptabilise la réalité économique d'une opération plutôt que sa forme. Le second est un recours étendu à la <strong>juste valeur</strong> (fair value), qui vient s'ajouter au coût historique comme base d'évaluation.</p>
+<p>Concrètement, voici les normes clés que tu dois savoir situer :</p>
 <dl>
-  <dt>IAS 1 / IAS 7</dt><dd>présentation des états financiers / tableau des flux de trésorerie (exploitation, investissement, financement).</dd>
-  <dt>IFRS 9</dt><dd>instruments financiers : classement, évaluation, dépréciation des créances en pertes attendues, comptabilité de couverture.</dd>
-  <dt>IFRS 15</dt><dd>revenu : reconnu quand chaque obligation de performance est remplie (modèle en 5 étapes).</dd>
-  <dt>IFRS 16</dt><dd>locations : le preneur inscrit un droit d'utilisation à l'actif et une dette de loyers au passif — l'EBITDA monte, la dette aussi.</dd>
-  <dt>IAS 36 / IAS 38</dt><dd>dépréciation d'actifs (test de valeur recouvrable, goodwill) / immobilisations incorporelles (frais de développement activables sous conditions).</dd>
+  <dt>IAS 1 / IAS 7</dt><dd>la présentation des états financiers, et le tableau des flux de trésorerie, découpé en trois cycles : exploitation, investissement, financement.</dd>
+  <dt>IFRS 9</dt><dd>les instruments financiers : leur classement, leur évaluation, la dépréciation des créances selon le modèle des pertes attendues, et la comptabilité de couverture.</dd>
+  <dt>IFRS 15</dt><dd>le revenu : il est reconnu quand chaque obligation de performance est remplie, selon un modèle en 5 étapes.</dd>
+  <dt>IFRS 16</dt><dd>les locations : le preneur inscrit un droit d'utilisation à l'actif et une dette de loyers au passif. Conséquence directe : l'EBITDA monte, mais la dette aussi.</dd>
+  <dt>IAS 36 / IAS 38</dt><dd>la dépréciation d'actifs (test de valeur recouvrable, goodwill), et les immobilisations incorporelles, dont les frais de développement, activables sous conditions.</dd>
 </dl>
-<div class="retenir"><span class="label">À retenir</span><p>Pour l'examen : IFRS 9 = créances et dérivés, IFRS 15 = chiffre d'affaires, IFRS 16 = loyers au bilan, IAS 36 = dépréciation/goodwill.</p></div>
+<div class="retenir"><span class="label">À retenir</span><p>Pour l'examen, garde ce repère simple : IFRS 9 = créances et dérivés, IFRS 15 = chiffre d'affaires, IFRS 16 = loyers au bilan, IAS 36 = dépréciation/goodwill.</p></div>
 
 ## Lire les comptes : bilan fonctionnel et SIG
 
-<p>Le <strong>bilan fonctionnel</strong> reclasse le bilan par cycles : investissement (actif immobilisé), financement (capitaux permanents = capitaux propres + dettes financières à long terme), exploitation (stocks, créances, dettes fournisseurs) et trésorerie.</p>
+<p>Avant de calculer le moindre ratio, il faut savoir lire un bilan autrement qu'en simple liste de comptes. C'est le rôle du <strong>bilan fonctionnel</strong>, qui reclasse le bilan par cycles : le cycle d'investissement (l'actif immobilisé), le cycle de financement (les capitaux permanents, c'est-à-dire capitaux propres + dettes financières à long terme), le cycle d'exploitation (stocks, créances, dettes fournisseurs) et enfin la trésorerie.</p>
 <div class="formula">FR = Capitaux permanents − Actif immobilisé
 BFR = Stocks + Créances d'exploitation − Dettes d'exploitation
 Trésorerie nette = FR − BFR</div>
-<p>Les <strong>soldes intermédiaires de gestion</strong> (SIG) décomposent le compte de résultat en cascade : marge commerciale → production → valeur ajoutée → excédent brut d'exploitation (EBE, proche de l'EBITDA) → résultat d'exploitation (REX, proche de l'EBIT) → résultat courant avant impôt → résultat net.</p>
-<p>La <strong>capacité d'autofinancement</strong> (CAF) mesure le cash potentiel généré par l'activité : résultat net + charges calculées (dotations) − produits calculés (reprises) − plus-values de cession.</p>
-<div class="retenir"><span class="label">À retenir</span><p>Un FR positif finance le BFR ; si le BFR dépasse le FR, la trésorerie nette est négative et l'entreprise vit à découvert. C'est le diagnostic de base.</p></div>
+<p>Passons maintenant au compte de résultat. Les <strong>soldes intermédiaires de gestion</strong> (SIG) le décomposent en cascade, chaque solde se déduisant du précédent : marge commerciale → production → valeur ajoutée → excédent brut d'exploitation (EBE, proche de l'EBITDA) → résultat d'exploitation (REX, proche de l'EBIT) → résultat courant avant impôt → résultat net.</p>
+<p>Reste une question essentielle : combien de cash l'activité est-elle capable de dégager ? C'est ce que mesure la <strong>capacité d'autofinancement</strong> (CAF), c'est-à-dire le cash potentiel généré par l'activité. On la calcule ainsi : résultat net + charges calculées (dotations) − produits calculés (reprises) − plus-values de cession.</p>
+<div class="retenir"><span class="label">À retenir</span><p>Un FR positif finance le BFR ; mais si le BFR dépasse le FR, la trésorerie nette devient négative et l'entreprise vit à découvert. C'est le diagnostic de base, celui à poser en premier.</p></div>
 
 ## Les ratios de diagnostic
 
-<p>Quatre familles de ratios, à toujours lire en tendance et en comparaison sectorielle :</p>
+<p>Une fois les comptes lus, on les diagnostique avec des ratios. Il en existe quatre familles, et une règle vaut pour toutes : un ratio ne se lit jamais isolément, mais toujours en tendance et en comparaison sectorielle.</p>
 <ul>
-  <li><strong>Rotation / délais</strong> : DSO (délai clients), DPO (délai fournisseurs), DIO (délai stocks). BFR en jours de CA = BFR ÷ CA × 360.</li>
-  <li><strong>Structure</strong> : endettement net ÷ capitaux propres (gearing), dette nette ÷ EBITDA (capacité de remboursement, alerte au-delà de 3-4x), autonomie financière.</li>
-  <li><strong>Rentabilité</strong> : marge d'EBITDA, ROCE (rentabilité économique des capitaux employés), ROE (rentabilité des capitaux propres).</li>
-  <li><strong>Liquidité</strong> : ratio de liquidité générale (actif circulant ÷ passif circulant), couverture des intérêts (EBIT ÷ charges d'intérêts).</li>
+  <li><strong>Rotation / délais</strong> : le DSO (délai clients), le DPO (délai fournisseurs) et le DIO (délai stocks). On peut aussi exprimer le BFR en jours de CA, avec BFR ÷ CA × 360.</li>
+  <li><strong>Structure</strong> : l'endettement net ÷ capitaux propres (le gearing), la dette nette ÷ EBITDA, qui mesure la capacité de remboursement et déclenche une alerte au-delà de 3-4x, et l'autonomie financière.</li>
+  <li><strong>Rentabilité</strong> : la marge d'EBITDA, le ROCE (rentabilité économique des capitaux employés) et le ROE (rentabilité des capitaux propres).</li>
+  <li><strong>Liquidité</strong> : le ratio de liquidité générale (actif circulant ÷ passif circulant) et la couverture des intérêts (EBIT ÷ charges d'intérêts).</li>
 </ul>
-<p>L'<strong>effet de levier</strong> relie les deux rentabilités : s'endetter augmente le ROE tant que la rentabilité économique dépasse le coût de la dette.</p>
+<p>Pourquoi distinguer le ROCE du ROE ? Parce que l'<strong>effet de levier</strong> relie précisément ces deux rentabilités : s'endetter augmente le ROE tant que la rentabilité économique dépasse le coût de la dette.</p>
 <div class="formula">ROE = ROCE + (ROCE − i) × D ÷ CP   (après impôt)
 DSO = Créances clients TTC ÷ CA TTC × 365</div>
-<div class="retenir"><span class="label">À retenir</span><p>Le levier joue dans les deux sens : si ROCE < i, la dette détruit de la rentabilité pour l'actionnaire (« effet de massue »).</p></div>
+<div class="retenir"><span class="label">À retenir</span><p>Le levier joue dans les deux sens : si ROCE < i, la dette détruit de la rentabilité pour l'actionnaire, c'est ce qu'on appelle l'« effet de massue ».</p></div>
 
 ## Évaluer par les flux : le DCF
 
-<p>La méthode DCF (discounted cash flows) valorise l'entreprise par la somme actualisée de ses flux de trésorerie disponibles futurs.</p>
+<p>Comment valoriser une entreprise à partir de ce qu'elle va réellement générer ? C'est l'idée de la méthode DCF (discounted cash flows) : la valeur de l'entreprise est la somme actualisée de ses flux de trésorerie disponibles futurs. La démarche se déroule en cinq étapes.</p>
 <ol>
-  <li>Prévoir les <strong>free cash flows</strong> (FCF) sur 5 à 7 ans : FCF = EBIT × (1 − t) + dotations − investissements − ΔBFR.</li>
-  <li>Calculer le <strong>WACC</strong> (coût moyen pondéré du capital) : moyenne du coût des fonds propres (ke, par le MEDAF) et du coût de la dette après impôt, pondérée par la structure financière cible.</li>
-  <li>Calculer la <strong>valeur terminale</strong> (Gordon-Shapiro) : FCF de l'année n+1 ÷ (WACC − g), g étant le taux de croissance à l'infini (prudent : 1-2 %).</li>
-  <li>Actualiser FCF et valeur terminale : on obtient la <strong>valeur d'entreprise</strong> (VE).</li>
-  <li>Passer à la <strong>valeur des fonds propres</strong> : VE − dette nette (dettes financières − trésorerie) − intérêts minoritaires + participations.</li>
+  <li>D'abord, prévoir les <strong>free cash flows</strong> (FCF) sur 5 à 7 ans, avec FCF = EBIT × (1 − t) + dotations − investissements − ΔBFR.</li>
+  <li>Ensuite, calculer le <strong>WACC</strong> (coût moyen pondéré du capital), c'est-à-dire le taux auquel on actualisera ces flux. C'est la moyenne du coût des fonds propres (ke, obtenu par le MEDAF) et du coût de la dette après impôt, pondérée par la structure financière cible.</li>
+  <li>Puis calculer la <strong>valeur terminale</strong> par la formule de Gordon-Shapiro : FCF de l'année n+1 ÷ (WACC − g), g étant le taux de croissance à l'infini, que l'on choisit prudent (1-2 %).</li>
+  <li>Actualiser les FCF et la valeur terminale : on obtient la <strong>valeur d'entreprise</strong> (VE).</li>
+  <li>Enfin, passer de la VE à la <strong>valeur des fonds propres</strong> : VE − dette nette (dettes financières − trésorerie) − intérêts minoritaires + participations.</li>
 </ol>
 <div class="formula">WACC = E/(D+E) × ke + D/(D+E) × kd × (1 − t)
 ke = rf + β × (Rm − rf)
 VT = FCF(n+1) ÷ (WACC − g)</div>
-<div class="retenir"><span class="label">À retenir</span><p>La valeur terminale pèse souvent 60-80 % de la VE : les hypothèses g et WACC sont donc les plus sensibles — toujours présenter une matrice de sensibilité.</p></div>
+<div class="retenir"><span class="label">À retenir</span><p>La valeur terminale pèse souvent 60-80 % de la VE : les hypothèses g et WACC sont donc les plus sensibles, et c'est pourquoi on présente toujours une matrice de sensibilité.</p></div>
 
 ## Évaluer par comparaison : multiples et ANR
 
-<p>Les <strong>multiples</strong> valorisent en appliquant à un agrégat de la cible le rapport observé sur des sociétés comparables (cotées : multiples boursiers ; ou transactions récentes : multiples transactionnels).</p>
+<p>La seconde grande approche ne part plus des flux futurs de l'entreprise, mais de ce que le marché observe. Les <strong>multiples</strong> valorisent une cible en appliquant à l'un de ses agrégats le rapport observé sur des sociétés comparables. Ces comparables sont soit des sociétés cotées (on parle alors de multiples boursiers), soit des transactions récentes (multiples transactionnels).</p>
 <ul>
-  <li>Multiples de valeur d'entreprise : VE ÷ EBITDA (le plus courant), VE ÷ EBIT, VE ÷ CA.</li>
-  <li>Multiples de capitaux propres : PER (cours ÷ BPA), P/B (cours ÷ actif net comptable).</li>
-  <li>Ajustements : décote d'illiquidité pour une société non cotée (20-30 %), prime de contrôle pour une acquisition majoritaire.</li>
+  <li>Les multiples de valeur d'entreprise : VE ÷ EBITDA (le plus courant), VE ÷ EBIT, VE ÷ CA.</li>
+  <li>Les multiples de capitaux propres : le PER (cours ÷ BPA) et le P/B (cours ÷ actif net comptable).</li>
+  <li>Les ajustements à ne pas oublier : une décote d'illiquidité pour une société non cotée (20-30 %), et une prime de contrôle pour une acquisition majoritaire.</li>
 </ul>
-<p>L'<strong>actif net réévalué</strong> (ANR) : capitaux propres comptables corrigés des plus ou moins-values latentes sur les actifs — pertinent pour les holdings, foncières, sociétés à forte composante patrimoniale.</p>
-<p>En pratique, on croise les méthodes (« football field ») et on retient une fourchette, pas un chiffre.</p>
-<div class="retenir"><span class="label">À retenir</span><p>VE/EBITDA compare des entreprises indépendamment de leur structure financière ; le PER dépend de l'endettement. Ne jamais mélanger un multiple de VE avec un agrégat de fonds propres.</p></div>
+<p>Une troisième approche, patrimoniale cette fois, est l'<strong>actif net réévalué</strong> (ANR) : on part des capitaux propres comptables et on les corrige des plus ou moins-values latentes sur les actifs. Elle est particulièrement pertinente pour les holdings, les foncières et les sociétés à forte composante patrimoniale.</p>
+<p>En pratique, on ne s'arrête pas à une seule méthode : on les croise dans un « football field » et on retient une fourchette, pas un chiffre.</p>
+<div class="retenir"><span class="label">À retenir</span><p>VE/EBITDA compare des entreprises indépendamment de leur structure financière, alors que le PER dépend de l'endettement. Règle absolue : ne jamais mélanger un multiple de VE avec un agrégat de fonds propres.</p></div>
 
 ## Application : le poste clients dans le diagnostic
 
-<p>Le DSO est l'indicateur qui mesure, à l'échelle de l'entreprise, l'efficacité du recouvrement. Un DSO de 60 jours signifie que le chiffre d'affaires d'environ deux mois est immobilisé chez les clients.</p>
+<p>Pour finir, appliquons tout cela au poste clients. Le DSO est l'indicateur qui mesure, à l'échelle de l'entreprise, l'efficacité du recouvrement. Concrètement, un DSO de 60 jours signifie que le chiffre d'affaires d'environ deux mois est immobilisé chez les clients. Et cet indicateur a trois impacts en chaîne.</p>
 <ul>
   <li>Impact trésorerie : chaque jour de DSO en plus immobilise CA TTC ÷ 365 de cash supplémentaire.</li>
-  <li>Impact résultat : les créances anciennes génèrent des provisions (IFRS 9) et des pertes définitives (créances irrécouvrables).</li>
-  <li>Impact valorisation : un BFR structurellement élevé réduit les FCF, donc la valeur DCF ; un acheteur ajuste le prix (« BFR normatif ») dans une acquisition.</li>
+  <li>Impact résultat : les créances anciennes génèrent des provisions (IFRS 9), puis des pertes définitives lorsqu'elles deviennent irrécouvrables.</li>
+  <li>Impact valorisation : un BFR structurellement élevé réduit les FCF, donc la valeur DCF ; c'est pourquoi, dans une acquisition, un acheteur ajuste le prix sur la base d'un « BFR normatif ».</li>
 </ul>
-<p>Un diagnostic complet du poste clients : DSO en tendance, balance âgée (part > 90 jours), concentration (part des 10 premiers clients), taux de litiges, taux de pertes sur créances, comparaison avec les conditions de paiement contractuelles (écart = retard moyen).</p>
-<div class="retenir"><span class="label">À retenir</span><p>Sais faire le lien chiffré : ΔDSO × CA journalier = cash immobilisé ; c'est aussi l'argument pour justifier un investissement dans le recouvrement.</p></div>
+<p>Un diagnostic complet du poste clients ne se limite donc pas au DSO. Il combine le DSO en tendance, la balance âgée (part > 90 jours), la concentration (part des 10 premiers clients), le taux de litiges, le taux de pertes sur créances, et la comparaison avec les conditions de paiement contractuelles, dont l'écart donne le retard moyen.</p>
+<div class="retenir"><span class="label">À retenir</span><p>Sais faire le lien chiffré : ΔDSO × CA journalier = cash immobilisé. C'est aussi l'argument pour justifier un investissement dans le recouvrement.</p></div>
 
 # Définitions
 

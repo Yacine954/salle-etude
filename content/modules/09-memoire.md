@@ -11,67 +11,67 @@ couleur: 318
 
 ## Choisir un sujet et formuler une problématique
 
-<p>Un bon sujet de mémoire professionnel croise trois cercles : ce qui intéresse l'entreprise d'accueil (un problème réel), ce que couvre le programme (un cadre théorique mobilisable) et ce à quoi tu as accès (données, interlocuteurs, temps).</p>
-<p>La <strong>problématique</strong> n'est pas un thème (« le recouvrement ») mais une question précise, discutable et à laquelle le mémoire répond : « Dans quelle mesure une priorisation des relances fondée sur un scoring de risque réduit-elle le délai de paiement d'une PME de services ? »</p>
-<p>Démarche en entonnoir : thème → constat / tension observée → question de recherche → hypothèses (H1 : la priorisation réduit le DSO ; H2 : l'effet est plus fort sur les petits clients) → périmètre (entreprise, période, données).</p>
-<div class="retenir"><span class="label">À retenir</span><p>Une problématique tient en une question ; si elle ne peut pas recevoir de réponse nuancée, ce n'est pas encore une problématique.</p></div>
+<p>Par où commencer ? Par le choix du sujet. Un bon sujet de mémoire professionnel se situe au croisement de trois cercles : ce qui intéresse l'entreprise d'accueil (un problème réel qu'elle rencontre), ce que couvre le programme du master (un cadre théorique que tu pourras mobiliser) et ce à quoi tu as concrètement accès (des données, des interlocuteurs, du temps). C'est bien l'intersection des trois qui compte.</p>
+<p>Une fois le sujet posé, il faut le transformer en <strong>problématique</strong>, et c'est là qu'il faut éviter une confusion fréquente : un thème (« le recouvrement ») n'est pas une problématique. La problématique est une question précise, discutable, et à laquelle le mémoire apporte une réponse. Prenons un exemple : « Dans quelle mesure une priorisation des relances fondée sur un scoring de risque réduit-elle le délai de paiement d'une PME de services ? » Tu vois la différence : le thème désigne un domaine, la problématique pose une vraie question.</p>
+<p>Pour y parvenir, la démarche est celle d'un entonnoir, où chaque étape resserre la précédente : on part du thème, on relève un constat ou une tension observée sur le terrain, on en tire une question de recherche, on la décline en hypothèses (H1 : la priorisation réduit le DSO ; H2 : l'effet est plus fort sur les petits clients), et l'on fixe enfin le périmètre (entreprise, période, données).</p>
+<div class="retenir"><span class="label">À retenir</span><p>Une problématique tient en une question ; si cette question ne peut pas recevoir de réponse nuancée, ce n'est pas encore une problématique.</p></div>
 
 ## La revue de littérature
 
-<p>La revue de littérature positionne ton travail : que sait-on déjà, quels concepts, quels résultats, quelles controverses, quelle place pour ta contribution ?</p>
+<p>Pourquoi une revue de littérature ? Parce qu'elle positionne ton travail par rapport à ce qui existe déjà : que sait-on sur le sujet, avec quels concepts, quels résultats, quelles controverses — et, au bout du compte, quelle place reste-t-il pour ta propre contribution ? Concrètement, elle se construit en trois temps.</p>
 <ul>
-  <li><strong>Sources</strong> : articles académiques (Google Scholar, Cairn, SSRN, ScienceDirect), ouvrages de référence (Vernimmen pour la finance d'entreprise), rapports professionnels (Banque de France, AFDCC pour le crédit client), normes (IFRS 9).</li>
-  <li><strong>Lecture critique</strong> : pour chaque source, noter la question, la méthode, les résultats, les limites — dans une grille de lecture.</li>
-  <li><strong>Synthèse thématique</strong> (par idée) plutôt que chronologique ou auteur par auteur ; conclure chaque partie par ce qu'elle implique pour ton étude.</li>
+  <li><strong>Sources</strong> : commence par rassembler des articles académiques (Google Scholar, Cairn, SSRN, ScienceDirect), des ouvrages de référence (Vernimmen pour la finance d'entreprise), des rapports professionnels (Banque de France, AFDCC pour le crédit client) et les normes elles-mêmes (IFRS 9).</li>
+  <li><strong>Lecture critique</strong> : pour chaque source, note la question posée, la méthode, les résultats et les limites, dans une grille de lecture qui te servira ensuite de base de travail.</li>
+  <li><strong>Synthèse thématique</strong> : organise ta synthèse par idée plutôt que de façon chronologique ou auteur par auteur, et conclus chaque partie par ce qu'elle implique pour ton étude.</li>
 </ul>
-<p>Citer selon les <strong>normes APA</strong> : (Auteur, année) dans le texte ; référence complète en bibliographie : Auteur, A. (année). Titre. <em>Revue</em>, volume(numéro), pages. Le <strong>plagiat</strong> (copier sans citer, y compris une reformulation proche) est éliminatoire ; les outils de détection sont systématiques.</p>
-<div class="retenir"><span class="label">À retenir</span><p>Une revue de littérature se termine par un cadre d'analyse (les concepts retenus et leurs liens), pas par un résumé.</p></div>
+<p>Reste la question des citations. Tu cites selon les <strong>normes APA</strong> : (Auteur, année) dans le texte, et la référence complète en bibliographie sous la forme Auteur, A. (année). Titre. <em>Revue</em>, volume(numéro), pages. Un point à ne jamais négliger : le <strong>plagiat</strong> (copier sans citer, y compris par une reformulation proche) est éliminatoire, et les outils de détection sont utilisés systématiquement.</p>
+<div class="retenir"><span class="label">À retenir</span><p>Une revue de littérature se termine par un cadre d'analyse (les concepts retenus et leurs liens), et non par un simple résumé.</p></div>
 
 ## La méthodologie
 
-<p>La méthodologie justifie comment tu réponds à la question — c'est la partie la plus regardée par le jury.</p>
+<p>La méthodologie, c'est la partie où tu justifies <em>comment</em> tu réponds à la question posée. C'est aussi la partie la plus regardée par le jury, d'où l'importance d'y expliciter chacun de tes choix. Voici les cinq points qu'elle doit couvrir.</p>
 <dl>
-  <dt>Approche</dt><dd>quantitative (mesurer, tester des hypothèses sur des données chiffrées), qualitative (comprendre par entretiens, observation), ou mixte.</dd>
-  <dt>Données</dt><dd>secondaires (balance âgée, historique de règlements, extraits ERP) ou primaires (entretiens avec les commerciaux, questionnaire clients).</dd>
-  <dt>Échantillon</dt><dd>périmètre, période, taille, critères d'exclusion ; représentativité et limites.</dd>
+  <dt>Approche</dt><dd>elle peut être quantitative (mesurer, tester des hypothèses sur des données chiffrées), qualitative (comprendre par entretiens ou observation), ou mixte, c'est-à-dire combiner les deux.</dd>
+  <dt>Données</dt><dd>elles sont secondaires lorsqu'elles existent déjà (balance âgée, historique de règlements, extraits ERP), ou primaires lorsque tu les collectes pour l'étude (entretiens avec les commerciaux, questionnaire clients).</dd>
+  <dt>Échantillon</dt><dd>précise le périmètre, la période, la taille et les critères d'exclusion, puis discute sa représentativité et ses limites.</dd>
   <dt>Analyse</dt><dd>statistiques descriptives, comparaison avant/après, régression ; pour le qualitatif, analyse thématique des entretiens.</dd>
-  <dt>Biais</dt><dd>sélection, désirabilité sociale (entretiens), endogénéité, effet de contexte (un client majeur qui change de comportement).</dd>
+  <dt>Biais</dt><dd>anticipe-les dès ce stade : sélection, désirabilité sociale (dans les entretiens), endogénéité, effet de contexte (par exemple un client majeur qui change de comportement).</dd>
 </dl>
-<p><strong>Éthique et confidentialité</strong> : anonymiser les clients, obtenir l'accord de l'entreprise pour l'usage des données, respecter le RGPD ; prévoir une version confidentielle du mémoire si nécessaire.</p>
-<div class="retenir"><span class="label">À retenir</span><p>Chaque choix méthodologique se justifie par rapport à la question posée ; les limites annoncées sont un signe de rigueur, pas de faiblesse.</p></div>
+<p>N'oublie pas non plus l'<strong>éthique et la confidentialité</strong> : il faut anonymiser les clients, obtenir l'accord de l'entreprise pour l'usage des données et respecter le RGPD ; si nécessaire, prévois une version confidentielle du mémoire.</p>
+<div class="retenir"><span class="label">À retenir</span><p>Chaque choix méthodologique se justifie par rapport à la question posée ; quant aux limites que tu annonces, elles sont un signe de rigueur, pas de faiblesse.</p></div>
 
 ## Rédiger le mémoire
 
-<p>Plan type (60-80 pages hors annexes) : introduction (contexte, constat, problématique, annonce du plan) ; partie 1 : revue de littérature et cadre d'analyse ; partie 2 : terrain et méthodologie ; partie 3 : résultats et discussion ; conclusion (réponse à la problématique, apports, limites, pistes) ; bibliographie ; annexes.</p>
+<p>Passons à la rédaction. Le plan type d'un mémoire (60-80 pages hors annexes) s'enchaîne logiquement : une introduction qui pose le contexte, le constat et la problématique, puis annonce le plan ; une partie 1 consacrée à la revue de littérature et au cadre d'analyse ; une partie 2 qui présente le terrain et la méthodologie ; une partie 3 qui expose les résultats et les discute ; une conclusion qui répond à la problématique et en tire les apports, les limites et les pistes ; enfin la bibliographie et les annexes. Quelques règles de rédaction font ensuite la différence.</p>
 <ul>
-  <li>Style : phrases courtes, temps présent, vocabulaire précis, pas de « je » excessif (préférer « cette étude », « nous »).</li>
-  <li>Tableaux et figures numérotés, titrés, sourcés, commentés dans le texte — un graphique non commenté ne compte pas.</li>
-  <li>Les <strong>recommandations managériales</strong> distinguent un mémoire professionnel : concrètes, chiffrées, hiérarchisées, avec conditions de mise en œuvre.</li>
-  <li>Relecture en trois passes : fond (logique), forme (orthographe, cohérence), mise en page (sommaire automatique, pagination, en-têtes).</li>
+  <li>Côté style, privilégie des phrases courtes, le temps présent et un vocabulaire précis ; évite le « je » excessif et préfère « cette étude » ou « nous ».</li>
+  <li>Chaque tableau et chaque figure doit être numéroté, titré, sourcé et commenté dans le texte. Pourquoi ? Parce qu'un graphique non commenté ne compte pas.</li>
+  <li>Ce qui distingue un mémoire professionnel, ce sont les <strong>recommandations managériales</strong> : elles doivent être concrètes, chiffrées, hiérarchisées et assorties de leurs conditions de mise en œuvre.</li>
+  <li>Enfin, relis-toi en trois passes successives : le fond (la logique du raisonnement), la forme (orthographe, cohérence) et la mise en page (sommaire automatique, pagination, en-têtes).</li>
 </ul>
-<div class="retenir"><span class="label">À retenir</span><p>Le jury lit d'abord l'introduction et la conclusion : elles doivent se répondre exactement (question posée / réponse apportée).</p></div>
+<div class="retenir"><span class="label">À retenir</span><p>Le jury lit d'abord l'introduction et la conclusion : elles doivent donc se répondre exactement, question posée d'un côté, réponse apportée de l'autre.</p></div>
 
 ## La soutenance
 
-<p>Format habituel : 15-20 minutes de présentation, 20-30 minutes de questions. La présentation ne répète pas le mémoire : elle en donne le fil (question → démarche → résultats clés → recommandations → limites et apports personnels).</p>
+<p>Vient enfin la soutenance. Son format habituel est de 15-20 minutes de présentation, suivies de 20-30 minutes de questions. Garde bien à l'esprit que la présentation ne répète pas le mémoire : elle en donne le fil conducteur, de la question à la démarche, puis aux résultats clés, aux recommandations, et enfin aux limites et aux apports personnels.</p>
 <ul>
-  <li>10-12 slides maximum, une idée par slide, chiffres lisibles, pas de texte lu.</li>
-  <li>Répéter chronomètre en main ; prévoir les questions probables (pourquoi cette méthode ? quelles limites ? que changerais-tu ? quel lien avec le cours X ?).</li>
-  <li>Répondre aux questions en reformulant, en assumant les limites, sans se justifier à l'excès ; « je ne sais pas, mais voici comment je le vérifierais » est une bonne réponse.</li>
+  <li>Limite-toi à 10-12 slides maximum, avec une idée par slide et des chiffres lisibles ; surtout, pas de texte lu.</li>
+  <li>Répète chronomètre en main et prépare les questions probables : pourquoi cette méthode ? quelles limites ? que changerais-tu ? quel lien avec le cours X ?</li>
+  <li>Le jour J, réponds aux questions en reformulant, en assumant les limites et sans te justifier à l'excès ; « je ne sais pas, mais voici comment je le vérifierais » est une bonne réponse.</li>
 </ul>
-<div class="retenir"><span class="label">À retenir</span><p>La soutenance évalue la maîtrise du sujet et le recul, pas la récitation. Le lien explicite avec les cours du master est souvent valorisé.</p></div>
+<div class="retenir"><span class="label">À retenir</span><p>La soutenance évalue la maîtrise du sujet et le recul, pas la récitation ; le lien explicite avec les cours du master est d'ailleurs souvent valorisé.</p></div>
 
 ## Application : plan détaillé d'un mémoire sur le recouvrement
 
-<p>Titre de travail : « Priorisation des relances et performance du recouvrement : le cas d'une entreprise de services ».</p>
+<p>Pour rendre tout cela concret, voici le plan détaillé d'un mémoire dont le titre de travail serait : « Priorisation des relances et performance du recouvrement : le cas d'une entreprise de services ». Tu y retrouveras, étape par étape, la logique vue dans les leçons précédentes.</p>
 <ol>
-  <li><strong>Introduction</strong> : poids du crédit client dans le BFR des PME, constat d'un DSO supérieur aux conditions contractuelles, problématique, hypothèses.</li>
-  <li><strong>Partie 1 — Cadre théorique</strong> : crédit client et BFR (finance d'entreprise) ; risque de crédit et IFRS 9 (gestion des risques) ; théories du comportement de paiement ; outils numériques de pilotage.</li>
-  <li><strong>Partie 2 — Terrain et méthode</strong> : présentation de l'entreprise (anonymisée), données (balance âgée sur 12 mois, historique de relances), construction du scoring, protocole avant/après, entretiens avec les commerciaux.</li>
-  <li><strong>Partie 3 — Résultats</strong> : évolution du DSO et de la part > 90 jours, régression délai de paiement / relances / montant / litiges, retours qualitatifs ; discussion (effets, limites, endogénéité).</li>
-  <li><strong>Conclusion et recommandations</strong> : généraliser le scoring, automatiser via l'ERP, indicateurs de suivi, gains chiffrés (cash, agios, provisions).</li>
+  <li><strong>Introduction</strong> : on part du poids du crédit client dans le BFR des PME, on pose le constat d'un DSO supérieur aux conditions contractuelles, et l'on en déduit la problématique et les hypothèses.</li>
+  <li><strong>Partie 1 — Cadre théorique</strong> : elle mobilise le crédit client et le BFR (finance d'entreprise), le risque de crédit et IFRS 9 (gestion des risques), les théories du comportement de paiement et les outils numériques de pilotage.</li>
+  <li><strong>Partie 2 — Terrain et méthode</strong> : présentation de l'entreprise (anonymisée), description des données (balance âgée sur 12 mois, historique de relances), construction du scoring, protocole avant/après et entretiens avec les commerciaux.</li>
+  <li><strong>Partie 3 — Résultats</strong> : évolution du DSO et de la part > 90 jours, régression délai de paiement / relances / montant / litiges, retours qualitatifs ; puis une discussion qui revient sur les effets, les limites et l'endogénéité.</li>
+  <li><strong>Conclusion et recommandations</strong> : généraliser le scoring, l'automatiser via l'ERP, mettre en place des indicateurs de suivi et chiffrer les gains (cash, agios, provisions).</li>
 </ol>
-<div class="retenir"><span class="label">À retenir</span><p>Ce plan mobilise quatre modules du master (valeur, risques, trésorerie, outils numériques) : c'est exactement ce qu'attend un jury de mémoire professionnel.</p></div>
+<div class="retenir"><span class="label">À retenir</span><p>Ce plan mobilise quatre modules du master (valeur, risques, trésorerie, outils numériques) : c'est exactement ce qu'un jury de mémoire professionnel attend de toi.</p></div>
 
 # Définitions
 

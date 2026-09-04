@@ -11,58 +11,58 @@ couleur: 236
 
 ## Statistiques descriptives et lois usuelles
 
-<p>Avant toute modélisation, décrire : la <strong>moyenne</strong> (tendance centrale), la <strong>variance</strong> et l'<strong>écart-type</strong> (dispersion), la <strong>covariance</strong> et le <strong>coefficient de corrélation</strong> ρ (liaison linéaire entre deux variables, entre −1 et +1).</p>
+<p>Avant de modéliser quoi que ce soit, il faut d'abord décrire ses données. Quelques outils suffisent pour commencer : la <strong>moyenne</strong>, qui donne la tendance centrale ; la <strong>variance</strong> et l'<strong>écart-type</strong>, qui mesurent la dispersion autour de cette moyenne ; puis, dès que l'on s'intéresse à deux variables, la <strong>covariance</strong> et le <strong>coefficient de corrélation</strong> ρ, qui mesure la liaison linéaire entre elles sur une échelle de −1 à +1.</p>
 <div class="formula">Moyenne x̄ = Σxᵢ ÷ n
 Variance s² = Σ(xᵢ − x̄)² ÷ (n − 1)      Écart-type s = √s²
 Cov(x,y) = Σ(xᵢ − x̄)(yᵢ − ȳ) ÷ (n − 1)      ρ = Cov(x,y) ÷ (sₓ · sᵧ)</div>
-<p>La <strong>loi normale</strong> N(μ, σ) est centrale en finance : 68 % des observations à ±1σ, 95 % à ±1,96σ, 99 % à ±2,58σ. Un <strong>intervalle de confiance</strong> à 95 % pour une moyenne : x̄ ± 1,96 × s ÷ √n. Corrélation n'est pas causalité : deux séries peuvent monter ensemble sans lien de cause.</p>
-<div class="retenir"><span class="label">À retenir</span><p>ρ mesure une liaison linéaire ; ρ = 0 n'exclut pas une relation non linéaire. 1,96 est le nombre magique du 95 %.</p></div>
+<p>Pourquoi la <strong>loi normale</strong> N(μ, σ) est-elle si centrale en finance ? Parce qu'elle donne des repères simples : 68 % des observations se situent à ±1σ, 95 % à ±1,96σ et 99 % à ±2,58σ. C'est ce qui permet de construire un <strong>intervalle de confiance</strong> à 95 % pour une moyenne : x̄ ± 1,96 × s ÷ √n. Un dernier rappel, essentiel : corrélation n'est pas causalité. Deux séries peuvent très bien monter ensemble sans qu'il y ait le moindre lien de cause entre elles.</p>
+<div class="retenir"><span class="label">À retenir</span><p>ρ mesure une liaison linéaire, et ρ = 0 n'exclut donc pas une relation non linéaire. Quant à 1,96, c'est le nombre magique du 95 %.</p></div>
 
 ## La régression linéaire par les MCO
 
-<p>Le modèle : y = α + βx + ε. Les <strong>moindres carrés ordinaires</strong> (MCO) choisissent α et β pour minimiser la somme des carrés des résidus.</p>
+<p>Le modèle de base s'écrit y = α + βx + ε. Comment choisir α et β ? La méthode des <strong>moindres carrés ordinaires</strong> (MCO) retient les valeurs qui minimisent la somme des carrés des résidus.</p>
 <div class="formula">β̂ = Cov(x,y) ÷ Var(x)        α̂ = ȳ − β̂ x̄
 R² = 1 − SCR ÷ SCT   (part de la variance de y expliquée par x)
 t = β̂ ÷ se(β̂) ; |t| > 1,96 ⇒ β significatif à 5 %  (p-value < 0,05)</div>
-<p>Interprétation : β est l'effet sur y d'une hausse d'une unité de x, toutes choses égales par ailleurs (en régression multiple). Hypothèses de Gauss-Markov pour que les MCO soient les meilleurs estimateurs linéaires sans biais : linéarité, résidus d'espérance nulle et de variance constante (<strong>homoscédasticité</strong>), non corrélés (<strong>pas d'autocorrélation</strong>), variables explicatives non corrélées au résidu (<strong>exogénéité</strong>) et non colinéaires.</p>
-<p>Problèmes fréquents et remèdes : hétéroscédasticité (écarts-types robustes), autocorrélation (Durbin-Watson, termes retardés), multicolinéarité (VIF, retirer une variable), endogénéité (variables instrumentales), variables omises (biais).</p>
-<div class="retenir"><span class="label">À retenir</span><p>Un coefficient se lit avec son signe, sa taille et sa significativité (t, p-value). R² élevé ≠ modèle causal.</p></div>
+<p>Comment lire le résultat ? β est l'effet sur y d'une hausse d'une unité de x, toutes choses égales par ailleurs lorsqu'on est en régression multiple. Mais pour que les MCO soient les meilleurs estimateurs linéaires sans biais, il faut respecter les hypothèses de Gauss-Markov : la linéarité ; des résidus d'espérance nulle et de variance constante (c'est l'<strong>homoscédasticité</strong>) ; des résidus non corrélés entre eux (<strong>pas d'autocorrélation</strong>) ; des variables explicatives non corrélées au résidu (<strong>exogénéité</strong>) et non colinéaires entre elles.</p>
+<p>Dans la pratique, chacune de ces hypothèses peut être violée, et à chaque problème correspond un remède : l'hétéroscédasticité se traite par des écarts-types robustes ; l'autocorrélation se détecte par Durbin-Watson et se corrige par des termes retardés ; la multicolinéarité se repère par le VIF et se règle en retirant une variable ; l'endogénéité appelle des variables instrumentales ; et les variables omises, elles, créent un biais.</p>
+<div class="retenir"><span class="label">À retenir</span><p>Un coefficient se lit toujours avec son signe, sa taille et sa significativité (t, p-value). Et garde en tête qu'un R² élevé ≠ modèle causal.</p></div>
 
 ## Séries temporelles : notions essentielles
 
-<p>Une série financière (cours, CA mensuel, encours clients) a souvent une <strong>tendance</strong>, une <strong>saisonnalité</strong> et une composante aléatoire. Régresser deux séries tendancielles l'une sur l'autre donne des corrélations trompeuses (« régression fallacieuse »).</p>
-<p>Une série est <strong>stationnaire</strong> si sa moyenne et sa variance ne dépendent pas du temps ; on teste la présence d'une racine unitaire (test de Dickey-Fuller augmenté). Si la série n'est pas stationnaire, on travaille sur les différences (rendements plutôt que cours) ou on cherche une relation de cointégration.</p>
-<p>Modèles usuels : moyenne mobile et lissage exponentiel pour prévoir, AR(p) (la valeur dépend de ses p valeurs passées), MA(q), ARIMA(p,d,q). Pour la volatilité des rendements : modèles ARCH/GARCH (la variance dépend des chocs passés — les crises se regroupent).</p>
-<div class="retenir"><span class="label">À retenir</span><p>Stationnariser avant de modéliser ; rendements plutôt que niveaux ; GARCH pour la volatilité. Sais ce que teste Dickey-Fuller.</p></div>
+<p>Une série financière, qu'il s'agisse d'un cours, d'un CA mensuel ou d'un encours clients, combine souvent trois composantes : une <strong>tendance</strong>, une <strong>saisonnalité</strong> et une composante aléatoire. D'où un piège classique : si tu régresses deux séries tendancielles l'une sur l'autre, tu obtiens des corrélations trompeuses, ce qu'on appelle la « régression fallacieuse ».</p>
+<p>Pour éviter ce piège, il faut s'assurer que la série est <strong>stationnaire</strong>, c'est-à-dire que sa moyenne et sa variance ne dépendent pas du temps. Concrètement, on teste la présence d'une racine unitaire à l'aide du test de Dickey-Fuller augmenté. Si la série n'est pas stationnaire, deux options : travailler sur les différences (les rendements plutôt que les cours) ou chercher une relation de cointégration.</p>
+<p>Une fois la série préparée, on peut la modéliser. Pour prévoir, les outils usuels sont la moyenne mobile et le lissage exponentiel, puis les modèles AR(p), dans lesquels la valeur dépend de ses p valeurs passées, MA(q) et ARIMA(p,d,q). Pour la volatilité des rendements, on utilise les modèles ARCH/GARCH, où la variance dépend des chocs passés : c'est ce qui traduit le fait que les crises se regroupent.</p>
+<div class="retenir"><span class="label">À retenir</span><p>Stationnariser avant de modéliser, travailler sur les rendements plutôt que sur les niveaux, utiliser GARCH pour la volatilité. Et sais ce que teste Dickey-Fuller.</p></div>
 
 ## Théorie du portefeuille et MEDAF
 
-<p><strong>Markowitz</strong> (1952) : un investisseur arbitre rendement espéré et risque (écart-type). La diversification réduit le risque d'un portefeuille tant que les actifs ne sont pas parfaitement corrélés ; la <strong>frontière efficiente</strong> regroupe les portefeuilles offrant le meilleur rendement pour chaque niveau de risque.</p>
+<p>Tout part de <strong>Markowitz</strong> (1952) : un investisseur arbitre entre le rendement espéré et le risque, mesuré par l'écart-type. L'idée clé est que la diversification réduit le risque d'un portefeuille tant que les actifs ne sont pas parfaitement corrélés. En combinant ainsi les actifs, on obtient la <strong>frontière efficiente</strong>, qui regroupe les portefeuilles offrant le meilleur rendement pour chaque niveau de risque.</p>
 <div class="formula">Portefeuille de 2 actifs : E(Rp) = w₁E(R₁) + w₂E(R₂)
 σp² = w₁²σ₁² + w₂²σ₂² + 2w₁w₂ρσ₁σ₂</div>
-<p>Le <strong>MEDAF</strong> (CAPM, Sharpe 1964) ajoute l'actif sans risque : seul le risque <strong>systématique</strong> (non diversifiable, mesuré par le <strong>bêta</strong>) est rémunéré. Le bêta mesure la sensibilité du titre au marché (β &gt; 1 : amplifie ; β &lt; 1 : amortit).</p>
+<p>Le <strong>MEDAF</strong> (CAPM, Sharpe 1964) prolonge ce raisonnement en ajoutant l'actif sans risque. Sa conclusion est forte : seul le risque <strong>systématique</strong>, celui qu'on ne peut pas diversifier, est rémunéré, et il se mesure par le <strong>bêta</strong>. Le bêta traduit la sensibilité du titre au marché : si β &gt; 1, le titre amplifie les mouvements du marché ; si β &lt; 1, il les amortit.</p>
 <div class="formula">E(Rᵢ) = r_f + βᵢ × [E(R_m) − r_f]        βᵢ = Cov(Rᵢ, R_m) ÷ Var(R_m)
 Ratio de Sharpe = (Rp − r_f) ÷ σp</div>
-<p>Le MEDAF fournit le coût des fonds propres (ke) utilisé dans le WACC. Limites : bêta instable, prime de risque à estimer, facteurs additionnels (taille, value, momentum — modèles de Fama-French).</p>
-<div class="retenir"><span class="label">À retenir</span><p>Diversification = élimine le risque spécifique ; bêta = risque systématique ; MEDAF = prix de ce risque. Sais calculer un bêta à partir d'une covariance.</p></div>
+<p>Concrètement, le MEDAF fournit le coût des fonds propres (ke) que tu réutilises dans le WACC. Il a toutefois ses limites : le bêta est instable, la prime de risque doit être estimée, et des facteurs additionnels comptent (taille, value, momentum), ce que capturent les modèles de Fama-French.</p>
+<div class="retenir"><span class="label">À retenir</span><p>La diversification élimine le risque spécifique ; le bêta mesure le risque systématique ; le MEDAF donne le prix de ce risque. Sais calculer un bêta à partir d'une covariance.</p></div>
 
 ## Efficience des marchés, structure financière, comportements
 
-<p>L'<strong>hypothèse d'efficience</strong> (Fama, 1970) : les prix intègrent l'information disponible. Trois formes : <strong>faible</strong> (prix passés — l'analyse technique est inutile), <strong>semi-forte</strong> (toute information publique — l'analyse fondamentale ne bat pas le marché), <strong>forte</strong> (même l'information privée — contredite par les gains d'initiés).</p>
-<p><strong>Modigliani-Miller</strong> : sans impôt ni frictions, la structure financière et la politique de dividende sont neutres ; avec impôt, la dette crée de la valeur. <strong>Théorie de l'agence</strong> appliquée à la finance : la dette discipline les dirigeants (flux disponibles réduits), les dividendes signalent la confiance.</p>
-<p>La <strong>finance comportementale</strong> (Kahneman, Thaler) documente les écarts à la rationalité : excès de confiance, aversion aux pertes (on ressent une perte deux fois plus qu'un gain), ancrage, comportement moutonnier, biais de disposition (vendre les gagnants trop tôt, garder les perdants). Ces biais expliquent bulles et sur-réactions.</p>
-<div class="retenir"><span class="label">À retenir</span><p>Trois formes d'efficience, MM sans/avec impôt, cinq biais comportementaux : le kit de la question de cours.</p></div>
+<p>Selon l'<strong>hypothèse d'efficience</strong> (Fama, 1970), les prix intègrent l'information disponible. Toute la question est de savoir quelle information, et c'est ce qui distingue les trois formes. Dans la forme <strong>faible</strong>, les prix intègrent les prix passés : l'analyse technique est donc inutile. Dans la forme <strong>semi-forte</strong>, ils intègrent toute l'information publique : l'analyse fondamentale ne bat pas le marché. Dans la forme <strong>forte</strong>, ils intègrent même l'information privée, ce que contredisent les gains des initiés.</p>
+<p>Sur la structure financière, <strong>Modigliani-Miller</strong> montrent que sans impôt ni frictions, la structure financière et la politique de dividende sont neutres ; dès qu'on introduit l'impôt, en revanche, la dette crée de la valeur. La <strong>théorie de l'agence</strong>, appliquée à la finance, apporte une autre lecture : la dette discipline les dirigeants en réduisant les flux disponibles, et les dividendes signalent la confiance.</p>
+<p>Enfin, la <strong>finance comportementale</strong> (Kahneman, Thaler) documente les écarts à la rationalité : l'excès de confiance, l'aversion aux pertes (on ressent une perte deux fois plus qu'un gain), l'ancrage, le comportement moutonnier et le biais de disposition (vendre les gagnants trop tôt, garder les perdants). Ce sont ces biais qui expliquent les bulles et les sur-réactions.</p>
+<div class="retenir"><span class="label">À retenir</span><p>Trois formes d'efficience, MM sans et avec impôt, cinq biais comportementaux : voilà le kit de la question de cours.</p></div>
 
 ## Application : tester l'effet d'une politique de relance
 
-<p>Question de recherche : « une relance structurée réduit-elle le délai de paiement ? » Protocole possible sur des données de balance âgée anonymisées :</p>
+<p>Mettons tout cela au service de ton poste. Prenons une question de recherche concrète : « une relance structurée réduit-elle le délai de paiement ? » Voici un protocole possible, à partir de données de balance âgée anonymisées.</p>
 <ol>
-  <li><strong>Variable expliquée</strong> : délai de paiement observé (jours entre échéance et règlement) par facture.</li>
-  <li><strong>Variables explicatives</strong> : nombre de relances reçues, montant de la facture, taille du client, secteur, ancienneté de la relation, mois (saisonnalité), variable indicatrice « après mise en place du TOP 15 ».</li>
-  <li><strong>Modèle</strong> : régression multiple par MCO ; lire le signe et la significativité du coefficient « après TOP 15 » et de « nombre de relances ». Alternative : comparaison avant/après (test de Student sur les moyennes) ou différence de différences si un groupe de clients n'a pas été relancé.</li>
-  <li><strong>Vigilance</strong> : endogénéité (on relance davantage les mauvais payeurs — le coefficient des relances peut sortir positif !), hétéroscédasticité (écarts-types robustes), variables omises (litiges).</li>
+  <li><strong>Variable expliquée</strong> : le délai de paiement observé par facture, c'est-à-dire le nombre de jours entre l'échéance et le règlement.</li>
+  <li><strong>Variables explicatives</strong> : le nombre de relances reçues, le montant de la facture, la taille du client, le secteur, l'ancienneté de la relation, le mois (pour capter la saisonnalité) et une variable indicatrice « après mise en place du TOP 15 ».</li>
+  <li><strong>Modèle</strong> : une régression multiple par MCO, dans laquelle tu lis le signe et la significativité du coefficient « après TOP 15 » et de celui du « nombre de relances ». En alternative, tu peux comparer avant et après par un test de Student sur les moyennes, ou faire une différence de différences si un groupe de clients n'a pas été relancé.</li>
+  <li><strong>Vigilance</strong> : l'endogénéité d'abord, car on relance davantage les mauvais payeurs et le coefficient des relances peut donc sortir positif ! Ensuite l'hétéroscédasticité, à traiter par des écarts-types robustes, et les variables omises, comme les litiges.</li>
 </ol>
-<div class="retenir"><span class="label">À retenir</span><p>L'endogénéité est le piège : la relance cible ceux qui paient mal. Le comparer « avant/après » ou avec un groupe témoin est plus convaincant qu'une simple corrélation.</p></div>
+<div class="retenir"><span class="label">À retenir</span><p>L'endogénéité est le piège : la relance cible précisément ceux qui paient mal. Comparer « avant/après » ou avec un groupe témoin est donc plus convaincant qu'une simple corrélation.</p></div>
 
 # Définitions
 

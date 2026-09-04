@@ -11,66 +11,66 @@ couleur: 96
 
 ## Financial statements vocabulary
 
-<p>Les trois états financiers et leur vocabulaire de base :</p>
+<p>Commençons par la base : les trois états financiers et le vocabulaire qui va avec. Pour chacun, retiens d'abord le nom de l'état, puis les grands postes qui le composent.</p>
 <dl>
-  <dt>Balance sheet</dt><dd>bilan — assets (actifs), liabilities (passifs/dettes), equity (capitaux propres), current vs non-current (courant / non courant), accounts receivable (créances clients), accounts payable (dettes fournisseurs), inventory (stocks), retained earnings (réserves).</dd>
-  <dt>Income statement / P&amp;L</dt><dd>compte de résultat — revenue / sales / turnover (chiffre d'affaires), cost of goods sold (coût des ventes), gross margin (marge brute), operating expenses (charges d'exploitation), EBITDA, operating income (résultat d'exploitation), net income (résultat net), earnings per share (BPA).</dd>
-  <dt>Cash flow statement</dt><dd>tableau de flux — operating / investing / financing activities, capital expenditure (capex), free cash flow, working capital (BFR), depreciation and amortisation.</dd>
+  <dt>Balance sheet</dt><dd>c'est le bilan. On y trouve les assets (actifs), les liabilities (passifs/dettes) et l'equity (capitaux propres), répartis en current vs non-current (courant / non courant) ; parmi les postes à connaître : accounts receivable (créances clients), accounts payable (dettes fournisseurs), inventory (stocks) et retained earnings (réserves).</dd>
+  <dt>Income statement / P&amp;L</dt><dd>c'est le compte de résultat. On y descend, dans l'ordre, du revenue / sales / turnover (chiffre d'affaires) au cost of goods sold (coût des ventes) et à la gross margin (marge brute), puis aux operating expenses (charges d'exploitation), à l'EBITDA, à l'operating income (résultat d'exploitation), au net income (résultat net) et aux earnings per share (BPA).</dd>
+  <dt>Cash flow statement</dt><dd>c'est le tableau de flux, découpé en operating / investing / financing activities ; les termes associés sont capital expenditure (capex), free cash flow, working capital (BFR) et depreciation and amortisation.</dd>
 </dl>
-<p>Verbes utiles : to book / to record (comptabiliser), to accrue (provisionner une charge à payer), to write off (passer en perte), to impair (déprécier), to consolidate, to reconcile (rapprocher), to disclose (publier / mentionner en annexe).</p>
-<div class="retenir"><span class="label">À retenir</span><p>Receivable = on nous doit ; payable = nous devons. Revenue/turnover = CA ; income/earnings/profit = résultat.</p></div>
+<p>À ce vocabulaire de postes s'ajoutent quelques verbes utiles, que tu emploieras au quotidien : to book / to record (comptabiliser), to accrue (provisionner une charge à payer), to write off (passer en perte), to impair (déprécier), to consolidate, to reconcile (rapprocher) et to disclose (publier / mentionner en annexe).</p>
+<div class="retenir"><span class="label">À retenir</span><p>Receivable = on nous doit ; payable = nous devons. De même, revenue/turnover = CA, tandis que income/earnings/profit = résultat.</p></div>
 
 ## Receivables and collections vocabulary
 
-<p>Le vocabulaire quotidien du crédit client en anglais :</p>
+<p>Passons maintenant au vocabulaire quotidien du crédit client, celui que tu manipules concrètement dans ton poste. Chaque entrée ci-dessous regroupe un terme et les expressions qui gravitent autour.</p>
 <dl>
-  <dt>Aging report / aged receivables</dt><dd>balance âgée ; buckets (tranches) : current, 1-30 days past due, 31-60, 61-90, over 90.</dd>
-  <dt>Overdue / past due / outstanding</dt><dd>en retard / échu non payé / en cours (non encore réglé, échu ou non).</dd>
-  <dt>Payment terms</dt><dd>conditions de paiement : net 30 (30 jours date de facture), end of month + 45 days, 2/10 net 30 (2 % d'escompte si paiement sous 10 jours).</dd>
-  <dt>Dunning / collection process</dt><dd>processus de relance : reminder (relance), final notice / formal notice (mise en demeure), to escalate (transmettre au niveau supérieur), to hand over to a collection agency (confier à une société de recouvrement), legal action.</dd>
-  <dt>Bad debt / doubtful debt</dt><dd>créance irrécouvrable / douteuse ; allowance (provision) for doubtful accounts ; write-off (passage en perte).</dd>
-  <dt>Dispute / credit note / remittance advice</dt><dd>litige / avoir / avis de règlement.</dd>
-  <dt>DSO (days sales outstanding)</dt><dd>délai moyen de recouvrement ; credit limit (plafond de crédit) ; credit hold (blocage des livraisons).</dd>
+  <dt>Aging report / aged receivables</dt><dd>c'est la balance âgée ; elle est découpée en buckets (tranches) : current, 1-30 days past due, 31-60, 61-90, over 90.</dd>
+  <dt>Overdue / past due / outstanding</dt><dd>trois mots à ne pas confondre : overdue (en retard), past due (échu non payé) et outstanding (en cours, c'est-à-dire non encore réglé, échu ou non).</dd>
+  <dt>Payment terms</dt><dd>les conditions de paiement, par exemple net 30 (30 jours date de facture), end of month + 45 days, ou encore 2/10 net 30 (2 % d'escompte si paiement sous 10 jours).</dd>
+  <dt>Dunning / collection process</dt><dd>le processus de relance, avec ses étapes successives : reminder (relance), final notice / formal notice (mise en demeure), to escalate (transmettre au niveau supérieur), to hand over to a collection agency (confier à une société de recouvrement) et enfin legal action.</dd>
+  <dt>Bad debt / doubtful debt</dt><dd>créance irrécouvrable / créance douteuse ; on parle d'allowance (provision) for doubtful accounts et de write-off (passage en perte).</dd>
+  <dt>Dispute / credit note / remittance advice</dt><dd>respectivement litige, avoir et avis de règlement.</dd>
+  <dt>DSO (days sales outstanding)</dt><dd>le délai moyen de recouvrement ; dans le même registre, credit limit (plafond de crédit) et credit hold (blocage des livraisons).</dd>
 </dl>
-<div class="retenir"><span class="label">À retenir</span><p>« Outstanding » n'est pas forcément en retard ; « overdue » l'est. « Write off » = perte définitive ; « allowance » = provision.</p></div>
+<div class="retenir"><span class="label">À retenir</span><p>« Outstanding » n'est pas forcément en retard, alors qu'« overdue » l'est. De même, « write off » = perte définitive, tandis qu'« allowance » = provision.</p></div>
 
 ## Treasury and corporate finance vocabulary
 
-<p><strong>Trésorerie</strong> : cash flow forecast (prévision de trésorerie), cash position (position), overdraft (découvert), credit line / revolving credit facility (ligne de crédit), factoring (affacturage), cash pooling, bank reconciliation (rapprochement), hedging (couverture), foreign exchange (FX) exposure, interest rate swap.</p>
-<p><strong>Finance d'entreprise</strong> : leverage / gearing (endettement), covenant, equity vs debt financing, share issue / rights issue (augmentation de capital avec DPS), bond issue (émission obligataire), credit rating, working capital requirement (BFR), discounted cash flow, weighted average cost of capital (WACC), enterprise value vs equity value, net debt.</p>
-<p><strong>M&amp;A</strong> : merger (fusion), acquisition / takeover (rachat), bid (offre), due diligence, term sheet, closing, earn-out, synergies, goodwill, leveraged buy-out.</p>
-<div class="retenir"><span class="label">À retenir</span><p>Working capital = BFR (pas « fonds de roulement » au sens français) ; leverage = endettement ; to hedge = couvrir.</p></div>
+<p>Troisième bloc de vocabulaire, celui de la trésorerie et de la finance d'entreprise, regroupé ici en trois familles. Côté <strong>trésorerie</strong>, retiens : cash flow forecast (prévision de trésorerie), cash position (position), overdraft (découvert), credit line / revolving credit facility (ligne de crédit), factoring (affacturage), cash pooling, bank reconciliation (rapprochement), hedging (couverture), foreign exchange (FX) exposure et interest rate swap.</p>
+<p>Côté <strong>finance d'entreprise</strong>, on parle de leverage / gearing (endettement), de covenant, d'equity vs debt financing, de share issue / rights issue (augmentation de capital avec DPS), de bond issue (émission obligataire), de credit rating, de working capital requirement (BFR), de discounted cash flow, de weighted average cost of capital (WACC), d'enterprise value vs equity value et de net debt.</p>
+<p>Enfin, le vocabulaire des <strong>M&amp;A</strong> : merger (fusion), acquisition / takeover (rachat), bid (offre), due diligence, term sheet, closing, earn-out, synergies, goodwill et leveraged buy-out.</p>
+<div class="retenir"><span class="label">À retenir</span><p>Working capital = BFR (et non « fonds de roulement » au sens français) ; leverage = endettement ; to hedge = couvrir.</p></div>
 
 ## Writing collection emails in English
 
-<p>Un email de relance efficace est court, factuel, poli et précis sur l'action attendue. Ton gradué selon le niveau de relance :</p>
+<p>Venons-en à la pratique : rédiger un email de relance en anglais. Un email de relance efficace est court, factuel, poli et précis sur l'action attendue. Le ton, lui, se durcit progressivement d'une relance à l'autre : voici les trois niveaux, avec pour chacun un modèle à réutiliser.</p>
 <ul>
   <li><strong>Reminder 1 (friendly)</strong> : « I hope this email finds you well. According to our records, invoice no. 2024-118 for €4,250.00, due on 15 June, remains outstanding. Could you please confirm when we can expect payment? Please disregard this message if payment has already been made. »</li>
   <li><strong>Reminder 2 (firm)</strong> : « Despite our previous reminder, invoice no. 2024-118 is now 30 days overdue. We kindly ask you to settle the outstanding balance of €4,250.00 by 20 July. Should there be any dispute regarding this invoice, please let us know as soon as possible. »</li>
   <li><strong>Final notice</strong> : « This is a final notice. Unless payment of €4,250.00 is received by 31 July, we will have no alternative but to place your account on credit hold and refer the matter to our legal department, in accordance with our terms and conditions. »</li>
 </ul>
-<p>Formules utiles : « as per our records », « please find attached a copy of the invoice », « we would appreciate your prompt payment », « thank you for your cooperation », « kind regards ». Éviter les majuscules, les menaces vagues et les excuses excessives.</p>
-<div class="retenir"><span class="label">À retenir</span><p>Objet clair (« Overdue invoice no. X – €Y »), montant et date dans la première phrase, action attendue et date limite explicites.</p></div>
+<p>Pour construire tes propres emails, quelques formules utiles : « as per our records », « please find attached a copy of the invoice », « we would appreciate your prompt payment », « thank you for your cooperation », « kind regards ». À l'inverse, évite les majuscules, les menaces vagues et les excuses excessives.</p>
+<div class="retenir"><span class="label">À retenir</span><p>Un objet clair (« Overdue invoice no. X – €Y »), le montant et la date dès la première phrase, puis l'action attendue et une date limite explicites.</p></div>
 
 ## Numbers, dates and presenting figures orally
 
-<p>Les chiffres à l'oral et à l'écrit :</p>
+<p>Dernier point de langue avant l'application : les chiffres, à l'oral comme à l'écrit. Voici les règles à ancrer, point par point.</p>
 <ul>
-  <li>Séparateurs : en anglais, la virgule sépare les milliers et le point les décimales : 1,250.50 = « one thousand two hundred and fifty point five zero » (ou « … fifty euros and fifty cents »).</li>
-  <li>Pourcentages : 12.5% = « twelve point five percent » ; « up 3 percentage points » ≠ « up 3 percent ».</li>
-  <li>Grands nombres : 2.4 million, 1.2 billion (milliard), K / M / bn dans les slides.</li>
-  <li>Variations : to increase / rise / grow by 8 % ; to decrease / fall / drop by 5 % ; to remain flat ; year-on-year (YoY), quarter-on-quarter, versus budget.</li>
-  <li>Dates : 15 June 2026 (UK) / June 15, 2026 (US) ; « due on », « by » (au plus tard le), « within 30 days ».</li>
+  <li>Les séparateurs d'abord : en anglais, la virgule sépare les milliers et le point les décimales. Ainsi 1,250.50 se lit « one thousand two hundred and fifty point five zero » (ou « … fifty euros and fifty cents »).</li>
+  <li>Les pourcentages : 12.5% se dit « twelve point five percent » ; attention, « up 3 percentage points » ≠ « up 3 percent ».</li>
+  <li>Les grands nombres : 2.4 million, 1.2 billion (milliard) ; dans les slides, on abrège en K / M / bn.</li>
+  <li>Les variations : to increase / rise / grow by 8 % ; to decrease / fall / drop by 5 % ; to remain flat ; et pour situer la comparaison, year-on-year (YoY), quarter-on-quarter, versus budget.</li>
+  <li>Les dates : 15 June 2026 (UK) / June 15, 2026 (US) ; et pour les délais, « due on », « by » (au plus tard le), « within 30 days ».</li>
 </ul>
-<p>Structure d'une présentation : « Today I'd like to cover three points… », « Let me start with… », « Moving on to… », « To sum up… », « I'd be happy to take your questions. »</p>
+<p>Pour structurer une présentation orale, enchaîne les jalons suivants : « Today I'd like to cover three points… », « Let me start with… », « Moving on to… », « To sum up… », « I'd be happy to take your questions. »</p>
 <div class="retenir"><span class="label">À retenir</span><p>Point pour les décimales, virgule pour les milliers. « Billion » = milliard. « By » = au plus tard.</p></div>
 
 ## Application : présenter son poste et son projet en anglais
 
-<p>Pitch de 60 secondes, utilisable en entretien ou à l'oral :</p>
+<p>Pour finir, mettons tout cela en pratique avec un pitch de 60 secondes, utilisable en entretien comme à l'oral. Repère au passage le vocabulaire des leçons précédentes.</p>
 <p>« I work as a credit and collections apprentice at a logistics company. I manage the accounts receivable aging report and prioritise collection calls based on days overdue and invoice amount, in order to reduce our DSO. Over the past year I redesigned our monthly tracking workbook: I replaced fragile external lookups with a structured table and a scoring formula that ranks the top fifteen accounts to chase each month. My master's thesis looks at whether risk-based prioritisation actually shortens payment delays, using twelve months of receivables data. Next, I'd like to move towards a treasury or credit management role. »</p>
-<p>Questions probables et réponses courtes : « What is DSO? » — « Days sales outstanding: the average number of days it takes to collect payment after a sale. » « How do you handle a disputed invoice? » — « I log the dispute, involve the sales team to resolve it, and exclude it from dunning until it is settled. »</p>
-<div class="retenir"><span class="label">À retenir</span><p>Un pitch = rôle, résultat concret, projet, ambition — quatre phrases, vocabulaire précis, pas de traduction mot à mot du français.</p></div>
+<p>Prépare aussi les questions probables, avec des réponses courtes. « What is DSO? » — « Days sales outstanding: the average number of days it takes to collect payment after a sale. » « How do you handle a disputed invoice? » — « I log the dispute, involve the sales team to resolve it, and exclude it from dunning until it is settled. »</p>
+<div class="retenir"><span class="label">À retenir</span><p>Un pitch = rôle, résultat concret, projet, ambition — quatre phrases, un vocabulaire précis, et surtout pas de traduction mot à mot du français.</p></div>
 
 # Définitions
 

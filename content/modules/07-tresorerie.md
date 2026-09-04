@@ -11,64 +11,64 @@ couleur: 186
 
 ## Budget de trésorerie et plan glissant
 
-<p>Le <strong>budget de trésorerie</strong> prévoit, mois par mois sur l'année, les encaissements (ventes TTC selon les délais clients, subventions, cessions, emprunts) et les décaissements (achats TTC selon les délais fournisseurs, salaires, charges sociales, TVA, impôts, investissements, remboursements). Il se construit à partir des budgets d'exploitation, d'investissement et de financement, en tenant compte des <strong>décalages</strong> : une vente de janvier à 60 jours est encaissée en mars.</p>
-<p>Le <strong>plan de trésorerie glissant</strong> (rolling forecast, souvent 13 semaines) est révisé chaque semaine ou chaque mois : il absorbe l'incertitude réelle des encaissements et permet d'anticiper les tensions.</p>
+<p>Le <strong>budget de trésorerie</strong> prévoit, mois par mois sur l'année, tout ce qui va entrer et tout ce qui va sortir. Côté encaissements : les ventes TTC selon les délais clients, les subventions, les cessions, les emprunts. Côté décaissements : les achats TTC selon les délais fournisseurs, les salaires, les charges sociales, la TVA, les impôts, les investissements et les remboursements. Il se construit à partir des budgets d'exploitation, d'investissement et de financement, et toute la difficulté consiste à tenir compte des <strong>décalages</strong> entre la facture et le flux réel. Prenons un exemple : une vente de janvier payable à 60 jours n'est encaissée qu'en mars.</p>
+<p>Comme la réalité s'écarte vite d'un budget annuel, on le complète par un <strong>plan de trésorerie glissant</strong> (rolling forecast, souvent 13 semaines), révisé chaque semaine ou chaque mois. Son intérêt ? Il absorbe l'incertitude réelle des encaissements et permet d'anticiper les tensions avant qu'elles ne surviennent.</p>
 <div class="formula">Solde fin de période = Solde début + Encaissements − Décaissements
 TVA à décaisser (mois M) = TVA collectée (M−1) − TVA déductible (M−1)</div>
-<div class="retenir"><span class="label">À retenir</span><p>Le budget raisonne en TTC et en date d'encaissement, pas en HT et en date de facture. C'est le piège classique.</p></div>
+<div class="retenir"><span class="label">À retenir</span><p>Le budget raisonne en TTC et en date d'encaissement, et non en HT et en date de facture : c'est le piège classique.</p></div>
 
 ## Le besoin en fonds de roulement et le cycle cash-to-cash
 
-<p>Le BFR d'exploitation est le cash immobilisé par le cycle d'activité :</p>
+<p>Pourquoi une entreprise rentable peut-elle manquer de cash ? Parce que son cycle d'activité immobilise de l'argent : elle achète et stocke avant de vendre, puis elle attend d'être payée. Ce cash immobilisé par le cycle d'activité, c'est le BFR d'exploitation :</p>
 <div class="formula">BFR = Stocks + Créances clients − Dettes fournisseurs (et autres dettes d'exploitation)
 BFR en jours de CA = BFR ÷ CA HT × 360</div>
-<p>Le <strong>cycle cash-to-cash</strong> (ou cash conversion cycle) mesure en jours le temps entre le paiement des fournisseurs et l'encaissement des clients :</p>
+<p>Le <strong>cycle cash-to-cash</strong> (ou cash conversion cycle) traduit la même idée en jours : il mesure le temps qui s'écoule entre le moment où tu paies tes fournisseurs et celui où tes clients te paient :</p>
 <div class="formula">CCC = DIO (stocks) + DSO (clients) − DPO (fournisseurs)</div>
-<p>Leviers d'optimisation : réduire le DSO (conditions de paiement, facturation rapide, relance structurée, acomptes), réduire le DIO (gestion des stocks), allonger le DPO sans dégrader la relation fournisseur (dans la limite de la loi LME : 60 jours date de facture ou 45 jours fin de mois). Un BFR négatif (grande distribution) finance l'entreprise.</p>
-<div class="retenir"><span class="label">À retenir</span><p>ΔBFR ≈ CA journalier × ΔDSO : un jour de DSO en moins, c'est un jour de CA de cash libéré. C'est LE calcul à maîtriser.</p></div>
+<p>Chaque terme de cette formule est un levier d'optimisation. Tu peux réduire le DSO (conditions de paiement, facturation rapide, relance structurée, acomptes), réduire le DIO par une meilleure gestion des stocks, ou allonger le DPO, à condition de ne pas dégrader la relation fournisseur et de rester dans la limite de la loi LME : 60 jours date de facture ou 45 jours fin de mois. Notons enfin qu'un BFR négatif, comme dans la grande distribution, finance l'entreprise au lieu de lui coûter.</p>
+<div class="retenir"><span class="label">À retenir</span><p>Retiens que ΔBFR ≈ CA journalier × ΔDSO : un jour de DSO en moins, c'est un jour de CA de cash libéré. C'est LE calcul à maîtriser.</p></div>
 
 ## Financer les déficits, placer les excédents
 
-<p><strong>Déficits court terme</strong> : facilité de caisse (quelques jours), découvert autorisé (montant et durée négociés, agios = montant × taux × jours ÷ 360 + commissions), escompte d'effets de commerce, cession Dailly (créances professionnelles), affacturage, billets de trésorerie (grandes entreprises). Un besoin <em>structurel</em> (BFR permanent) doit être financé par des ressources stables, pas par du découvert.</p>
-<p><strong>Excédents</strong> : critères dans l'ordre sécurité, liquidité, rendement. Supports : comptes rémunérés, dépôts à terme, OPCVM monétaires, certificats de dépôt. Éviter d'immobiliser un excédent qui sera nécessaire au prochain pic de décaissements (paie, TVA, échéance d'emprunt).</p>
-<p><strong>Dates de valeur et jours de banque</strong> : la banque crédite/débite avec un décalage ; connaître ces conventions évite des agios inutiles. La <strong>négociation bancaire</strong> porte sur les taux, les commissions (mouvement, plus fort découvert) et les dates de valeur.</p>
-<div class="retenir"><span class="label">À retenir</span><p>Agios = montant × taux × jours ÷ 360. Découvert = besoin ponctuel ; ligne moyen terme ou fonds propres = besoin structurel.</p></div>
+<p>Une fois la prévision établie, deux situations se présentent : un trou à combler ou un excédent à placer. Pour les <strong>déficits de court terme</strong>, la palette est large : la facilité de caisse (quelques jours), le découvert autorisé (montant et durée négociés, avec des agios = montant × taux × jours ÷ 360 + commissions), l'escompte d'effets de commerce, la cession Dailly (créances professionnelles), l'affacturage et, pour les grandes entreprises, les billets de trésorerie. Attention cependant à ne pas confondre les horizons : un besoin <em>structurel</em>, c'est-à-dire un BFR permanent, doit être financé par des ressources stables, et non par du découvert.</p>
+<p>Pour les <strong>excédents</strong>, les critères se hiérarchisent dans cet ordre : la sécurité d'abord, la liquidité ensuite, le rendement en dernier. Les supports classiques sont les comptes rémunérés, les dépôts à terme, les OPCVM monétaires et les certificats de dépôt. Le bon réflexe consiste à ne pas immobiliser un excédent dont tu auras besoin au prochain pic de décaissements : paie, TVA ou échéance d'emprunt.</p>
+<p>Un dernier point, souvent négligé : les <strong>dates de valeur et jours de banque</strong>. La banque crédite et débite avec un décalage ; connaître ces conventions évite de payer des agios inutiles. C'est d'ailleurs l'un des objets de la <strong>négociation bancaire</strong>, qui porte sur les taux, les commissions (de mouvement, de plus fort découvert) et précisément ces dates de valeur.</p>
+<div class="retenir"><span class="label">À retenir</span><p>Agios = montant × taux × jours ÷ 360. Le découvert répond à un besoin ponctuel ; une ligne à moyen terme ou des fonds propres répondent à un besoin structurel.</p></div>
 
 ## Sécuriser : risques de taux, de change, de contrepartie
 
-<p>Le trésorier gère aussi les risques de marché sur ses flux :</p>
+<p>Prévoir et financer ne suffit pas : le trésorier doit aussi protéger ses flux contre les risques de marché. Trois d'entre eux reviennent systématiquement :</p>
 <ul>
-  <li><strong>Change</strong> : position par devise et échéance, couverture par ventes/achats à terme ou options ; facturation en euros ou clauses d'indexation quand c'est possible.</li>
-  <li><strong>Taux</strong> : sur une dette à taux variable, plafonner par un cap ou fixer par un swap ; sur les placements, éviter le risque de perte en capital.</li>
-  <li><strong>Contrepartie bancaire</strong> : diversifier les banques, suivre leur notation, limiter les dépôts par établissement.</li>
+  <li><strong>Le change</strong> : on établit d'abord la position par devise et par échéance, puis on la couvre par des ventes ou des achats à terme, ou par des options ; quand c'est possible, on préfère facturer en euros ou insérer des clauses d'indexation.</li>
+  <li><strong>Le taux</strong> : sur une dette à taux variable, on plafonne le taux par un cap ou on le fixe par un swap ; sur les placements, on évite le risque de perte en capital.</li>
+  <li><strong>La contrepartie bancaire</strong> : on diversifie les banques, on suit leur notation et on limite les dépôts par établissement.</li>
 </ul>
-<p>Le tout dans un cadre de <strong>contrôle interne</strong> : pouvoirs bancaires limités, double signature, séparation entre celui qui initie un virement et celui qui le valide, protection contre la fraude au président et au faux fournisseur (procédure de vérification des changements de RIB).</p>
-<div class="retenir"><span class="label">À retenir</span><p>Les fraudes aux virements sont le premier risque opérationnel d'une trésorerie : double validation et vérification des RIB par un canal indépendant.</p></div>
+<p>Tout cela s'inscrit dans un cadre de <strong>contrôle interne</strong> : des pouvoirs bancaires limités, la double signature, la séparation entre celui qui initie un virement et celui qui le valide, et une protection contre la fraude au président et au faux fournisseur, grâce à une procédure de vérification des changements de RIB.</p>
+<div class="retenir"><span class="label">À retenir</span><p>Les fraudes aux virements sont le premier risque opérationnel d'une trésorerie ; la parade, c'est la double validation et la vérification des RIB par un canal indépendant.</p></div>
 
 ## Le rôle de l'ERP et des outils de trésorerie
 
-<p>Trois apports concrets des systèmes d'information :</p>
+<p>Que change concrètement un système d'information pour le trésorier ? Trois apports méritent d'être retenus.</p>
 <dl>
-  <dt>Rapprochement bancaire automatisé</dt><dd>les relevés (protocoles EBICS, SWIFT, formats CAMT/MT940) sont importés et lettrés automatiquement avec les écritures ; les exceptions sont traitées manuellement.</dd>
-  <dt>Cash pooling</dt><dd>centralisation des soldes des filiales sur un compte pivot : physique (virements réels quotidiens, « zero balancing ») ou notionnel (compensation des intérêts sans mouvement de fonds). Réduit les frais financiers et optimise le placement du solde net du groupe.</dd>
-  <dt>Prévision alimentée par les modules</dt><dd>ventes/facturation (échéances clients), achats (échéances fournisseurs), paie, immobilisations : la prévision de trésorerie devient un flux continu au lieu d'une reconstruction manuelle. Les TMS (treasury management systems) ajoutent la gestion des dérivés, des emprunts et du reporting.</dd>
+  <dt>Rapprochement bancaire automatisé</dt><dd>Les relevés bancaires arrivent via les protocoles EBICS ou SWIFT, dans les formats CAMT ou MT940 ; ils sont importés puis lettrés automatiquement avec les écritures. Seules les exceptions sont traitées manuellement.</dd>
+  <dt>Cash pooling</dt><dd>Il s'agit de centraliser les soldes des filiales sur un compte pivot. Il peut être physique (virements réels quotidiens, dit « zero balancing ») ou notionnel (compensation des intérêts sans aucun mouvement de fonds). Dans les deux cas, le groupe réduit ses frais financiers et optimise le placement de son solde net.</dd>
+  <dt>Prévision alimentée par les modules</dt><dd>Les modules ventes/facturation (échéances clients), achats (échéances fournisseurs), paie et immobilisations alimentent directement la prévision de trésorerie, qui devient un flux continu au lieu d'une reconstruction manuelle. Les TMS (treasury management systems) vont plus loin en ajoutant la gestion des dérivés, des emprunts et du reporting.</dd>
 </dl>
-<p>Le <strong>netting</strong> intra-groupe compense les créances et dettes entre filiales pour réduire le nombre et le coût des flux.</p>
-<div class="retenir"><span class="label">À retenir</span><p>Cash pooling physique vs notionnel, rapprochement automatique, netting : trois mots-clés d'examen sur l'ERP en trésorerie.</p></div>
+<p>À ces trois apports s'ajoute le <strong>netting</strong> intra-groupe, qui compense les créances et les dettes entre filiales afin de réduire le nombre et le coût des flux.</p>
+<div class="retenir"><span class="label">À retenir</span><p>Cash pooling physique ou notionnel, rapprochement automatique, netting : ce sont les trois mots-clés d'examen sur l'ERP en trésorerie.</p></div>
 
 ## Piloter : reporting et indicateurs de trésorerie
 
-<p>Un reporting de trésorerie efficace tient sur une page : position du jour (soldes par banque, lignes disponibles), prévision à 13 semaines avec écarts vs prévision précédente, indicateurs de BFR (DSO, DPO, DIO, CCC), coût de la dette et des couvertures, alertes (covenants, pics à venir).</p>
-<p>Les indicateurs sont lus en tendance et expliqués par leurs causes : un DSO qui monte vient-il de nouveaux clients aux délais longs, de litiges, d'une relance insuffisante, ou d'un effet de saisonnalité du CA ? Le taux de recouvrement (encaissé ÷ échu du mois) et l'ancienneté moyenne pondérée complètent le DSO.</p>
+<p>Reste à piloter. Un reporting de trésorerie efficace tient sur une page et répond à cinq questions : où en est-on aujourd'hui (position du jour, avec les soldes par banque et les lignes disponibles) ; où va-t-on (prévision à 13 semaines, avec les écarts par rapport à la prévision précédente) ; comment se comporte le BFR (DSO, DPO, DIO, CCC) ; combien coûtent la dette et les couvertures ; et enfin quelles alertes surveiller (covenants, pics à venir).</p>
+<p>Un indicateur brut ne dit rien : il se lit en tendance et s'explique par ses causes. Prenons un DSO qui monte : vient-il de nouveaux clients aux délais longs, de litiges, d'une relance insuffisante, ou simplement d'un effet de saisonnalité du CA ? Pour affiner la lecture, le taux de recouvrement (encaissé ÷ échu du mois) et l'ancienneté moyenne pondérée viennent compléter le DSO.</p>
 <div class="formula">Taux de recouvrement = Encaissements du mois ÷ Encours échu en début de mois
 Encaissement prévisionnel pondéré = Σ (Créance × Probabilité de règlement dans l'horizon)</div>
-<div class="retenir"><span class="label">À retenir</span><p>Un bon reporting explique l'écart entre prévu et réalisé ; c'est là que se joue la crédibilité du trésorier.</p></div>
+<div class="retenir"><span class="label">À retenir</span><p>Un bon reporting ne se contente pas de constater : il explique l'écart entre le prévu et le réalisé, et c'est là que se joue la crédibilité du trésorier.</p></div>
 
 ## Application : du recouvrement à la prévision de trésorerie
 
-<p>Chaque ligne d'une balance âgée est, vue de la trésorerie, un encaissement futur incertain, avec une probabilité de règlement qui décroît avec l'ancienneté. Une prévision réaliste pondère chaque créance par cette probabilité, tranche par tranche, à partir des taux historiques de recouvrement.</p>
-<p>Améliorer la priorisation des relances (viser les dossiers à plus fort montant × probabilité de récupération) réduit le DSO, donc le BFR, donc le besoin de financement court terme et son coût. Exemple : CA TTC 36,5 M€, DSO de 58 à 52 jours → 6 × 100 k€ = 600 k€ libérés ; à 5 % de coût de découvert, 30 k€ d'agios économisés par an, sans compter la baisse des provisions.</p>
-<p>Le chaînage complet : qualité de facturation → relance structurée → DSO → BFR → trésorerie → coût de financement → résultat. Le recouvrement n'est pas une fonction administrative : c'est le premier fournisseur de cash de l'entreprise.</p>
+<p>Faisons maintenant le lien avec ton poste. Vue de la trésorerie, chaque ligne d'une balance âgée est un encaissement futur incertain, dont la probabilité de règlement décroît avec l'ancienneté. Une prévision réaliste pondère donc chaque créance par cette probabilité, tranche par tranche, en s'appuyant sur les taux historiques de recouvrement.</p>
+<p>Pourquoi est-ce important ? Parce qu'améliorer la priorisation des relances, c'est-à-dire viser les dossiers à plus fort montant × probabilité de récupération, réduit le DSO, donc le BFR, donc le besoin de financement court terme et son coût. Prenons un exemple chiffré : avec un CA TTC de 36,5 M€, un DSO qui passe de 58 à 52 jours libère 6 × 100 k€ = 600 k€ ; à 5 % de coût de découvert, cela représente 30 k€ d'agios économisés par an, sans compter la baisse des provisions.</p>
+<p>Tu vois ainsi le chaînage complet : qualité de facturation → relance structurée → DSO → BFR → trésorerie → coût de financement → résultat. Autrement dit, le recouvrement n'est pas une fonction administrative : c'est le premier fournisseur de cash de l'entreprise.</p>
 <div class="retenir"><span class="label">À retenir</span><p>Sais chiffrer en trois lignes l'effet d'une baisse de DSO sur le cash et sur les agios : c'est l'argument qui justifie un investissement dans le recouvrement.</p></div>
 
 # Définitions

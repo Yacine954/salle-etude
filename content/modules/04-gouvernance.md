@@ -11,46 +11,46 @@ couleur: 272
 
 ## Théorie de l'agence et mécanismes de gouvernance
 
-<p>La <strong>théorie de l'agence</strong> (Jensen et Meckling, 1976) décrit la relation entre un principal (l'actionnaire) et un agent (le dirigeant) dont les intérêts divergent et qui dispose de plus d'information. Il en résulte des <strong>coûts d'agence</strong> : coûts de surveillance (audit, conseil), coûts de dédouanement (reporting du dirigeant) et perte résiduelle.</p>
-<p>La gouvernance d'entreprise rassemble les mécanismes qui alignent les intérêts :</p>
+<p>Pourquoi a-t-on besoin de gouvernance ? La <strong>théorie de l'agence</strong> (Jensen et Meckling, 1976) répond en décrivant la relation entre un principal (l'actionnaire) et un agent (le dirigeant) : leurs intérêts divergent, et l'agent dispose de plus d'information que le principal. Il en résulte des <strong>coûts d'agence</strong>, qui sont de trois natures : les coûts de surveillance (audit, conseil), les coûts de dédouanement (le reporting du dirigeant) et la perte résiduelle.</p>
+<p>La gouvernance d'entreprise rassemble précisément les mécanismes qui alignent ces intérêts. On en distingue deux familles :</p>
 <ul>
-  <li><strong>internes</strong> : conseil d'administration et comités (audit, rémunérations, nominations), administrateurs indépendants, rémunération variable et actions de performance, « say on pay » (vote des actionnaires sur la rémunération) ;</li>
-  <li><strong>externes</strong> : marché du contrôle (OPA hostiles), analystes, agences de notation, activisme actionnarial, cadre légal.</li>
+  <li>les mécanismes <strong>internes</strong> : le conseil d'administration et ses comités (audit, rémunérations, nominations), les administrateurs indépendants, la rémunération variable et les actions de performance, et le « say on pay », c'est-à-dire le vote des actionnaires sur la rémunération ;</li>
+  <li>les mécanismes <strong>externes</strong> : le marché du contrôle (OPA hostiles), les analystes, les agences de notation, l'activisme actionnarial et le cadre légal.</li>
 </ul>
-<p>En France, le code AFEP-MEDEF (grandes sociétés cotées) et le code Middlenext fixent les bonnes pratiques selon le principe « appliquer ou expliquer » (comply or explain).</p>
+<p>En France, ces bonnes pratiques sont fixées par le code AFEP-MEDEF pour les grandes sociétés cotées et par le code Middlenext, selon le principe « appliquer ou expliquer » (comply or explain).</p>
 <div class="retenir"><span class="label">À retenir</span><p>Trois coûts d'agence (surveillance, dédouanement, perte résiduelle) et deux familles de mécanismes (internes / externes) : c'est le squelette de toute question de cours sur la gouvernance.</p></div>
 
 ## Les organes : structures, comités, contrôle légal
 
-<p>Une SA peut adopter une structure <strong>moniste</strong> (conseil d'administration + directeur général, éventuellement PDG cumulant les deux) ou <strong>dualiste</strong> (directoire qui dirige, conseil de surveillance qui contrôle). La dissociation président / directeur général est recommandée par les codes.</p>
-<p>Le <strong>comité d'audit</strong> (obligatoire pour les entités d'intérêt public) suit l'élaboration de l'information financière, l'efficacité du contrôle interne et de la gestion des risques, et l'indépendance des commissaires aux comptes.</p>
-<p>Les <strong>commissaires aux comptes</strong> certifient les comptes (audit légal), avec rotation obligatoire et limitation des services hors audit. La loi <strong>Sapin II</strong> impose un dispositif anticorruption (cartographie des risques, code de conduite, alerte interne) ; la loi sur le <strong>devoir de vigilance</strong> exige un plan couvrant les risques sociaux et environnementaux de la chaîne d'approvisionnement.</p>
+<p>Concrètement, comment s'organise le pouvoir dans une société ? Une SA peut adopter une structure <strong>moniste</strong>, avec un conseil d'administration et un directeur général, éventuellement réunis en un PDG qui cumule les deux fonctions, ou une structure <strong>dualiste</strong>, où un directoire dirige et un conseil de surveillance contrôle. Notons que la dissociation entre président et directeur général est recommandée par les codes.</p>
+<p>Au sein du conseil, le <strong>comité d'audit</strong> (obligatoire pour les entités d'intérêt public) joue un rôle central : il suit l'élaboration de l'information financière, l'efficacité du contrôle interne et de la gestion des risques, ainsi que l'indépendance des commissaires aux comptes.</p>
+<p>Le contrôle légal, lui, est assuré par les <strong>commissaires aux comptes</strong>, qui certifient les comptes (c'est l'audit légal), avec une rotation obligatoire et une limitation des services hors audit. À ce dispositif s'ajoutent deux lois. La loi <strong>Sapin II</strong> impose un dispositif anticorruption (cartographie des risques, code de conduite, alerte interne) ; la loi sur le <strong>devoir de vigilance</strong> exige quant à elle un plan couvrant les risques sociaux et environnementaux de la chaîne d'approvisionnement.</p>
 <div class="retenir"><span class="label">À retenir</span><p>Moniste vs dualiste, rôle du comité d'audit, indépendance des CAC, Sapin II : sais les situer en deux phrases chacun.</p></div>
 
 ## RSE et finance durable : ESG, CSRD, taxonomie
 
-<p>La responsabilité sociétale des entreprises (RSE) s'évalue selon trois piliers <strong>ESG</strong> : environnement (climat, ressources, pollution), social (conditions de travail, diversité, chaîne d'approvisionnement), gouvernance (éthique, transparence, indépendance).</p>
-<p>La directive européenne <strong>CSRD</strong> impose un rapport de durabilité normé (standards <strong>ESRS</strong>), audité, fondé sur la <strong>double matérialité</strong> : l'impact de l'entreprise sur son environnement (matérialité d'impact) et l'impact des enjeux de durabilité sur sa performance financière (matérialité financière).</p>
-<p>La <strong>taxonomie</strong> européenne classe les activités économiques durables selon six objectifs environnementaux ; les entreprises publient la part de leur CA, capex et opex alignés. Les investisseurs utilisent des notations ESG et des fonds « article 8 / article 9 » (règlement SFDR). Le risque de <strong>greenwashing</strong> (communication trompeuse) est désormais sanctionné.</p>
-<div class="retenir"><span class="label">À retenir</span><p>CSRD = quoi publier (ESRS), taxonomie = quelles activités sont vertes, double matérialité = les deux sens de l'impact. Ne pas les confondre à l'examen.</p></div>
+<p>Au-delà de la gouvernance au sens strict, l'entreprise est aussi jugée sur sa responsabilité sociétale (RSE). Celle-ci s'évalue selon trois piliers <strong>ESG</strong> : l'environnement (climat, ressources, pollution), le social (conditions de travail, diversité, chaîne d'approvisionnement) et la gouvernance (éthique, transparence, indépendance).</p>
+<p>Comment cette responsabilité se traduit-elle dans le reporting ? La directive européenne <strong>CSRD</strong> impose un rapport de durabilité normé, selon les standards <strong>ESRS</strong>, et audité. Il repose sur le principe de <strong>double matérialité</strong>, qui regarde l'impact dans les deux sens : l'impact de l'entreprise sur son environnement (c'est la matérialité d'impact) et l'impact des enjeux de durabilité sur sa performance financière (c'est la matérialité financière).</p>
+<p>Reste à savoir quelles activités sont réellement durables. C'est l'objet de la <strong>taxonomie</strong> européenne, qui classe les activités économiques durables selon six objectifs environnementaux ; les entreprises publient alors la part de leur CA, de leur capex et de leur opex alignés. De leur côté, les investisseurs utilisent des notations ESG et des fonds « article 8 / article 9 » (règlement SFDR). Attention enfin au risque de <strong>greenwashing</strong>, c'est-à-dire de communication trompeuse : il est désormais sanctionné.</p>
+<div class="retenir"><span class="label">À retenir</span><p>CSRD = quoi publier (ESRS), taxonomie = quelles activités sont vertes, double matérialité = les deux sens de l'impact. Ne les confonds pas à l'examen.</p></div>
 
 ## Communication financière : obligations et pratiques
 
-<p>Une société cotée doit publier une <strong>information réglementée</strong> sous le contrôle de l'AMF : information <strong>périodique</strong> (rapport financier annuel avec comptes audités, rapport semestriel, et souvent informations trimestrielles) et information <strong>permanente</strong> (toute information privilégiée doit être rendue publique dès que possible, sauf différé justifié).</p>
-<p>Une <strong>information privilégiée</strong> est précise, non publique et susceptible d'influencer le cours : l'utiliser ou la transmettre constitue un délit ou manquement d'initié (règlement Abus de marché). Les « fenêtres négatives » interdisent aux initiés de traiter avant les publications.</p>
-<p>Pratiques : communiqués de résultats, <strong>guidance</strong> (objectifs annoncés) et <strong>profit warning</strong> (avertissement quand la guidance ne sera pas tenue), présentations aux analystes, roadshows, assemblée générale, site investisseurs. Principes : exactitude, précision, sincérité, égalité d'accès à l'information.</p>
-<div class="retenir"><span class="label">À retenir</span><p>Information périodique vs permanente, définition de l'information privilégiée, rôle de l'AMF : les trois points incontournables.</p></div>
+<p>Une société cotée ne communique pas librement : elle doit publier une <strong>information réglementée</strong>, sous le contrôle de l'AMF. Cette information est de deux types. L'information <strong>périodique</strong> revient à intervalles réguliers : rapport financier annuel avec comptes audités, rapport semestriel, et souvent informations trimestrielles. L'information <strong>permanente</strong>, elle, exige que toute information privilégiée soit rendue publique dès que possible, sauf différé justifié.</p>
+<p>Qu'est-ce qu'une <strong>information privilégiée</strong> ? C'est une information qui réunit trois critères : elle est précise, non publique et susceptible d'influencer le cours. L'utiliser ou la transmettre constitue un délit ou un manquement d'initié, au sens du règlement Abus de marché. C'est aussi pourquoi les « fenêtres négatives » interdisent aux initiés de traiter avant les publications.</p>
+<p>En pratique, la communication financière prend plusieurs formes : les communiqués de résultats, la <strong>guidance</strong> (les objectifs annoncés) et le <strong>profit warning</strong> (l'avertissement publié quand la guidance ne sera pas tenue), les présentations aux analystes, les roadshows, l'assemblée générale et le site investisseurs. Toutes obéissent aux mêmes principes : exactitude, précision, sincérité et égalité d'accès à l'information.</p>
+<div class="retenir"><span class="label">À retenir</span><p>Information périodique vs permanente, définition de l'information privilégiée, rôle de l'AMF : ce sont les trois points incontournables.</p></div>
 
 ## Application : construire un reporting de performance
 
-<p>Un bon reporting interne suit la même discipline que la communication financière externe : des chiffres justes, un message clair, des écarts expliqués, des actions engagées. Structure type en quatre temps :</p>
+<p>Terminons par l'application directe à ton poste. Un bon reporting interne suit exactement la même discipline que la communication financière externe : des chiffres justes, un message clair, des écarts expliqués et des actions engagées. Pour y parvenir, adopte une structure type en quatre temps.</p>
 <ol>
-  <li><strong>Contexte</strong> : périmètre, période, faits marquants (un client majeur en litige, un changement d'outil).</li>
-  <li><strong>Chiffres clés</strong> : 3 à 5 indicateurs maximum, en niveau et en tendance — pour le recouvrement : DSO, encours échu total, part > 90 jours, taux de recouvrement du mois, nombre de litiges.</li>
-  <li><strong>Écarts</strong> : par rapport à l'objectif et au mois précédent, avec la cause principale de chaque écart.</li>
-  <li><strong>Actions</strong> : ce qui a été fait, ce qui est prévu, ce qui nécessite une décision (ex. passage en contentieux, provision).</li>
+  <li>Le <strong>contexte</strong> : le périmètre, la période et les faits marquants (par exemple un client majeur en litige, ou un changement d'outil).</li>
+  <li>Les <strong>chiffres clés</strong> : 3 à 5 indicateurs maximum, présentés en niveau et en tendance. Pour le recouvrement, ce sont le DSO, l'encours échu total, la part > 90 jours, le taux de recouvrement du mois et le nombre de litiges.</li>
+  <li>Les <strong>écarts</strong> : par rapport à l'objectif et au mois précédent, en donnant à chaque fois la cause principale de l'écart.</li>
+  <li>Les <strong>actions</strong> : ce qui a été fait, ce qui est prévu, et ce qui nécessite une décision (par exemple un passage en contentieux ou une provision).</li>
 </ol>
-<p>Exemple de message : « Le DSO recule de 58 à 54 jours grâce à la priorisation des 15 plus gros dossiers ; l'encours > 90 jours reste concentré sur trois clients pour lesquels une mise en demeure est proposée. »</p>
+<p>Prenons un exemple de message qui respecte cette logique : « Le DSO recule de 58 à 54 jours grâce à la priorisation des 15 plus gros dossiers ; l'encours > 90 jours reste concentré sur trois clients pour lesquels une mise en demeure est proposée. »</p>
 <div class="retenir"><span class="label">À retenir</span><p>Contexte → chiffres → écarts → actions. Un reporting sans écarts expliqués ni actions n'est qu'un tableau.</p></div>
 
 # Définitions

@@ -11,22 +11,22 @@ couleur: 152
 
 ## L'environnement : VBE, modules, enregistreur
 
-<p>VBA (Visual Basic for Applications) est le langage intégré à Excel. On y accède par l'éditeur <strong>VBE</strong> (Alt + F11). Le code se range dans des <strong>modules</strong> (standard, de feuille, de classeur « ThisWorkbook », de formulaire).</p>
+<p>VBA (Visual Basic for Applications) est le langage de programmation intégré à Excel : c'est lui qui te permet d'automatiser un classeur. Pour y accéder, tu ouvres l'éditeur <strong>VBE</strong> avec le raccourci Alt + F11. Le code que tu écris ne flotte pas n'importe où : il se range dans des <strong>modules</strong>, qui peuvent être de plusieurs natures — module standard, module de feuille, module de classeur (« ThisWorkbook ») ou module de formulaire.</p>
 <ul>
-  <li>L'<strong>enregistreur de macros</strong> traduit vos actions en code : idéal pour découvrir la syntaxe d'une opération (tri, mise en forme), à nettoyer ensuite (supprimer les Select/Activate inutiles).</li>
-  <li>Un classeur contenant des macros doit être enregistré en <strong>.xlsm</strong> ; la sécurité des macros peut bloquer l'exécution (fichiers téléchargés).</li>
-  <li><strong>Option Explicit</strong> en tête de module oblige à déclarer les variables : cela évite 80 % des bugs de faute de frappe.</li>
+  <li>Pour démarrer, l'<strong>enregistreur de macros</strong> est ton meilleur allié : il traduit tes actions en code. C'est idéal pour découvrir la syntaxe d'une opération (un tri, une mise en forme), à condition de nettoyer ensuite le code obtenu, notamment en supprimant les Select/Activate inutiles.</li>
+  <li>Attention au format : un classeur contenant des macros doit être enregistré en <strong>.xlsm</strong>. Et même ainsi, la sécurité des macros peut bloquer l'exécution, en particulier pour les fichiers téléchargés.</li>
+  <li>Enfin, prends l'habitude d'écrire <strong>Option Explicit</strong> en tête de chaque module : cette instruction t'oblige à déclarer tes variables. Pourquoi ? Parce que cela évite 80 % des bugs dus à une simple faute de frappe.</li>
 </ul>
 <div class="formula">Option Explicit
 
 Sub Bonjour()
     MsgBox "Classeur ouvert le " &amp; Format(Date, "dd/mm/yyyy")
 End Sub</div>
-<div class="retenir"><span class="label">À retenir</span><p>Sub = procédure qui agit ; Function = renvoie une valeur (utilisable dans une cellule). Option Explicit toujours.</p></div>
+<div class="retenir"><span class="label">À retenir</span><p>Une Sub est une procédure qui agit ; une Function renvoie une valeur (et s'utilise donc dans une cellule). Et Option Explicit, toujours.</p></div>
 
 ## Le modèle objet : Workbook, Worksheet, Range
 
-<p>Tout en VBA passe par une hiérarchie d'objets : Application → Workbooks → Worksheets → Range/Cells. Un objet a des <strong>propriétés</strong> (Value, Font.Bold, Interior.Color) et des <strong>méthodes</strong> (Copy, Sort, ClearContents).</p>
+<p>En VBA, tout passe par une hiérarchie d'objets : Application → Workbooks → Worksheets → Range/Cells. Autrement dit, l'application contient des classeurs, qui contiennent des feuilles, qui contiennent elles-mêmes des plages et des cellules. Chaque objet possède des <strong>propriétés</strong>, c'est-à-dire des caractéristiques que tu peux lire ou modifier (Value, Font.Bold, Interior.Color), et des <strong>méthodes</strong>, c'est-à-dire des actions qu'il sait exécuter (Copy, Sort, ClearContents).</p>
 <div class="formula">Dim ws As Worksheet
 Set ws = ThisWorkbook.Worksheets("Balance")
 
@@ -39,12 +39,12 @@ With ws.Range("A1:F1")
     .Font.Bold = True
     .Interior.Color = RGB(220, 228, 208)
 End With</div>
-<p>Les <strong>tableaux structurés</strong> (ListObject) sont plus robustes que des plages : <code>ws.ListObjects("tBalance").ListRows.Count</code>, <code>.ListColumns("Montant").DataBodyRange</code>. Toujours qualifier la feuille (ws.Range plutôt que Range) pour éviter d'écrire au mauvais endroit.</p>
-<div class="retenir"><span class="label">À retenir</span><p>Set pour les objets, With…End With pour grouper, End(xlUp) pour trouver la dernière ligne : trois réflexes de base.</p></div>
+<p>Concrètement, dès que tes données sont organisées en <strong>tableaux structurés</strong> (ListObject), préfère-les aux simples plages : ils sont bien plus robustes. Tu écriras par exemple <code>ws.ListObjects("tBalance").ListRows.Count</code> ou <code>.ListColumns("Montant").DataBodyRange</code>. Autre réflexe important : qualifie toujours la feuille (ws.Range plutôt que Range), sinon tu risques d'écrire au mauvais endroit.</p>
+<div class="retenir"><span class="label">À retenir</span><p>Set pour affecter les objets, With…End With pour grouper les instructions, End(xlUp) pour trouver la dernière ligne : ce sont les trois réflexes de base.</p></div>
 
 ## Variables, conditions, boucles, fonctions
 
-<p><strong>Types</strong> : Long (entiers), Double (décimaux), String, Boolean, Date, Variant (à éviter), objets (Range, Worksheet). <strong>Conditions</strong> : If…ElseIf…Else…End If ; Select Case pour plusieurs valeurs.</p>
+<p>Commençons par les <strong>types</strong> de variables : Long pour les entiers, Double pour les décimaux, String, Boolean, Date, Variant (à éviter) et les types objets (Range, Worksheet). Viennent ensuite les <strong>conditions</strong> : la structure If…ElseIf…Else…End If, et Select Case lorsqu'il faut distinguer plusieurs valeurs — c'est bien plus lisible qu'une cascade de If. Prenons un exemple : le classement d'une créance par tranche d'ancienneté.</p>
 <div class="formula">Dim i As Long, anciennete As Long
 For i = 2 To lastRow
     anciennete = Date - ws.Cells(i, "D").Value      ' D = date d'échéance
@@ -55,16 +55,16 @@ Case 31 To 90:  ws.Cells(i, "G").Value = "31-90 j"
 Case Else:      ws.Cells(i, "G").Value = "+90 j"
     End Select
 Next i</div>
-<p><strong>Boucles</strong> : For…Next (nombre connu), For Each (collection : chaque feuille, chaque cellule), Do While / Do Until (condition). <strong>Fonctions personnalisées</strong> :</p>
+<p>Passons aux <strong>boucles</strong>. Tu en as trois familles : For…Next quand le nombre d'itérations est connu, For Each pour parcourir une collection (chaque feuille, chaque cellule), et Do While / Do Until quand la répétition dépend d'une condition. Pour finir, VBA te permet d'écrire tes propres <strong>fonctions personnalisées</strong>, utilisables directement dans une cellule :</p>
 <div class="formula">Function ScoreRelance(montant As Double, jours As Long) As Double
     ScoreRelance = montant * (1 + jours / 30)
 End Function
 ' Dans une cellule : =ScoreRelance(E2; F2)</div>
-<div class="retenir"><span class="label">À retenir</span><p>For pour parcourir des lignes, Select Case pour classer, Function pour un calcul réutilisable dans les cellules.</p></div>
+<div class="retenir"><span class="label">À retenir</span><p>For pour parcourir des lignes, Select Case pour classer une valeur, Function pour un calcul réutilisable dans les cellules.</p></div>
 
 ## Interaction, erreurs, événements, performance
 
-<p><strong>Dialogue</strong> : MsgBox (message, choix Oui/Non), InputBox (saisie), UserForm (formulaire complet). <strong>Erreurs</strong> : sans traitement, une erreur arrête la macro ; on encadre les zones à risque.</p>
+<p>Une macro a souvent besoin de <strong>dialoguer</strong> avec l'utilisateur. Pour cela, tu disposes de MsgBox (afficher un message, proposer un choix Oui/Non), d'InputBox (demander une saisie) et du UserForm (un formulaire complet). Vient ensuite la question des <strong>erreurs</strong> : sans traitement, la moindre erreur arrête la macro net. C'est pourquoi on encadre les zones à risque avec un gestionnaire d'erreurs, comme ici :</p>
 <div class="formula">Sub Exporter()
     On Error GoTo Gestion
     Application.ScreenUpdating = False     ' plus rapide
@@ -76,26 +76,26 @@ Gestion:
     MsgBox "Erreur " &amp; Err.Number &amp; " : " &amp; Err.Description
     Resume Sortie
 End Sub</div>
-<p><strong>Événements</strong> : du code qui se déclenche tout seul. Dans ThisWorkbook : <code>Workbook_Open</code> (à l'ouverture) ; dans le module d'une feuille : <code>Worksheet_Change(ByVal Target As Range)</code> (à chaque modification — utile pour horodater une saisie de relance).</p>
-<p><strong>Performance</strong> : désactiver ScreenUpdating et le calcul automatique pendant le traitement, lire une plage dans un tableau (Variant) plutôt que cellule par cellule, éviter Select/Activate.</p>
-<div class="retenir"><span class="label">À retenir</span><p>On Error GoTo + Resume, ScreenUpdating False/True, événements Open et Change : ce qui distingue une macro « qui marche » d'une macro fiable.</p></div>
+<p>Les <strong>événements</strong>, ce sont des morceaux de code qui se déclenchent tout seuls, en réaction à une action. Dans ThisWorkbook, <code>Workbook_Open</code> s'exécute à l'ouverture du classeur ; dans le module d'une feuille, <code>Worksheet_Change(ByVal Target As Range)</code> s'exécute à chaque modification — très utile, par exemple, pour horodater une saisie de relance.</p>
+<p>Enfin, un mot sur la <strong>performance</strong>. Quelques réflexes suffisent : désactiver ScreenUpdating et le calcul automatique pendant le traitement, lire une plage entière dans un tableau (Variant) plutôt que cellule par cellule, et éviter Select/Activate.</p>
+<div class="retenir"><span class="label">À retenir</span><p>On Error GoTo + Resume, ScreenUpdating False/True, événements Open et Change : voilà ce qui distingue une macro « qui marche » d'une macro fiable.</p></div>
 
 ## Coder ou ne pas coder : formules modernes et Power Query
 
-<p>Avant d'écrire une macro, vérifier si Excel sait déjà le faire :</p>
+<p>Avant d'écrire une macro, pose-toi toujours la question : Excel ne sait-il pas déjà le faire ? Bien souvent, la réponse est oui.</p>
 <dl>
-  <dt>XLOOKUP / RECHERCHEX</dt><dd>remplace RECHERCHEV : =RECHERCHEX(clé ; plage_clés ; plage_résultats ; "non trouvé"). Pas de numéro de colonne, gestion de l'absence.</dd>
-  <dt>FILTER / FILTRE, SORT / TRIER, UNIQUE</dt><dd>formules dynamiques : =TRIER(FILTRE(tBalance ; tBalance[Retard]&gt;90) ; 5 ; -1) donne la liste triée des créances > 90 jours, mise à jour automatiquement.</dd>
-  <dt>SUMIFS / SOMME.SI.ENS, COUNTIFS</dt><dd>totaux par tranche d'ancienneté ou par agent, sans macro.</dd>
-  <dt>LET, LAMBDA</dt><dd>nommer des étapes intermédiaires, créer ses fonctions sans VBA.</dd>
-  <dt>Power Query</dt><dd>importer et transformer des données (fusion de fichiers mensuels, nettoyage, jointures) de façon rejouable en un clic : Données → Obtenir des données. Le bon outil pour consolider des exports de l'ERP.</dd>
+  <dt>XLOOKUP / RECHERCHEX</dt><dd>remplace avantageusement RECHERCHEV : =RECHERCHEX(clé ; plage_clés ; plage_résultats ; "non trouvé"). Plus besoin de numéro de colonne, et l'absence de résultat est gérée directement.</dd>
+  <dt>FILTER / FILTRE, SORT / TRIER, UNIQUE</dt><dd>ce sont les formules dynamiques. Par exemple, =TRIER(FILTRE(tBalance ; tBalance[Retard]&gt;90) ; 5 ; -1) donne la liste triée des créances > 90 jours, mise à jour automatiquement.</dd>
+  <dt>SUMIFS / SOMME.SI.ENS, COUNTIFS</dt><dd>pour obtenir des totaux par tranche d'ancienneté ou par agent, sans la moindre macro.</dd>
+  <dt>LET, LAMBDA</dt><dd>pour nommer des étapes intermédiaires de calcul et créer tes propres fonctions, sans passer par VBA.</dd>
+  <dt>Power Query</dt><dd>pour importer et transformer des données (fusion de fichiers mensuels, nettoyage, jointures) de façon rejouable en un clic, via Données → Obtenir des données. C'est le bon outil pour consolider des exports de l'ERP.</dd>
 </dl>
-<p>Règle pratique : transformation de données → Power Query ; calcul et restitution → formules dynamiques et tableaux structurés ; actions répétitives (mise en forme, export, envoi, génération de rapport) → VBA.</p>
-<div class="retenir"><span class="label">À retenir</span><p>Un VLOOKUP vers un fichier externe casse ; Power Query + tableau structuré + RECHERCHEX ne cassent pas. C'est la modernisation type d'un classeur de suivi.</p></div>
+<p>D'où une règle pratique simple : s'il s'agit de transformer des données, c'est Power Query ; s'il s'agit de calculer et de restituer, ce sont les formules dynamiques et les tableaux structurés ; et s'il s'agit d'actions répétitives (mise en forme, export, envoi, génération de rapport), c'est là que VBA prend tout son sens.</p>
+<div class="retenir"><span class="label">À retenir</span><p>Un VLOOKUP vers un fichier externe casse ; Power Query + tableau structuré + RECHERCHEX, eux, ne cassent pas. C'est la modernisation type d'un classeur de suivi.</p></div>
 
 ## Application : générer un TOP 15 automatiquement
 
-<p>Objectif : à l'ouverture du classeur, trier la balance par score décroissant et copier les 15 premières lignes dans la feuille Synthèse, avec horodatage.</p>
+<p>Prenons un cas concret. L'objectif : à l'ouverture du classeur, trier la balance par score décroissant, puis copier les 15 premières lignes dans la feuille Synthèse, en ajoutant un horodatage. Voici la macro complète, à lire ligne par ligne.</p>
 <div class="formula">Sub GenererTop15()
     Dim wsB As Worksheet, wsS As Worksheet
     Set wsB = ThisWorkbook.Worksheets("Balance")
@@ -125,8 +125,8 @@ End Sub
 Private Sub Workbook_Open()
     GenererTop15
 End Sub</div>
-<p>Variante sans VBA : dans Synthèse, <code>=PRENDRE(TRIER(tBalance ; 8 ; -1) ; 15)</code> donne le même TOP 15, recalculé en permanence.</p>
-<div class="retenir"><span class="label">À retenir</span><p>Une macro utile = trouver la dernière ligne, trier, copier en valeurs, horodater. Sais la lire ligne par ligne, c'est un sujet d'examen classique.</p></div>
+<p>Il existe d'ailleurs une variante sans VBA : dans la feuille Synthèse, la formule <code>=PRENDRE(TRIER(tBalance ; 8 ; -1) ; 15)</code> donne exactement le même TOP 15, recalculé en permanence.</p>
+<div class="retenir"><span class="label">À retenir</span><p>Une macro utile, c'est : trouver la dernière ligne, trier, copier en valeurs, horodater. Sais la lire ligne par ligne, c'est un sujet d'examen classique.</p></div>
 
 # Définitions
 

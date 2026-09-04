@@ -11,70 +11,70 @@ couleur: 24
 
 ## Le cycle de financement d'une startup
 
-<p>Une startup se finance par étapes successives, chacune correspondant à un niveau de maturité et à un type d'investisseur :</p>
+<p>Une startup ne se finance pas d'un seul coup : elle lève des fonds par étapes successives, et chaque étape correspond à la fois à un niveau de maturité de l'entreprise et à un type d'investisseur. Voici ces étapes dans l'ordre où elles se présentent :</p>
 <dl>
-  <dt>Love money</dt><dd>apports des fondateurs, famille et proches — petits montants, quasi sans négociation.</dd>
-  <dt>Business angels</dt><dd>particuliers fortunés investissant leur propre argent (50 k€ à 500 k€ typiquement), souvent avec un accompagnement.</dd>
-  <dt>Amorçage (seed)</dt><dd>premier tour structuré avec des fonds spécialisés, pour valider le produit et les premiers clients.</dd>
-  <dt>Séries A, B, C…</dt><dd>tours successifs de plus en plus gros pour accélérer (produit, commercial, international). Chaque tour est mené par un « lead investor ».</dd>
-  <dt>Sortie (exit)</dt><dd>introduction en bourse (IPO) ou cession à un industriel (trade sale) ou à un autre fonds (secondary) : c'est là que les investisseurs réalisent leur plus-value.</dd>
+  <dt>Love money</dt><dd>ce sont les apports des fondateurs, de leur famille et de leurs proches — de petits montants, quasi sans négociation.</dd>
+  <dt>Business angels</dt><dd>des particuliers fortunés qui investissent leur propre argent (50 k€ à 500 k€ typiquement), et qui apportent souvent un accompagnement en plus des fonds.</dd>
+  <dt>Amorçage (seed)</dt><dd>c'est le premier tour structuré, réalisé avec des fonds spécialisés, dont l'objectif est de valider le produit et de décrocher les premiers clients.</dd>
+  <dt>Séries A, B, C…</dt><dd>des tours successifs, de plus en plus gros, destinés à accélérer (produit, commercial, international). Chaque tour est mené par un « lead investor ».</dd>
+  <dt>Sortie (exit)</dt><dd>introduction en bourse (IPO), cession à un industriel (trade sale) ou à un autre fonds (secondary) : c'est à ce moment-là que les investisseurs réalisent leur plus-value.</dd>
 </dl>
-<p>À chaque tour, l'entreprise émet de nouvelles actions : les actionnaires existants sont <strong>dilués</strong>. La table de capitalisation (cap table) suit la répartition du capital tour après tour.</p>
-<div class="retenir"><span class="label">À retenir</span><p>Post-money = Pre-money + montant levé. La part de l'investisseur = montant levé ÷ post-money. Tout le reste (dilution, cap table) découle de ces deux égalités.</p></div>
+<p>Un mécanisme est à bien comprendre dès maintenant : à chaque tour, l'entreprise émet de nouvelles actions. Concrètement, les actionnaires existants sont <strong>dilués</strong>, c'est-à-dire que leur pourcentage du capital baisse. Pour suivre cette répartition du capital tour après tour, on tient une table de capitalisation (cap table).</p>
+<div class="retenir"><span class="label">À retenir</span><p>Post-money = Pre-money + montant levé, et part de l'investisseur = montant levé ÷ post-money. Tout le reste (dilution, cap table) découle de ces deux égalités.</p></div>
 
 ## Les acteurs du capital-risque
 
-<p>Un fonds de capital-risque (venture capital, VC) est en général structuré en deux niveaux : les <strong>LP</strong> (limited partners : institutionnels, family offices, assureurs) apportent l'argent ; les <strong>GP</strong> (general partners : l'équipe de gestion) sélectionnent et accompagnent les participations.</p>
+<p>Un fonds de capital-risque (venture capital, VC) est en général structuré en deux niveaux. D'un côté, les <strong>LP</strong> (limited partners : institutionnels, family offices, assureurs) apportent l'argent ; de l'autre, les <strong>GP</strong> (general partners : l'équipe de gestion) sélectionnent les participations et les accompagnent. Trois caractéristiques structurent le fonctionnement d'un tel fonds :</p>
 <ul>
-  <li>Durée de vie du fonds : environ 10 ans (5 ans d'investissement, 5 ans de gestion et sortie).</li>
-  <li>Rémunération des GP : frais de gestion (~2 % par an des montants engagés) et « carried interest » (~20 % de la plus-value au-delà d'un rendement minimum, le « hurdle rate »).</li>
-  <li>Logique de portefeuille : sur 10 participations, quelques-unes échouent, la plupart rendent à peine la mise, une ou deux font le rendement du fonds (« power law »).</li>
+  <li>Sa durée de vie est d'environ 10 ans : 5 ans pour investir, puis 5 ans pour gérer les participations et organiser les sorties.</li>
+  <li>Les GP sont rémunérés de deux façons : des frais de gestion (~2 % par an des montants engagés) et un « carried interest » (~20 % de la plus-value au-delà d'un rendement minimum, le « hurdle rate »).</li>
+  <li>Le fonds raisonne en logique de portefeuille : sur 10 participations, quelques-unes échouent, la plupart rendent à peine la mise, et une ou deux font à elles seules le rendement du fonds. C'est ce qu'on appelle la « power law ».</li>
 </ul>
-<p>Autres acteurs : corporate venture (fonds d'un grand groupe, logique stratégique), Bpifrance (financement public, prêts d'amorçage, co-investissement), accélérateurs et incubateurs (accompagnement contre une petite part du capital).</p>
-<div class="retenir"><span class="label">À retenir</span><p>Le VC exige un rendement élevé (TRI cible 25-35 %) parce qu'il finance des actifs illiquides, risqués, et que quelques réussites doivent compenser de nombreux échecs.</p></div>
+<p>Le VC n'est pas le seul acteur du financement des startups. On trouve aussi le corporate venture (le fonds d'un grand groupe, qui suit une logique stratégique), Bpifrance (financement public : prêts d'amorçage, co-investissement), ainsi que les accélérateurs et incubateurs, qui offrent un accompagnement contre une petite part du capital.</p>
+<div class="retenir"><span class="label">À retenir</span><p>Le VC exige un rendement élevé (TRI cible 25-35 %). Pourquoi ? Parce qu'il finance des actifs illiquides et risqués, et que quelques réussites doivent compenser de nombreux échecs.</p></div>
 
 ## Les instruments et les clauses du pacte
 
-<p>Les investisseurs n'achètent presque jamais des actions ordinaires « nues ». Ils négocient des <strong>actions de préférence</strong> assorties de droits spécifiques, et parfois des instruments intermédiaires :</p>
+<p>Les investisseurs n'achètent presque jamais des actions ordinaires « nues ». Ils négocient des <strong>actions de préférence</strong>, c'est-à-dire des actions assorties de droits spécifiques, et ils utilisent parfois des instruments intermédiaires qui permettent d'apporter l'argent sans fixer tout de suite la valorisation :</p>
 <dl>
-  <dt>BSA-AIR</dt><dd>bon de souscription « accord d'investissement rapide » : l'investisseur apporte les fonds maintenant, la valorisation sera fixée au tour suivant avec une décote et souvent un plafond (cap).</dd>
-  <dt>Obligation convertible</dt><dd>dette qui se convertit en actions au tour suivant, à des conditions négociées (décote, cap).</dd>
+  <dt>BSA-AIR</dt><dd>bon de souscription « accord d'investissement rapide » : l'investisseur apporte les fonds maintenant, et la valorisation sera fixée au tour suivant, avec une décote et souvent un plafond (cap).</dd>
+  <dt>Obligation convertible</dt><dd>une dette qui se convertit en actions au tour suivant, à des conditions négociées à l'avance (décote, cap).</dd>
 </dl>
-<p>Clauses fréquentes du pacte d'actionnaires :</p>
+<p>Au-delà des instruments, ce sont les clauses du pacte d'actionnaires qui définissent réellement les droits de chacun. Voici les plus fréquentes :</p>
 <ul>
-  <li><strong>Préférence de liquidation</strong> : en cas de sortie, l'investisseur récupère d'abord sa mise (1x, parfois plus), avant le partage avec les autres.</li>
-  <li><strong>Anti-dilution</strong> : si un tour suivant se fait à une valorisation plus basse (down round), l'investisseur reçoit des actions supplémentaires (« full ratchet » — le plus dur — ou « weighted average »).</li>
-  <li><strong>Drag-along / tag-along</strong> : obligation de suivre une cession majoritaire / droit de vendre aux mêmes conditions.</li>
-  <li><strong>Vesting</strong> des fondateurs : leurs actions se « libèrent » progressivement (souvent 4 ans, avec un « cliff » d'un an) ; en cas de départ, clauses de good/bad leaver.</li>
+  <li><strong>Préférence de liquidation</strong> : en cas de sortie, l'investisseur récupère d'abord sa mise (1x, parfois plus), et c'est seulement ensuite que le reste est partagé avec les autres actionnaires.</li>
+  <li><strong>Anti-dilution</strong> : si un tour suivant se fait à une valorisation plus basse (down round), l'investisseur reçoit des actions supplémentaires pour compenser. Deux variantes existent : le « full ratchet », qui est le plus dur pour les fondateurs, et le « weighted average ».</li>
+  <li><strong>Drag-along / tag-along</strong> : le drag-along est l'obligation de suivre une cession majoritaire ; le tag-along est le droit de vendre aux mêmes conditions.</li>
+  <li><strong>Vesting</strong> des fondateurs : leurs actions se « libèrent » progressivement dans le temps (souvent sur 4 ans, avec un « cliff » d'un an). En cas de départ, ce sont les clauses de good/bad leaver qui s'appliquent.</li>
 </ul>
 <div class="retenir"><span class="label">À retenir</span><p>La valorisation affichée d'un tour ne dit pas tout : la préférence de liquidation et l'anti-dilution changent radicalement ce que les fondateurs touchent réellement à la sortie.</p></div>
 
 ## Valoriser une startup et suivre ses métriques
 
-<p>Sans historique de résultats, le DCF est peu fiable. On utilise des méthodes qui partent de la sortie espérée ou de comparables :</p>
+<p>Comment valoriser une entreprise qui n'a pas encore d'historique de résultats ? Dans cette situation, le DCF est peu fiable. On lui préfère donc des méthodes qui partent de la sortie espérée ou de comparables :</p>
 <dl>
-  <dt>VC method</dt><dd>on estime la valeur de sortie dans n années, on l'actualise au TRI exigé (ou on la divise par le multiple visé) : cela donne la valorisation post-money acceptable aujourd'hui.</dd>
-  <dt>Multiples</dt><dd>valorisation = multiple × ARR (revenu annuel récurrent) pour les SaaS, ou × GMV, × utilisateurs selon le secteur.</dd>
-  <dt>Berkus / Scorecard</dt><dd>méthodes qualitatives pour l'amorçage : on attribue une valeur à chaque facteur (équipe, produit, marché, traction).</dd>
+  <dt>VC method</dt><dd>on estime la valeur de sortie dans n années, puis on la ramène à aujourd'hui en l'actualisant au TRI exigé (ou en la divisant par le multiple visé) : le résultat est la valorisation post-money acceptable aujourd'hui.</dd>
+  <dt>Multiples</dt><dd>la valorisation = un multiple × l'ARR (revenu annuel récurrent) pour les SaaS ; selon le secteur, on applique plutôt un multiple à la GMV ou au nombre d'utilisateurs.</dd>
+  <dt>Berkus / Scorecard</dt><dd>des méthodes qualitatives adaptées à l'amorçage : on attribue une valeur à chaque facteur (équipe, produit, marché, traction).</dd>
 </dl>
-<p>Métriques suivies par les investisseurs :</p>
+<p>Une fois entrés au capital, les investisseurs suivent la startup à travers quelques métriques clés :</p>
 <ul>
-  <li><strong>Burn rate</strong> : trésorerie consommée par mois ; <strong>runway</strong> : nombre de mois avant la panne sèche.</li>
-  <li><strong>CAC</strong> (coût d'acquisition client) et <strong>LTV</strong> (valeur vie client) : on vise LTV/CAC &gt; 3.</li>
-  <li><strong>Churn</strong> : taux de perte de clients ; <strong>MRR/ARR</strong> : revenu récurrent mensuel/annuel.</li>
+  <li><strong>Burn rate</strong> : la trésorerie consommée chaque mois ; <strong>runway</strong> : le nombre de mois qui restent avant la panne sèche.</li>
+  <li><strong>CAC</strong> (coût d'acquisition client) et <strong>LTV</strong> (valeur vie client) : autrement dit, ce que coûte un client à acquérir face à ce qu'il rapporte sur sa durée de vie. On vise LTV/CAC &gt; 3.</li>
+  <li><strong>Churn</strong> : le taux de perte de clients ; <strong>MRR/ARR</strong> : le revenu récurrent mensuel/annuel.</li>
 </ul>
-<div class="retenir"><span class="label">À retenir</span><p>Runway = trésorerie ÷ burn rate mensuel. Une startup lève en général 12 à 18 mois de runway, et commence le tour suivant 6 mois avant la fin.</p></div>
+<div class="retenir"><span class="label">À retenir</span><p>Runway = trésorerie ÷ burn rate mensuel. En général, une startup lève de quoi tenir 12 à 18 mois de runway, et elle commence le tour suivant 6 mois avant la fin.</p></div>
 
 ## Application : lire un term sheet de série A
 
-<p>Exemple : une startup a 1 000 000 d'actions détenues par les fondateurs. Un fonds propose 2 M€ sur une valorisation pre-money de 6 M€.</p>
+<p>Prenons un exemple concret. Une startup a 1 000 000 d'actions, toutes détenues par les fondateurs. Un fonds propose d'investir 2 M€ sur une valorisation pre-money de 6 M€. Déroulons le calcul :</p>
 <ul>
-  <li>Post-money = 6 + 2 = 8 M€. Part du fonds = 2 ÷ 8 = 25 %.</li>
-  <li>Prix par action = 6 M€ ÷ 1 000 000 = 6 €. Actions émises = 2 M€ ÷ 6 € ≈ 333 333.</li>
-  <li>Les fondateurs passent de 100 % à 1 000 000 ÷ 1 333 333 = 75 %.</li>
-  <li>Si le term sheet prévoit un pool d'options (BSPCE) de 10 % post-money créé <em>avant</em> l'entrée du fonds, la dilution est supportée par les fondateurs seuls : ils tombent à 65 %.</li>
+  <li>D'abord la post-money : 6 + 2 = 8 M€. La part du fonds est donc de 2 ÷ 8 = 25 %.</li>
+  <li>Ensuite le prix par action : 6 M€ ÷ 1 000 000 = 6 €. Le fonds reçoit donc 2 M€ ÷ 6 € ≈ 333 333 actions nouvelles.</li>
+  <li>Les fondateurs, eux, passent de 100 % à 1 000 000 ÷ 1 333 333 = 75 %.</li>
+  <li>Attention au détail qui change tout : si le term sheet prévoit un pool d'options (BSPCE) de 10 % post-money créé <em>avant</em> l'entrée du fonds, cette dilution est supportée par les fondateurs seuls, et ils tombent à 65 %.</li>
 </ul>
-<p>Points à vérifier dans un term sheet : valorisation pre/post et traitement du pool d'options, préférence de liquidation (1x non participante est le standard « équilibré »), anti-dilution (weighted average plutôt que full ratchet), gouvernance (siège au board, droits de veto), clauses de sortie.</p>
+<p>Cet exemple montre qu'un term sheet se lit ligne par ligne. Les points à vérifier sont : la valorisation pre/post et le traitement du pool d'options, la préférence de liquidation (1x non participante est le standard « équilibré »), l'anti-dilution (weighted average plutôt que full ratchet), la gouvernance (siège au board, droits de veto) et les clauses de sortie.</p>
 <div class="retenir"><span class="label">À retenir</span><p>Sais refaire ce calcul en 4 lignes (post-money, %, prix par action, actions émises) — c'est l'exercice type de ce module.</p></div>
 
 # Définitions
