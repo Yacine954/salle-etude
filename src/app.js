@@ -582,7 +582,7 @@ function startApp() {
 
   function renderNotes(m) {
     if (!m.notes) {
-      return '<div class="notes-empty"><p>Pas encore de notes pour ce module.</p><p>Pour en ajouter : ouvre le fichier du module dans <code>content/modules/</code>, écris sous la section <code># Notes</code>, puis relance <code>npm run build</code>.</p></div>';
+            return '<div class="notes-empty"><p>Pas encore de notes pour ce module.</p><p>Des notes de synthèse seront ajoutées au fil de l\'année.</p></div>';
     }
     return '<article class="lesson"><div class="lesson-body notes">' + m.notes + '</div></article>';
   }
