@@ -11,7 +11,7 @@
     "build": "node build.js",
     "watch": "node build.js --watch",
     "start": "node build.js && electron .",
-    "package": "node build.js && electron-packager . \"Salle d'etude\" --platform=win32 --arch=x64 --out=release --overwrite --asar --tmpdir=false --icon=electron/icon.ico --ignore=\"^/(node_modules|release|content|src|tools|README.md|build.js|.gitignore|.git)\"",
+    "package": "node tools/package.js",
     "icon": "electron tools/make-icon.js"
   },
   "devDependencies": {
