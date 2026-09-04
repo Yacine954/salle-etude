@@ -176,6 +176,17 @@ function readLogo() {
   return null;
 }
 
+// Dans le CSS, url("assets/x.svg") devient une image intégrée (lue dans src/assets/).
+function inlineAssets(css) {
+  var mime = { svg: "image/svg+xml", png: "image/png", jpg: "image/jpeg", jpeg: "image/jpeg", webp: "image/webp", gif: "image/gif" };
+  return css.replace(/url\("assets\/([^"]+)"\)/g, function (_, name) {
+    var file = path.join(SRC, "assets", name);
+    if (!fs.existsSync(file)) { console.warn("  ⚠ image introuvable : src/assets/" + name); return "none"; }
+    var ext = name.split(".").pop().toLowerCase();
+    return 'url("data:' + (mime[ext] || "application/octet-stream") + ";base64," + fs.readFileSync(file).toString("base64") + '")';
+  });
+}
+
 /* ---------- assemblage ---------- */
 
 function build() {
@@ -190,7 +201,7 @@ function build() {
   modules.forEach(function (m) { if (ids[m.id]) console.warn("  ⚠ id en double : " + m.id); ids[m.id] = true; });
 
   var template = fs.readFileSync(path.join(SRC, "template.html"), "utf8");
-  var style = fs.readFileSync(path.join(SRC, "style.css"), "utf8");
+  var style = inlineAssets(fs.readFileSync(path.join(SRC, "style.css"), "utf8"));
   var app = fs.readFileSync(path.join(SRC, "app.js"), "utf8");
   var data = "var MODULES = " + JSON.stringify(modules) + ";\nvar CONFIG = " + JSON.stringify(config) + ";";
   data = data.replace(/<\//g, "<\\/"); // jamais de </script> accidentel dans les données

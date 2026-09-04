@@ -124,6 +124,12 @@ Tout est dans `src/style.css`. Les couleurs, la teinte d'accent et les ombres so
 
 Les textes de l'accueil, le titre de l'application et les noms des semestres sont dans `content/config.json`.
 
+### L'ambiance lofi
+
+Le fond « lofi » (ciel de fin de journée, skyline avec fenêtres allumées, étoiles qui scintillent la nuit, léger grain) se règle dans `content/config.json` : `"ambiance": "lofi"` pour l'activer par défaut, `"neutre"` pour le fond uni. Chaque personne peut ensuite l'activer ou le couper avec le bouton « Ambiance lofi » en bas du menu ; son choix est mémorisé sur son appareil.
+
+Les dessins sont dans `src/assets/` (`skyline-night.svg`, `skyline-day.svg`, `grain.svg`) et les couleurs du ciel dans `src/style.css`, variables `--lofi-…` (un jeu pour le jour, un pour la nuit). Pour une autre image de fond, dépose-la dans `src/assets/` et référence-la dans le CSS avec `url("assets/mon-image.jpg")` : le script l'intègre à la page.
+
 ### Le logo
 
 - **Sans image** : la pastille de la barre latérale affiche un sigle, réglable avec `"sigle": "SÉ"` dans `content/config.json`.

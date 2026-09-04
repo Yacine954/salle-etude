@@ -19,6 +19,14 @@
   --soft-l: 91%;
   --soft2-l: 96%;
   --wm-a: 0.10;
+  /* Ambiance lofi (jour) */
+  --lofi-sky: linear-gradient(180deg, #c7d8ec 0%, #e5dbe9 42%, #f6d7c0 76%, #f4e6d6 100%);
+  --lofi-glow: radial-gradient(55% 38% at 75% 100%, rgba(255, 186, 110, 0.5), transparent 70%);
+  --lofi-skyline: url("assets/skyline-day.svg");
+  --lofi-stars: 0;
+  --lofi-elev: rgba(255, 255, 255, 0.76);
+  --lofi-bg: rgba(255, 255, 255, 0.42);
+  --lofi-sunk: rgba(214, 218, 214, 0.65);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -42,6 +50,14 @@
     --soft-l: 17%;
     --soft2-l: 12%;
     --wm-a: 0.14;
+    /* Ambiance lofi (nuit) */
+    --lofi-sky: linear-gradient(180deg, #0b0a18 0%, #1f1838 38%, #48294f 68%, #9c4b3a 100%);
+    --lofi-glow: radial-gradient(55% 38% at 70% 100%, rgba(255, 140, 80, 0.38), transparent 70%);
+    --lofi-skyline: url("assets/skyline-night.svg");
+    --lofi-stars: 1;
+    --lofi-elev: rgba(21, 25, 29, 0.74);
+    --lofi-bg: rgba(12, 14, 18, 0.45);
+    --lofi-sunk: rgba(6, 8, 10, 0.6);
   }
 }
 
@@ -65,6 +81,14 @@
   --soft-l: 17%;
   --soft2-l: 12%;
   --wm-a: 0.14;
+  /* Ambiance lofi (nuit) */
+  --lofi-sky: linear-gradient(180deg, #0b0a18 0%, #1f1838 38%, #48294f 68%, #9c4b3a 100%);
+  --lofi-glow: radial-gradient(55% 38% at 70% 100%, rgba(255, 140, 80, 0.38), transparent 70%);
+  --lofi-skyline: url("assets/skyline-night.svg");
+  --lofi-stars: 1;
+  --lofi-elev: rgba(21, 25, 29, 0.74);
+  --lofi-bg: rgba(12, 14, 18, 0.45);
+  --lofi-sunk: rgba(6, 8, 10, 0.6);
 }
 
 /* Accent derived from the current module hue */
@@ -392,6 +416,64 @@ h1, h2, h3, h4 { font-family: "Bricolage Grotesque", "Public Sans", system-ui, s
 .ptitle p { color: var(--ink-2); margin: 0.5rem 0 0; max-width: 60ch; }
 
 .foot { margin-top: 3rem; padding-top: 1.2rem; border-top: 1px solid var(--line); color: var(--ink-3); font-size: 0.8rem; display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; align-items: center; }
+
+/* ---------- Ambiance lofi ---------- */
+body.ambiance-lofi {
+  --bg-elev: var(--lofi-elev);
+  --bg: var(--lofi-bg);
+  --bg-sunk: var(--lofi-sunk);
+  background: var(--lofi-sky) fixed;
+}
+body.ambiance-lofi::before, body.ambiance-lofi::after {
+  content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+}
+/* Ciel, lueur chaude, skyline et premières étoiles */
+body.ambiance-lofi::before {
+  background:
+    radial-gradient(1.6px 1.6px at 8% 12%, #fff 100%, transparent),
+    radial-gradient(1.2px 1.2px at 21% 28%, #fff 100%, transparent),
+    radial-gradient(1.8px 1.8px at 33% 9%, #fff 100%, transparent),
+    radial-gradient(1.2px 1.2px at 47% 22%, #fff 100%, transparent),
+    radial-gradient(1.5px 1.5px at 58% 6%, #fff 100%, transparent),
+    radial-gradient(1.2px 1.2px at 69% 31%, #fff 100%, transparent),
+    radial-gradient(1.7px 1.7px at 81% 14%, #fff 100%, transparent),
+    radial-gradient(1.2px 1.2px at 92% 26%, #fff 100%, transparent),
+    radial-gradient(1.4px 1.4px at 75% 40%, #fff 100%, transparent),
+    radial-gradient(1.2px 1.2px at 14% 44%, #fff 100%, transparent),
+    var(--lofi-skyline) center bottom / auto 240px repeat-x,
+    var(--lofi-glow),
+    var(--lofi-sky);
+}
+/* Deuxième couche d'étoiles, qui scintille (invisible de jour) */
+body.ambiance-lofi::after {
+  background:
+    radial-gradient(1.3px 1.3px at 27% 17%, #fff 100%, transparent),
+    radial-gradient(1.8px 1.8px at 40% 35%, #fff 100%, transparent),
+    radial-gradient(1.2px 1.2px at 52% 13%, #fff 100%, transparent),
+    radial-gradient(1.5px 1.5px at 64% 21%, #fff 100%, transparent),
+    radial-gradient(1.2px 1.2px at 86% 8%, #fff 100%, transparent),
+    radial-gradient(1.6px 1.6px at 95% 38%, #fff 100%, transparent),
+    radial-gradient(1.2px 1.2px at 5% 30%, #fff 100%, transparent),
+    radial-gradient(1.4px 1.4px at 44% 3%, #fff 100%, transparent);
+  opacity: calc(var(--lofi-stars) * 0.9);
+  animation: lofi-twinkle 6s ease-in-out infinite alternate;
+}
+@keyframes lofi-twinkle {
+  from { opacity: calc(var(--lofi-stars) * 0.25); }
+  to   { opacity: calc(var(--lofi-stars) * 0.95); }
+}
+/* Grain très léger par-dessus tout */
+.ambiance-lofi .app::after {
+  content: ""; position: fixed; inset: 0; z-index: 60; pointer-events: none; opacity: 0.07;
+  background: url("assets/grain.svg") repeat; mix-blend-mode: multiply;
+}
+/* Les panneaux laissent deviner la scène */
+.ambiance-lofi .sidebar, .ambiance-lofi .topbar, .ambiance-lofi .mcard, .ambiance-lofi .lesson, .ambiance-lofi .fc,
+.ambiance-lofi .qq, .ambiance-lofi .ex, .ambiance-lofi .hit, .ambiance-lofi .qbar, .ambiance-lofi .notes-empty {
+  backdrop-filter: blur(16px) saturate(1.15); -webkit-backdrop-filter: blur(16px) saturate(1.15);
+}
+.ambiance-lofi .sidebar { border-right-color: transparent; }
+.ambiance-lofi .home-hero h1, .ambiance-lofi .ptitle h1 { text-shadow: 0 1px 0 var(--bg-elev); }
 
 /* ---------- Responsive ---------- */
 @media (max-width: 900px) {
