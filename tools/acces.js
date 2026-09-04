@@ -89,6 +89,11 @@ function readContentKey(create) {
   return key;
 }
 
+// Adresse publique du site (config.json, clé « site »), pour fabriquer le lien direct.
+function siteUrl() {
+  try { const c = JSON.parse(fs.readFileSync(path.join(ROOT, "content", "config.json"), "utf8")); return c.site ? String(c.site).replace(/\/?$/, "/") : ""; } catch (e) { return ""; }
+}
+
 function findCode(acces, name) {
   const key = String(name || "").toLowerCase();
   return acces.codes.filter((c) => c.nom.toLowerCase() === key)[0];
@@ -108,7 +113,8 @@ function addCode(opts) {
   acces.codes.push(entry);
   writeAcces(acces);
   const duree = opts.expire ? "\n   Valable jusqu'au " + opts.expire + " inclus." : "";
-  console.log("\n✔ Code créé pour " + opts.name + " :\n\n      " + code + "\n" + duree + "\n\nNote-le maintenant : il n'est stocké nulle part en clair. Puis : npm run build, git add -A, git commit, git push.\n");
+  const lien = siteUrl() ? "\n   Lien direct (connecte en un clic) : " + siteUrl() + "#acces=" + code + "\n" : "";
+  console.log("\n✔ Code créé pour " + opts.name + " :\n\n      " + code + "\n" + duree + lien + "\nNote-le maintenant : il n'est stocké nulle part en clair. Puis : npm run build, git add -A, git commit, git push.\n");
 }
 
 function extendCode(opts) {

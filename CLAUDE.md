@@ -14,7 +14,7 @@ Application de révision (M2 Finance d'entreprise, Nanterre) maintenue par Yacin
 
 ## Accès réservé (important)
 
-- Le site est fermé : chaque visiteur a un code personnel (`npm run acces -- ajouter "Prénom Nom"`, `liste`, `retirer`). Le contenu est chiffré dans la page (AES-GCM), clé dans `content/cle-contenu.txt` (**jamais commité**, à copier à la main d'un PC à l'autre ; sans elle, impossible de créer des codes). Les empreintes et clés enveloppées sont dans `content/acces.json` (commité).
+- Le site est fermé : chaque visiteur a un code personnel (`npm run acces -- ajouter "Prénom Nom"`, `liste`, `retirer`). Le code est mémorisé sur l'appareil (localStorage + IndexedDB + `storage.persist()`) ; un lien direct `#acces=CODE` déverrouille et mémorise en un clic (`src/gate.js`). Le contenu est chiffré dans la page (AES-GCM), clé dans `content/cle-contenu.txt` (**jamais commité**, à copier à la main d'un PC à l'autre ; sans elle, impossible de créer des codes). Les empreintes et clés enveloppées sont dans `content/acces.json` (commité).
 - Après tout changement de contenu ou de code d'accès : `node build.js`, puis `git add -A`, `git commit`, `git push`. Le site se met à jour en une à deux minutes.
 - Les camarades demandent un accès via le bouton « Demander un accès » (e-mail pré-rempli vers `acces.contact` dans config.json). Yacine encaisse une participation de façon informelle, puis crée le code et l'envoie.
 - Le réseau de l'entreprise de Yacine bloque `*.github.io` : tester depuis un autre réseau.
@@ -56,9 +56,10 @@ Idées gardées pour plus tard : sections « Erreurs fréquentes » et « Métho
   > Salut {Prénom},
   >
   > Voici ton code d'accès personnel à la salle d'étude : **{CODE}**
-  > Le lien : https://yacine954.github.io/salle-etude/
+  > Clique ici, ça s'ouvre directement : https://yacine954.github.io/salle-etude/#acces={CODE}
+  > (Le lien sans code, si besoin : https://yacine954.github.io/salle-etude/ )
   >
-  > Tu entres le code une fois, il reste enregistré sur ton appareil. Sur téléphone, tu peux l'installer comme une appli : bandeau « Installer » (Android / Chrome) ou Partager → « Sur l'écran d'accueil » (iPhone / Safari) ; elle marche ensuite même sans connexion.
+  > Le code reste enregistré sur ton appareil : tu n'as pas à le retaper. Sur téléphone, tu peux l'installer comme une appli : bandeau « Installer » (Android / Chrome) ou Partager → « Sur l'écran d'accueil » (iPhone / Safari) ; elle marche ensuite même sans connexion.
   >
   > Le code est personnel : merci de ne pas le partager.
   >

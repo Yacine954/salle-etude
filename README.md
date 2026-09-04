@@ -252,7 +252,9 @@ git commit -m "Accès pour Prénom Nom"
 git push
 ```
 
-Autres commandes : `npm run acces -- liste` (qui a un code) et `npm run acces -- retirer "Prénom Nom"` (coupe l'accès à la prochaine publication). Chaque personne saisit son code une fois ; il reste enregistré sur son appareil, et le bouton « Se déconnecter » en bas du menu l'efface.
+Autres commandes : `npm run acces -- liste` (qui a un code) et `npm run acces -- retirer "Prénom Nom"` (coupe l'accès à la prochaine publication). Chaque personne saisit son code une fois ; il reste enregistré sur son appareil (à deux endroits, et le site demande au navigateur de ne pas effacer ses données), et le bouton « Se déconnecter » en bas du menu l'efface. La commande affiche aussi un **lien direct** du type `https://yacine954.github.io/salle-etude/#acces=SE-7K3P-9QWX` : la personne clique, c'est déverrouillé et mémorisé, sans rien taper. Le code reste après le `#`, il n'est jamais transmis au serveur et disparaît de la barre d'adresse aussitôt lu. (L'adresse du site vient de la clé `site` de `content/config.json`.)
+
+Il reste des cas où le navigateur oublie malgré tout : navigation privée, navigateur intégré d'Instagram ou de Messenger, ou données du site effacées à la main. Le lien direct règle ça en un clic.
 
 **Codes à durée limitée.** Tu peux donner une date de fin à un code (la date est incluse) ou un essai de sept jours :
 

@@ -51,7 +51,7 @@
       var data = JSON.parse(new TextDecoder().decode(plain));
       MODULES.length = 0; Array.prototype.push.apply(MODULES, data.modules);
       ANNALES.length = 0; Array.prototype.push.apply(ANNALES, data.annales);
-      try { localStorage.setItem(KEY, code); } catch (e) {}
+      remember(code);
       return true;
     }, function (e) {
       throw new Error(e && e.message && /[Cc]ode/.test(e.message) ? e.message : "Code inconnu ou désactivé.");
@@ -90,10 +90,55 @@
     if (input && !busy) input.focus();
   }
 
-  function run(start) {
-    if (CONFIG.ambiance === "lofi") document.body.classList.add("ambiance-lofi");
+  /* ---------- Mémorisation du code : l'utilisateur ne le saisit qu'une fois ----------
+     Le code est gardé à deux endroits (localStorage et IndexedDB) et le navigateur est prié de
+     ne pas effacer les données du site (storage.persist), ce qui protège notamment contre le
+     ménage automatique de Safari après sept jours sans visite. */
+  var DB = "salle-etude-acces";
+  function idb(mode, fn) {
+    return new Promise(function (resolve) {
+      if (!window.indexedDB) return resolve(null);
+      var req;
+      try { req = indexedDB.open(DB, 1); } catch (e) { return resolve(null); }
+      req.onupgradeneeded = function () { req.result.createObjectStore("kv"); };
+      req.onerror = function () { resolve(null); };
+      req.onsuccess = function () {
+        var db = req.result;
+        try {
+          var tx = db.transaction("kv", mode), store = tx.objectStore("kv");
+          var r = fn(store);
+          tx.oncomplete = function () { db.close(); resolve(r && r.result !== undefined ? r.result : null); };
+          tx.onerror = function () { db.close(); resolve(null); };
+        } catch (e) { db.close(); resolve(null); }
+      };
+    });
+  }
+  function remember(code) {
+    try { localStorage.setItem(KEY, code); } catch (e) {}
+    idb("readwrite", function (store) { store.put(code, "code"); });
+    try { if (navigator.storage && navigator.storage.persist) navigator.storage.persist().catch(function () {}); } catch (e) {}
+  }
+  function forget() {
+    try { localStorage.removeItem(KEY); } catch (e) {}
+    return idb("readwrite", function (store) { store.delete("code"); });
+  }
+  function recall() {
     var stored = "";
     try { stored = localStorage.getItem(KEY) || ""; } catch (e) {}
+    if (stored) return Promise.resolve(stored);
+    return idb("readonly", function (store) { return store.get("code"); }).then(function (v) { return typeof v === "string" ? v : ""; });
+  }
+  // Lien direct : https://…/salle-etude/#acces=SE-XXXX-XXXX déverrouille et mémorise en un clic.
+  // Le code n'est jamais envoyé au serveur (il est après le #) et il est retiré de l'adresse aussitôt lu.
+  function codeFromLink() {
+    var m = (location.hash || "").match(/[#&]acces=([^&]+)/);
+    if (!m) return "";
+    try { history.replaceState(null, "", location.pathname + location.search); } catch (e) {}
+    return decodeURIComponent(m[1]);
+  }
+
+  function run(start) {
+    if (CONFIG.ambiance === "lofi") document.body.classList.add("ambiance-lofi");
     var go = function () { appEl.innerHTML = ""; start(); };
     var attempt = function (code) {
       renderLock("", true);
@@ -105,12 +150,17 @@
       e.preventDefault();
       attempt(f.querySelector("[data-lock-code]").value);
     });
-    if (stored) attempt(stored); else renderLock("", false);
+    // Un lien direct collé dans la barre d'adresse alors que la page est déjà ouverte.
+    window.addEventListener("hashchange", function () { var c = codeFromLink(); if (c) attempt(c); });
+    var fromLink = codeFromLink();
+    if (fromLink) { attempt(fromLink); return; }
+    renderLock("", true);
+    recall().then(function (stored) { if (stored) attempt(stored); else renderLock("", false); });
   }
 
   window.SalleEtudeGate = {
     run: run,
     unlock: unlock,
-    logout: function () { try { localStorage.removeItem(KEY); } catch (e) {} location.reload(); }
+    logout: function () { forget().then(function () { location.reload(); }); }
   };
 })();
