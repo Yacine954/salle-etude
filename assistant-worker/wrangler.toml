@@ -1,0 +1,22 @@
+name = "salle-etude-assistant"
+main = "src/index.js"
+compatibility_date = "2026-08-01"
+compatibility_flags = ["nodejs_compat"]
+
+# Réglages modifiables sans toucher au code (redéployer après modification).
+[vars]
+MODEL = "claude-opus-5"        # modèle Claude utilisé (voir README pour les alternatives moins chères)
+EFFORT = "medium"              # low | medium | high : profondeur de réflexion
+MAX_SEARCHES = "5"             # recherches web maximum par réponse
+DAILY_LIMIT = "40"             # messages par jour et par adresse IP (actif seulement si QUOTA est configuré)
+FALLBACKS = "on"               # "on" : si Claude Opus 5 décline une demande, l'API bascule seule sur un autre modèle
+
+# Les secrets ne sont jamais écrits ici. Ils se définissent avec :
+#   npm run secret:key    (clé API Anthropic, commence par sk-ant-)
+#   npm run secret:code   (code d'accès donné aux élèves)
+
+# Quota journalier par élève (facultatif) : crée un espace KV puis dé-commente.
+#   npx wrangler kv namespace create QUOTA
+# [[kv_namespaces]]
+# binding = "QUOTA"
+# id = "colle-ici-l-identifiant-renvoye"

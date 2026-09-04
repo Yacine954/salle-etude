@@ -140,6 +140,14 @@ Les dessins sont dans `src/assets/` (`skyline-night.svg`, `skyline-day.svg`, `gr
 
 Pour convertir ou redimensionner une image en PNG 256×256, Paint ou n'importe quel outil en ligne suffit.
 
+## 5 bis. L'assistant IA
+
+Un bouton « Assistant » en bas à droite ouvre une discussion avec Claude : questions de cours, exercices corrigés, recherches sur le web avec sources. L'assistant reçoit le contenu du module ouvert, il répond donc dans le vocabulaire du cours.
+
+Pour qu'il fonctionne, il faut un petit service intermédiaire qui garde la clé API : tout est expliqué dans [assistant-worker/README.md](assistant-worker/README.md). Une fois déployé, renseigne son adresse dans `content/config.json` (`assistant.url`), reconstruis, publie. Les élèves saisissent le code d'accès une fois.
+
+Sans adresse configurée, le bouton reste présent mais propose de saisir l'adresse du service : pratique pour tester avec le faux assistant local (`node tools/mock-assistant.js`, adresse `http://localhost:8787`, code `test`).
+
 ## 6. Publier pour la classe (GitHub Pages)
 
 Le dossier `docs/` est servi tel quel par GitHub Pages. Une seule personne (toi) a le droit d'écrire dans le dépôt ; les autres ne font que consulter.

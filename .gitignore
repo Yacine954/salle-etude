@@ -1,5 +1,7 @@
 node_modules/
 release/
+.wrangler/
+.dev.vars
 npm-install.log
 *.log
 .DS_Store

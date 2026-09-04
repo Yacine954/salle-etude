@@ -202,7 +202,7 @@ function build() {
 
   var template = fs.readFileSync(path.join(SRC, "template.html"), "utf8");
   var style = inlineAssets(fs.readFileSync(path.join(SRC, "style.css"), "utf8"));
-  var app = fs.readFileSync(path.join(SRC, "app.js"), "utf8");
+  var app = fs.readFileSync(path.join(SRC, "app.js"), "utf8") + "\n" + fs.readFileSync(path.join(SRC, "assistant.js"), "utf8");
   var data = "var MODULES = " + JSON.stringify(modules) + ";\nvar CONFIG = " + JSON.stringify(config) + ";";
   data = data.replace(/<\//g, "<\\/"); // jamais de </script> accidentel dans les données
 

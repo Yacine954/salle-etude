@@ -1,0 +1,20 @@
+{
+  "name": "salle-etude-assistant",
+  "version": "1.0.0",
+  "description": "Assistant IA de la Salle d'étude : relais sécurisé vers l'API Claude (Cloudflare Worker)",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "secret:key": "wrangler secret put ANTHROPIC_API_KEY",
+    "secret:code": "wrangler secret put ACCESS_CODE",
+    "tail": "wrangler tail"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.123.0"
+  },
+  "devDependencies": {
+    "wrangler": "^4.129.0"
+  }
+}

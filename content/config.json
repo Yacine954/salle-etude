@@ -13,5 +13,14 @@
     "2": "Priorité 2",
     "3": "Priorité 3"
   },
-  "ambiance": "lofi"
+  "ambiance": "lofi",
+  "assistant": {
+    "url": "",
+    "nom": "Assistant",
+    "suggestions": [
+      "Explique-moi la différence entre fonds de roulement et BFR avec un exemple chiffré.",
+      "Fais-moi un exercice corrigé sur le calcul du WACC.",
+      "Quel est le taux directeur actuel de la BCE et quel effet sur le coût de la dette ?"
+    ]
+  }
 }

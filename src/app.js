@@ -558,6 +558,16 @@
     }
   });
 
+  /* Petite API pour les modules annexes (assistant IA) */
+  var renderHooks = [];
+  var baseRender = render;
+  render = function () { baseRender(); renderHooks.forEach(function (fn) { try { fn(); } catch (e) {} }); };
+  window.SalleEtude = {
+    currentModule: function () { return state.view === "module" ? getModule(state.moduleId) : null; },
+    esc: esc,
+    onRender: function (fn) { renderHooks.push(fn); }
+  };
+
   render();
   initSync();
 })();
