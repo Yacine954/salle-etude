@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "salle-etude",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["--yes", "serve@14", "docs", "-l", "8766", "--no-clipboard"],
+      "port": 8766
+    }
+  ]
+}

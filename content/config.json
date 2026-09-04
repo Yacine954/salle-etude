@@ -1,0 +1,16 @@
+{
+  "titre": "La salle d'étude",
+  "sousTitre": "M2 Finance d'entreprise · Nanterre",
+  "accueilTitre": "Réussir le M2, module par module.",
+  "accueilTexte": "Dix modules qui suivent le programme officiel : cours, définitions et formules à mémoriser en mode cartes, quiz corrigés et exercices.",
+  "pied": "Contenu construit à partir du programme officiel — à croiser avec les supports de tes professeurs. Priorité 1 = lien direct avec ton poste.",
+  "groupes": {
+    "S9": "Semestre 9",
+    "S10": "Semestre 10"
+  },
+  "priorites": {
+    "1": "Priorité 1",
+    "2": "Priorité 2",
+    "3": "Priorité 3"
+  }
+}
