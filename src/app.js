@@ -801,7 +801,7 @@ function startApp() {
   }
 
   function renderAnnalesList(list, groupByModule) {
-    if (!list.length) return '<div class="notes-empty"><p>Aucun sujet pour l\'instant.</p><p>Dépose un PDF, une image ou un fichier <code>.md</code> dans <code>content/annales/</code>, puis relance <code>npm run build</code>. Le guide du projet décrit le format.</p></div>';
+        if (!list.length) { var c = (CONFIG.acces && CONFIG.acces.contact) || ""; var lien = c ? '<a href="mailto:' + c + '?subject=' + encodeURIComponent("Salle d'étude — sujet d'examen") + '">' + c + '</a>' : "l'administrateur du site"; return '<div class="notes-empty"><p>Aucun sujet pour l\'instant.</p><p>Les sujets sont ajoutés au fil de l\'année. Si tu as un sujet, un corrigé ou une photo d\'énoncé, envoie-le à ' yacineguett@gmail.com ' : il sera mis en ligne pour tout le monde.</p></div>'; }
     if (!groupByModule) return list.map(function (a) { return renderAnnale(a, false); }).join("");
     var groups = [], byKey = {};
     list.forEach(function (a) {
