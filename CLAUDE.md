@@ -6,6 +6,7 @@ Application de révision (M2 Finance d'entreprise, Nanterre) maintenue par Yacin
 
 - Contenu en Markdown : `content/modules/*.md` (un module par fichier, sections `# Cours / Définitions / Formules / Quiz / Exercices / Notes`), `content/annales/` (sujets d'examen : PDF, images, `.md`), réglages dans `content/config.json`.
 - Design dans `src/style.css`, logique dans `src/app.js` (+ `src/gate.js` pour l'accès réservé, `src/assistant.js` désactivé), squelette `src/template.html`, images dans `src/assets/`.
+- Application installable (PWA) : `src/pwa.js` (enregistrement, bandeau d'installation, bandeau de mise à jour), modèle `src/sw.js`, icônes dans `content/pwa/`. Le build écrit `docs/manifest.webmanifest`, `docs/sw.js` (version = empreinte de la page) et copie les icônes. Inactif en `file://`, donc sans effet dans Electron.
 - `node build.js` assemble tout en **une page unique** `docs/index.html`, servie par GitHub Pages : https://yacine954.github.io/salle-etude/ (dépôt https://github.com/Yacine954/salle-etude, branche `main`, dossier `/docs`).
 - `npm run package` fabrique l'application Windows (Electron) dans `release/` ; sur le PC du bureau elle est installée dans `%LOCALAPPDATA%\Programs\Salle d'etude`.
 - Le README.md (en français) est le guide utilisateur complet : le tenir à jour à chaque nouvelle fonctionnalité.
@@ -29,7 +30,7 @@ Application de révision (M2 Finance d'entreprise, Nanterre) maintenue par Yacin
 
 Cinq fonctionnalités à réaliser, dans cet ordre, sans infrastructure payante :
 
-1. **PWA** : manifeste, service worker, installation sur téléphone, fonctionnement hors ligne, mise à jour automatique. Compatible avec l'écran d'accès (le déchiffrement se fait dans le navigateur).
+1. ~~**PWA**~~ — **fait (v1.2)** : manifeste, service worker, installation sur téléphone, hors ligne, mise à jour automatique. Fonctionne avec l'écran d'accès (le déchiffrement se fait dans le navigateur, sur le contenu mis en cache).
 2. **Révision espacée des cartes** (définitions et formules) : boîtes de Leitner, file « à revoir aujourd'hui » sur l'accueil.
 3. **Mode examen blanc** : questions tirées au hasard dans les modules choisis, chronomètre, note sur 20, correction, historique des scores.
 4. **Codes à durée limitée** : date d'expiration facultative par code (`npm run acces -- ajouter "Nom" --jusqu-au 2027-01-31`), essai de sept jours.

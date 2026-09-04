@@ -8,10 +8,13 @@ Tout le projet tient dans ce dossier. Le contenu est écrit en fichiers texte (M
 salle-etude/
 ├── content/
 │   ├── config.json          titre, sous-titre, texte d'accueil, noms des semestres
-│   └── modules/             un fichier .md par module (l'ordre des fichiers = l'ordre des modules)
+│   ├── modules/             un fichier .md par module (l'ordre des fichiers = l'ordre des modules)
+│   └── pwa/                 les icônes de l'application installée sur téléphone
 ├── src/
 │   ├── style.css            tout le design (les couleurs et polices sont en haut du fichier)
 │   ├── app.js               la logique (navigation, cartes, quiz, progression)
+│   ├── pwa.js               installation sur l'appareil, hors ligne, bandeau de mise à jour
+│   ├── sw.js                le modèle du service worker (le cache hors ligne)
 │   └── template.html        le squelette de la page
 ├── docs/index.html          LA PAGE CONSTRUITE (ne pas modifier à la main, servie par GitHub Pages)
 ├── electron/                l'enveloppe « application Windows »
@@ -33,6 +36,15 @@ Si plus tard `npm start` se plaint qu'Electron n'est pas installé (le télécha
 ```bash
 node node_modules/electron/install.js
 ```
+
+**Si PowerShell refuse de lancer npm** (« l'exécution de scripts est désactivée sur ce système ») : c'est Windows qui bloque les scripts, pas le projet. Deux solutions, au choix :
+
+```powershell
+npm.cmd install                                              # contourne, rien à changer sur le PC
+Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned   # autorise une fois pour toutes
+```
+
+Après la seconde commande (répondre `O`), ferme et rouvre le terminal. Sur un poste géré par l'entreprise, la modification peut être refusée : reste alors sur `npm.cmd`.
 
 ## 2. Les commandes du quotidien
 
@@ -234,6 +246,25 @@ git push
 ```
 
 La page en ligne se met à jour en une ou deux minutes. La progression de chaque élève reste sur son propre appareil.
+
+## 6 bis. L'application sur téléphone (et le mode hors ligne)
+
+Depuis la version 1.2, le site publié est une **application installable** : tes camarades peuvent l'ajouter à leur écran d'accueil et l'ouvrir sans connexion (dans le métro, en amphi, en examen blanc).
+
+**Pour l'installer**, il suffit d'ouvrir l'adresse du site :
+
+- **Android / Chrome** : un bandeau « Installer » apparaît au bout de quelques secondes ; sinon menu ⋮ → *Ajouter à l'écran d'accueil*.
+- **iPhone / Safari** : bouton Partager → *Sur l'écran d'accueil*. (Apple n'affiche pas de bandeau automatique.)
+- **Ordinateur / Chrome ou Edge** : icône d'installation dans la barre d'adresse, ou le bouton « Installer l'application » en bas du menu de gauche.
+
+**Ce qui marche sans connexion** : toute la page (les dix modules, les cartes, les quiz, les exercices, les notes), les annales jointes et les icônes. La progression est de toute façon enregistrée sur l'appareil. Le code d'accès reste demandé, mais il est mémorisé après la première fois : une fois entré, le contenu se déchiffre même hors ligne.
+
+**Les mises à jour sont automatiques.** À chaque `npm run build`, une empreinte de version est écrite dans `docs/sw.js`. Le visiteur qui rouvre l'application voit un bandeau « Une nouvelle version est prête » avec un bouton *Actualiser* ; tant qu'il ne clique pas, il continue sur l'ancienne version sans rien casser. Rien à faire de plus que publier comme d'habitude.
+
+**Deux points à connaître :**
+
+- L'installation exige une adresse en `https` : elle marche sur GitHub Pages, pas en ouvrant `docs/index.html` depuis le disque. L'application Windows (Electron) n'est pas concernée et ignore complètement cette partie.
+- Les icônes viennent de `content/pwa/` et sont fabriquées une fois pour toutes à partir de `content/logo.png`. Si tu changes de logo, refais-les à la même taille (192 px, 512 px, une version « maskable » 512 px sur fond plein, et 180 px pour l'iPhone).
 
 ## 7. Travailler depuis un autre PC
 

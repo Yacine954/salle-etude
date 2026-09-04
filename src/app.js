@@ -252,6 +252,7 @@ function startApp() {
       codes().map(function (c) { return '<div class="side-group"><div class="side-label">' + esc(groupLabel(c)) + '</div>' + modItems(c) + '</div>'; }).join("") +
       '<div class="side-foot"><div>Avancement global · <b class="mono">' + g + ' %</b></div><div class="bar"><span style="width:' + g + '%"></span></div>' +
         '<div class="sync" data-sync="' + sync.status + '"><i></i>' + syncLabel() + '</div>' +
+        (window.SalleEtudePWA && SalleEtudePWA.installable() ? '<button class="btn ghost sm" data-pwa-install="1" style="justify-content:center">Installer l\'application</button>' : '') +
         '<button class="btn ghost sm" data-theme-toggle="1" style="justify-content:center">' + ({ auto: "Thème : automatique", light: "Thème : clair", dark: "Thème : sombre" })[state.theme] + '</button>' +
         '<button class="btn ghost sm" data-ambiance="1" style="justify-content:center">' + (state.ambiance === "lofi" ? "Ambiance lofi ✓" : "Ambiance lofi") + '</button>' +
         '<button class="btn ghost sm" data-reset="1" style="justify-content:center">' + (state.resetArmed ? "Confirmer la réinitialisation" : "Réinitialiser ma progression") + '</button>' +
@@ -593,6 +594,7 @@ function startApp() {
 
     if ((el = t.closest("[data-print]"))) { window.print(); return; }
     if ((el = t.closest("[data-logout]"))) { window.SalleEtudeGate.logout(); return; }
+    if ((el = t.closest("[data-pwa-install]"))) { SalleEtudePWA.install().then(function () { render(); }); return; }
     if ((el = t.closest("[data-theme-toggle]"))) { state.theme = state.theme === "auto" ? "dark" : state.theme === "dark" ? "light" : "auto"; savePrefs(); render(); return; }
     if ((el = t.closest("[data-ambiance]"))) { state.ambiance = state.ambiance === "lofi" ? "neutre" : "lofi"; savePrefs(); render(); return; }
     if ((el = t.closest("[data-reset]"))) {

@@ -592,3 +592,26 @@ body.ambiance-lofi::after {
 .chat-foot textarea:disabled { opacity: 0.6; }
 @media (max-width: 900px) { .chat-drawer { width: 100vw; border-left: none; } #chat .chat-fab span { display: none; } #chat .chat-fab { padding: 0.75rem; } }
 @media print { #chat { display: none !important; } }
+
+/* ---------- Bandeau application installable / mise à jour ---------- */
+.pwa-bar {
+  position: fixed; left: 50%; bottom: 1rem; z-index: 70;
+  transform: translate(-50%, calc(100% + 2rem)); opacity: 0;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+  display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap;
+  width: min(560px, calc(100vw - 2rem));
+  padding: 0.75rem 0.9rem;
+  background: var(--bg-elev); color: var(--ink);
+  border: 1px solid var(--line); border-radius: 14px; box-shadow: var(--shadow);
+}
+.pwa-bar.show { transform: translate(-50%, 0); opacity: 1; }
+.pwa-bar p { margin: 0; flex: 1 1 240px; font-size: 0.88rem; line-height: 1.45; color: var(--ink-2); }
+.pwa-bar .btn { flex: 0 0 auto; }
+.pwa-close {
+  flex: 0 0 auto; width: 28px; height: 28px; border-radius: 8px;
+  border: 1px solid transparent; background: transparent; color: var(--ink-3);
+  font-size: 1.1rem; line-height: 1; cursor: pointer;
+}
+.pwa-close:hover { background: var(--bg-sunk); color: var(--ink); }
+@media (max-width: 560px) { .pwa-bar { bottom: 0.7rem; } .pwa-bar p { flex-basis: 100%; } }
+@media print { .pwa-bar { display: none !important; } }

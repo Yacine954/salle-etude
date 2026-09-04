@@ -1,0 +1,36 @@
+{
+  "name": "La salle d'étude",
+  "short_name": "La salle d'étude",
+  "description": "M2 Finance d'entreprise · Nanterre",
+  "lang": "fr",
+  "dir": "ltr",
+  "start_url": ".",
+  "scope": ".",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#F1F1EE",
+  "theme_color": "#F1F1EE",
+  "categories": [
+    "education"
+  ],
+  "icons": [
+    {
+      "src": "icone-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icone-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icone-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

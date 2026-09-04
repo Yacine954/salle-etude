@@ -7,6 +7,7 @@
 
 const fs = require("fs");
 const path = require("path");
+const crypto = require("crypto");
 const { marked } = require("marked");
 const acces = require("./tools/acces.js");
 
@@ -260,6 +261,68 @@ function parseAnnales(moduleIds) {
   return entries;
 }
 
+/* ---------- application installable (PWA) ---------- */
+
+// Icônes fournies dans content/pwa/ (fabriquées une fois à partir de content/logo.png).
+var PWA_ICONS = [
+  { file: "icone-192.png", sizes: "192x192", purpose: "any" },
+  { file: "icone-512.png", sizes: "512x512", purpose: "any" },
+  { file: "icone-maskable-512.png", sizes: "512x512", purpose: "maskable" }
+];
+
+// Écrit docs/manifest.webmanifest, copie les icônes et génère docs/sw.js à partir de src/sw.js.
+// Le service worker garde en cache la page, les icônes et les annales : la salle d'étude
+// s'installe sur le téléphone et fonctionne sans connexion.
+function writePwa(config, html, annales) {
+  var outDir = path.dirname(OUT);
+  var iconsDir = path.join(CONTENT, "pwa");
+  var icons = [];
+
+  PWA_ICONS.forEach(function (icon) {
+    var src = path.join(iconsDir, icon.file);
+    if (!fs.existsSync(src)) { console.warn("  ⚠ icône PWA manquante : content/pwa/" + icon.file); return; }
+    fs.copyFileSync(src, path.join(outDir, icon.file));
+    icons.push({ src: icon.file, sizes: icon.sizes, type: "image/png", purpose: icon.purpose });
+  });
+
+  var apple = path.join(iconsDir, "icone-apple-180.png");
+  if (fs.existsSync(apple)) fs.copyFileSync(apple, path.join(outDir, "icone-apple-180.png"));
+
+  var manifest = {
+    name: config.titre,
+    short_name: config.courtNom || config.titre,
+    description: config.sousTitre || "",
+    lang: "fr",
+    dir: "ltr",
+    start_url: ".",
+    scope: ".",
+    display: "standalone",
+    orientation: "portrait-primary",
+    background_color: "#F1F1EE",
+    theme_color: "#F1F1EE",
+    categories: ["education"],
+    icons: icons
+  };
+  fs.writeFileSync(path.join(outDir, "manifest.webmanifest"), JSON.stringify(manifest, null, 2));
+
+  // Tout ce qui doit être disponible hors ligne. index.html en premier : c'est le secours
+  // utilisé par le service worker quand la navigation échoue.
+  var fichiers = ["index.html", "manifest.webmanifest"]
+    .concat(icons.map(function (i) { return i.src; }))
+    .concat(fs.existsSync(apple) ? ["icone-apple-180.png"] : [])
+    .concat(annales.reduce(function (acc, a) { return acc.concat(a.files.map(function (f) { return f.url; })); }, []));
+
+  // La version change dès que la page ou la liste des fichiers change : c'est ce qui
+  // déclenche le bandeau « nouvelle version » chez les visiteurs.
+  var version = crypto.createHash("sha256").update(html).update(fichiers.join("|")).digest("hex").slice(0, 12);
+  var sw = fs.readFileSync(path.join(SRC, "sw.js"), "utf8")
+    .replace("{{VERSION}}", version)
+    .replace("{{FICHIERS}}", JSON.stringify(fichiers));
+  fs.writeFileSync(path.join(outDir, "sw.js"), sw);
+
+  return { version: version, fichiers: fichiers.length };
+}
+
 /* ---------- assemblage ---------- */
 
 function build() {
@@ -275,7 +338,7 @@ function build() {
 
   var template = fs.readFileSync(path.join(SRC, "template.html"), "utf8");
   var style = inlineAssets(fs.readFileSync(path.join(SRC, "style.css"), "utf8"));
-  var app = fs.readFileSync(path.join(SRC, "gate.js"), "utf8") + "\n" + fs.readFileSync(path.join(SRC, "app.js"), "utf8") + "\n" + fs.readFileSync(path.join(SRC, "assistant.js"), "utf8");
+  var app = fs.readFileSync(path.join(SRC, "gate.js"), "utf8") + "\n" + fs.readFileSync(path.join(SRC, "app.js"), "utf8") + "\n" + fs.readFileSync(path.join(SRC, "assistant.js"), "utf8") + "\n" + fs.readFileSync(path.join(SRC, "pwa.js"), "utf8");
   var annales = parseAnnales(modules.map(function (m) { return m.id; }));
   var data;
   var codes = acces.readAcces().codes;
@@ -292,7 +355,7 @@ function build() {
   data = data.replace(/<\//g, "<\\/"); // jamais de </script> accidentel dans les données
 
   var html = template
-    .replace("{{TITLE}}", config.titre)
+    .replace(/\{\{TITLE\}\}/g, function () { return config.titre; })
     .replace("{{FAVICON}}", logo ? '<link rel="icon" href="' + logo + '">' : "")
     .replace("{{STYLE}}", function () { return style; })
     .replace("{{DATA}}", function () { return data; })
@@ -302,6 +365,8 @@ function build() {
   fs.writeFileSync(OUT, html);
   var nojekyll = path.join(path.dirname(OUT), ".nojekyll");
   if (!fs.existsSync(nojekyll)) fs.writeFileSync(nojekyll, "");
+  var pwa = writePwa(config, html, annales);
+  console.log("  📱 application installable : version " + pwa.version + ", " + pwa.fichiers + " fichier(s) disponibles hors ligne");
   console.log("✔ " + path.relative(ROOT, OUT) + " — " + modules.length + " modules, " + annales.length + " annale(s), " + Math.round(html.length / 1024) + " Ko, " + (Date.now() - t0) + " ms");
   return modules;
 }
