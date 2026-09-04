@@ -61,6 +61,7 @@ Pour voir le résultat pendant que tu travailles : lance `npm run watch`, ouvre 
 
 - `publier.cmd` — reconstruit la page, enregistre les changements et les envoie sur GitHub (le site est à jour une à deux minutes plus tard). S'il n'y a rien de nouveau, il le dit et s'arrête.
 - `fabriquer-application.cmd` — fabrique l'application Windows dans `release\` et ouvre le dossier à la fin (quelques minutes).
+- `installer-application.cmd` — installe (ou met à jour) cette application sur le PC : copie dans `%LOCALAPPDATA%\Programs\Salle d'etude`, raccourcis sur le Bureau et dans le menu Démarrer, puis lancement. Pour l'épingler à la barre des tâches : clic droit sur son icône dans la barre → *Épingler à la barre des tâches*.
 
 En cas de problème, la fenêtre reste ouverte avec le message d'erreur : copie-le à Claude.
 
