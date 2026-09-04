@@ -1,4 +1,4 @@
-const { app, BrowserWindow, shell, Menu } = require("electron");
+const { app, BrowserWindow, shell, Menu, nativeTheme } = require("electron");
 const path = require("path");
 
 const smoke = process.argv.includes("--smoke");
@@ -58,6 +58,7 @@ const menu = Menu.buildFromTemplate([
 Menu.setApplicationMenu(menu);
 
 app.whenReady().then(() => {
+  if (process.env.SMOKE_THEME) nativeTheme.themeSource = process.env.SMOKE_THEME;
   createWindow();
   app.on("activate", () => { if (BrowserWindow.getAllWindows().length === 0) createWindow(); });
 });

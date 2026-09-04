@@ -102,7 +102,7 @@
   function saveLocal() { try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state.progress)); } catch (e) {} }
   function saveProgress() { saveLocal(); pushRemote(); }
   function loadPrefs() { try { var raw = localStorage.getItem(PREF_KEY); return raw ? JSON.parse(raw) : {}; } catch (e) { return {}; } }
-  function savePrefs() { try { localStorage.setItem(PREF_KEY, JSON.stringify({ cardMode: state.cardMode, lastModule: state.lastModule, ambiance: state.ambiance })); } catch (e) {} }
+  function savePrefs() { try { localStorage.setItem(PREF_KEY, JSON.stringify({ cardMode: state.cardMode, lastModule: state.lastModule, ambiance: state.ambiance, theme: state.theme })); } catch (e) {} }
 
   /* ---------- Sync with the artifact store: progress follows the user across devices ---------- */
   var sync = { ref: null, status: "local", timer: null, last: "" };
@@ -184,6 +184,7 @@
     tab: "cours",
     cardMode: prefs.cardMode || { definitions: false, formules: false },
     ambiance: prefs.ambiance || CONFIG.ambiance || "neutre",
+    theme: prefs.theme || CONFIG.theme || "auto",
     flipped: {},
     quizSubmitted: {},
     quizAnswers: {},
@@ -248,6 +249,7 @@
       codes().map(function (c) { return '<div class="side-group"><div class="side-label">' + esc(groupLabel(c)) + '</div>' + modItems(c) + '</div>'; }).join("") +
       '<div class="side-foot"><div>Avancement global · <b class="mono">' + g + ' %</b></div><div class="bar"><span style="width:' + g + '%"></span></div>' +
         '<div class="sync" data-sync="' + sync.status + '"><i></i>' + syncLabel() + '</div>' +
+        '<button class="btn ghost sm" data-theme-toggle="1" style="justify-content:center">' + ({ auto: "Thème : automatique", light: "Thème : clair", dark: "Thème : sombre" })[state.theme] + '</button>' +
         '<button class="btn ghost sm" data-ambiance="1" style="justify-content:center">' + (state.ambiance === "lofi" ? "Ambiance lofi ✓" : "Ambiance lofi") + '</button>' +
         '<button class="btn ghost sm" data-reset="1" style="justify-content:center">' + (state.resetArmed ? "Confirmer la réinitialisation" : "Réinitialiser ma progression") + '</button></div>' +
     '</aside>';
@@ -473,6 +475,8 @@
     else main = renderHome();
 
     document.body.classList.toggle("ambiance-lofi", state.ambiance === "lofi");
+    if (state.theme === "light" || state.theme === "dark") document.documentElement.setAttribute("data-theme", state.theme);
+    else document.documentElement.removeAttribute("data-theme");
     app.innerHTML = '<div class="app hued" style="--h:' + h + '">' + renderSidebar() +
       '<div style="min-width:0">' + renderTopbar() + (state.navOpen ? '<div class="scrim" data-nav-toggle="1"></div>' : '') +
       '<main class="main">' + main + '</main></div></div>';
@@ -515,6 +519,7 @@
     if ((el = t.closest("[data-quiz-retry]"))) { var mid2 = el.getAttribute("data-quiz-retry"); state.quizSubmitted[mid2] = false; state.quizAnswers[mid2] = {}; state.scrollTop = true; render(); return; }
 
     if ((el = t.closest("[data-print]"))) { window.print(); return; }
+    if ((el = t.closest("[data-theme-toggle]"))) { state.theme = state.theme === "auto" ? "dark" : state.theme === "dark" ? "light" : "auto"; savePrefs(); render(); return; }
     if ((el = t.closest("[data-ambiance]"))) { state.ambiance = state.ambiance === "lofi" ? "neutre" : "lofi"; savePrefs(); render(); return; }
     if ((el = t.closest("[data-reset]"))) {
       if (!state.resetArmed) { state.resetArmed = true; render(); }
