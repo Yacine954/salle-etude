@@ -23,6 +23,14 @@
       "salt": "b1c38767b830ecb17976124d715698a5",
       "iv": "kKhjWY76T9wWUy44",
       "wrap": "bNlWtXifMOSOmvn/+FJHMcCZdsFvIFd+P1vL45whvhX7aveKrNvMU91+A1pqBANT"
+    },
+    {
+      "nom": "Yasmina Agaoua",
+      "date": "2026-09-05",
+      "hash": "79618a0a400df34df096989aad4ee7831ac07ba9c33cba258edb0b3c985c1243",
+      "salt": "835f15f74cb20e76aba3e4857411a9a2",
+      "iv": "cdhpViOvpiQd0Siv",
+      "wrap": "x2JLjqcOh9z3/EPWBQz/HGtv8jG2F/Bsl4tyFKpXKPCxw16LzYewE0KOoz/LY+A5"
     }
   ]
 }
